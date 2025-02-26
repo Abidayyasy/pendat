@@ -1,11 +1,9 @@
-# Welcome to your Jupyter Book
+# Buku Penambangan Data
+Perkenalkan nama saya Muhammad Abid Ayyasy, saya adalah seorang mahasiswa prodi Teknik Informatika dengan NIM 230411100042 yang sedang mengambil mata kuliah penambangan data
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Projek ini bertujuan untuk mendokumentasikan setiap materi penambangan data selama satu semester
 
-Check out the content pages bundled with this sample book to see more.
+Hubungi email abid.ays23456@gmail.com
 
 ```{tableofcontents}
 ```
