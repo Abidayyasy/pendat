@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Pendat</title>
+    <title>DATA UNDERSTANDING &#8212; Pendat</title>
   
   
   
@@ -178,7 +178,10 @@
                 </a>
             </li>
         </ul>
-        
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">DATA UNDERSTANDING</a></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -349,9 +352,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -362,19 +363,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>DATA UNDERSTANDING</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -384,7 +377,800 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-understanding">
+<h1>DATA UNDERSTANDING<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h1>
+<p>tahap pemahaman data yang dilakukan dalam metodologi sains data dan pengembangan AI</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pymysql
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pymysql
+  Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
+Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/45.0 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.0/45.0 kB</span> <span class=" -Color -Color-Red">2.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pymysql
+Successfully installed pymysql-1.1.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>psycopg2-binary
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting psycopg2-binary
+  Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.7/3.0 MB</span> <span class=" -Color -Color-Red">21.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">60.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">42.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: psycopg2-binary
+Successfully installed psycopg2-binary-2.9.10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pandas
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /usr/local/lib/python3.11/dist-packages (2.2.2)
+Requirement already satisfied: numpy&gt;=1.23.2 in /usr/local/lib/python3.11/dist-packages (from pandas) (1.26.4)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.11/dist-packages (from pandas) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.11/dist-packages (from pandas) (2025.1)
+Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.11/dist-packages (from pandas) (2025.1)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Mengambil database dari MySql</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Kode untuk Menampilkan data dari mysql ke dalam google collab</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="c1"># Koneksi ke MySQL di Aiven.io</span>
+<span class="n">MYSQL_HOST</span> <span class="o">=</span> <span class="s2">&quot;mysql-3d9be5d4-irismysqll.g.aivencloud.com&quot;</span>  <span class="c1"># Ganti dengan host MySQL di Aiven.io</span>
+<span class="n">MYSQL_PORT</span> <span class="o">=</span> <span class="mi">28758</span>  <span class="c1"># Aiven MySQL biasanya menggunakan port 25060</span>
+<span class="n">MYSQL_DB</span> <span class="o">=</span> <span class="s2">&quot;defaultdb&quot;</span>  <span class="c1"># Ganti dengan nama database Anda</span>
+<span class="n">MYSQL_USER</span> <span class="o">=</span> <span class="s2">&quot;avnadmin&quot;</span>  <span class="c1"># Username dari Aiven.io</span>
+<span class="n">MYSQL_PASS</span> <span class="o">=</span> <span class="s2">&quot;AVNS_9SRQX7luHCPCP1wxyhh&quot;</span>  <span class="c1"># Ganti dengan password dari Aiven.io</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Membuat koneksi ke MySQL</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="n">MYSQL_HOST</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">MYSQL_PORT</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">MYSQL_USER</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="n">MYSQL_PASS</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="n">MYSQL_DB</span><span class="p">,</span>
+        <span class="n">ssl</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ssl&#39;</span><span class="p">:</span> <span class="p">{}},</span>  <span class="c1"># Aiven.io membutuhkan koneksi SSL</span>
+    <span class="p">)</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="c1"># Menjalankan query (Ganti &#39;your_table&#39; dengan nama tabel yang benar)</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM defaultdb.irissql;&quot;</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="c1"># Mengambil nama kolom</span>
+    <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+
+    <span class="c1"># Menampilkan hasil dalam bentuk tabel</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;psql&quot;</span><span class="p">))</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="c1"># Menutup koneksi</span>
+    <span class="k">if</span> <span class="n">cur</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----+------+-----------------+----------------+---------------+
+|     |   id | Class           |   petal length |   petal width |
+|-----+------+-----------------+----------------+---------------|
+|   0 |    1 | Iris-setosa     |            1.4 |           0.2 |
+|   1 |    2 | Iris-setosa     |            1.4 |           0.2 |
+|   2 |    3 | Iris-setosa     |            1.3 |           0.2 |
+|   3 |    4 | Iris-setosa     |            1.5 |           0.2 |
+|   4 |    5 | Iris-setosa     |            1.4 |           0.2 |
+|   5 |    6 | Iris-setosa     |            1.7 |           0.4 |
+|   6 |    7 | Iris-setosa     |            1.4 |           0.3 |
+|   7 |    8 | Iris-setosa     |            1.5 |           0.2 |
+|   8 |    9 | Iris-setosa     |            1.4 |           0.2 |
+|   9 |   10 | Iris-setosa     |            1.5 |           0.1 |
+|  10 |   11 | Iris-setosa     |            1.5 |           0.2 |
+|  11 |   12 | Iris-setosa     |            1.6 |           0.2 |
+|  12 |   13 | Iris-setosa     |            1.4 |           0.1 |
+|  13 |   14 | Iris-setosa     |            1.1 |           0.1 |
+|  14 |   15 | Iris-setosa     |            1.2 |           0.2 |
+|  15 |   16 | Iris-setosa     |            1.5 |           0.4 |
+|  16 |   17 | Iris-setosa     |            1.3 |           0.4 |
+|  17 |   18 | Iris-setosa     |            1.4 |           0.3 |
+|  18 |   19 | Iris-setosa     |            1.7 |           0.3 |
+|  19 |   20 | Iris-setosa     |            1.5 |           0.3 |
+|  20 |   21 | Iris-setosa     |            1.7 |           0.2 |
+|  21 |   22 | Iris-setosa     |            1.5 |           0.4 |
+|  22 |   23 | Iris-setosa     |            1   |           0.2 |
+|  23 |   24 | Iris-setosa     |            1.7 |           0.5 |
+|  24 |   25 | Iris-setosa     |            1.9 |           0.2 |
+|  25 |   26 | Iris-setosa     |            1.6 |           0.2 |
+|  26 |   27 | Iris-setosa     |            1.6 |           0.4 |
+|  27 |   28 | Iris-setosa     |            1.5 |           0.2 |
+|  28 |   29 | Iris-setosa     |            1.4 |           0.2 |
+|  29 |   30 | Iris-setosa     |            1.6 |           0.2 |
+|  30 |   31 | Iris-setosa     |            1.6 |           0.2 |
+|  31 |   32 | Iris-setosa     |            1.5 |           0.4 |
+|  32 |   33 | Iris-setosa     |            1.5 |           0.1 |
+|  33 |   34 | Iris-setosa     |            1.4 |           0.2 |
+|  34 |   35 | Iris-setosa     |            1.5 |           0.1 |
+|  35 |   36 | Iris-setosa     |            1.2 |           0.2 |
+|  36 |   37 | Iris-setosa     |            1.3 |           0.2 |
+|  37 |   38 | Iris-setosa     |            1.5 |           0.1 |
+|  38 |   39 | Iris-setosa     |            1.3 |           0.2 |
+|  39 |   40 | Iris-setosa     |            1.5 |           0.2 |
+|  40 |   41 | Iris-setosa     |            1.3 |           0.3 |
+|  41 |   42 | Iris-setosa     |            1.3 |           0.3 |
+|  42 |   43 | Iris-setosa     |            1.3 |           0.2 |
+|  43 |   44 | Iris-setosa     |            1.6 |           0.6 |
+|  44 |   45 | Iris-setosa     |            1.9 |           0.4 |
+|  45 |   46 | Iris-setosa     |            1.4 |           0.3 |
+|  46 |   47 | Iris-setosa     |            1.6 |           0.2 |
+|  47 |   48 | Iris-setosa     |            1.4 |           0.2 |
+|  48 |   49 | Iris-setosa     |            1.5 |           0.2 |
+|  49 |   50 | Iris-setosa     |            1.4 |           0.2 |
+|  50 |   51 | Iris-versicolor |            4.7 |           1.4 |
+|  51 |   52 | Iris-versicolor |            4.5 |           1.5 |
+|  52 |   53 | Iris-versicolor |            4.9 |           1.5 |
+|  53 |   54 | Iris-versicolor |            4   |           1.3 |
+|  54 |   55 | Iris-versicolor |            4.6 |           1.5 |
+|  55 |   56 | Iris-versicolor |            4.5 |           1.3 |
+|  56 |   57 | Iris-versicolor |            4.7 |           1.6 |
+|  57 |   58 | Iris-versicolor |            3.3 |           1   |
+|  58 |   59 | Iris-versicolor |            4.6 |           1.3 |
+|  59 |   60 | Iris-versicolor |            3.9 |           1.4 |
+|  60 |   61 | Iris-versicolor |            3.5 |           1   |
+|  61 |   62 | Iris-versicolor |            4.2 |           1.5 |
+|  62 |   63 | Iris-versicolor |            4   |           1   |
+|  63 |   64 | Iris-versicolor |            4.7 |           1.4 |
+|  64 |   65 | Iris-versicolor |            3.6 |           1.3 |
+|  65 |   66 | Iris-versicolor |            4.4 |           1.4 |
+|  66 |   67 | Iris-versicolor |            4.5 |           1.5 |
+|  67 |   68 | Iris-versicolor |            4.1 |           1   |
+|  68 |   69 | Iris-versicolor |            4.5 |           1.5 |
+|  69 |   70 | Iris-versicolor |            3.9 |           1.1 |
+|  70 |   71 | Iris-versicolor |            4.8 |           1.8 |
+|  71 |   72 | Iris-versicolor |            4   |           1.3 |
+|  72 |   73 | Iris-versicolor |            4.9 |           1.5 |
+|  73 |   74 | Iris-versicolor |            4.7 |           1.2 |
+|  74 |   75 | Iris-versicolor |            4.3 |           1.3 |
+|  75 |   76 | Iris-versicolor |            4.4 |           1.4 |
+|  76 |   77 | Iris-versicolor |            4.8 |           1.4 |
+|  77 |   78 | Iris-versicolor |            5   |           1.7 |
+|  78 |   79 | Iris-versicolor |            4.5 |           1.5 |
+|  79 |   80 | Iris-versicolor |            3.5 |           1   |
+|  80 |   81 | Iris-versicolor |            3.8 |           1.1 |
+|  81 |   82 | Iris-versicolor |            3.7 |           1   |
+|  82 |   83 | Iris-versicolor |            3.9 |           1.2 |
+|  83 |   84 | Iris-versicolor |            5.1 |           1.6 |
+|  84 |   85 | Iris-versicolor |            4.5 |           1.5 |
+|  85 |   86 | Iris-versicolor |            4.5 |           1.6 |
+|  86 |   87 | Iris-versicolor |            4.7 |           1.5 |
+|  87 |   88 | Iris-versicolor |            4.4 |           1.3 |
+|  88 |   89 | Iris-versicolor |            4.1 |           1.3 |
+|  89 |   90 | Iris-versicolor |            4   |           1.3 |
+|  90 |   91 | Iris-versicolor |            4.4 |           1.2 |
+|  91 |   92 | Iris-versicolor |            4.6 |           1.4 |
+|  92 |   93 | Iris-versicolor |            4   |           1.2 |
+|  93 |   94 | Iris-versicolor |            3.3 |           1   |
+|  94 |   95 | Iris-versicolor |            4.2 |           1.3 |
+|  95 |   96 | Iris-versicolor |            4.2 |           1.2 |
+|  96 |   97 | Iris-versicolor |            4.2 |           1.3 |
+|  97 |   98 | Iris-versicolor |            4.3 |           1.3 |
+|  98 |   99 | Iris-versicolor |            3   |           1.1 |
+|  99 |  100 | Iris-versicolor |            4.1 |           1.3 |
+| 100 |  101 | Iris-virginica  |            6   |           2.5 |
+| 101 |  102 | Iris-virginica  |            5.1 |           1.9 |
+| 102 |  103 | Iris-virginica  |            5.9 |           2.1 |
+| 103 |  104 | Iris-virginica  |            5.6 |           1.8 |
+| 104 |  105 | Iris-virginica  |            5.8 |           2.2 |
+| 105 |  106 | Iris-virginica  |            6.6 |           2.1 |
+| 106 |  107 | Iris-virginica  |            4.5 |           1.7 |
+| 107 |  108 | Iris-virginica  |            6.3 |           1.8 |
+| 108 |  109 | Iris-virginica  |            5.8 |           1.8 |
+| 109 |  110 | Iris-virginica  |            6.1 |           2.5 |
+| 110 |  111 | Iris-virginica  |            5.1 |           2   |
+| 111 |  112 | Iris-virginica  |            5.3 |           1.9 |
+| 112 |  113 | Iris-virginica  |            5.5 |           2.1 |
+| 113 |  114 | Iris-virginica  |            5   |           2   |
+| 114 |  115 | Iris-virginica  |            5.1 |           2.4 |
+| 115 |  116 | Iris-virginica  |            5.3 |           2.3 |
+| 116 |  117 | Iris-virginica  |            5.5 |           1.8 |
+| 117 |  118 | Iris-virginica  |            6.7 |           2.2 |
+| 118 |  119 | Iris-virginica  |            6.9 |           2.3 |
+| 119 |  120 | Iris-virginica  |            5   |           1.5 |
+| 120 |  121 | Iris-virginica  |            5.7 |           2.3 |
+| 121 |  122 | Iris-virginica  |            4.9 |           2   |
+| 122 |  123 | Iris-virginica  |            6.7 |           2   |
+| 123 |  124 | Iris-virginica  |            4.9 |           1.8 |
+| 124 |  125 | Iris-virginica  |            5.7 |           2.1 |
+| 125 |  126 | Iris-virginica  |            6   |           1.8 |
+| 126 |  127 | Iris-virginica  |            4.8 |           1.8 |
+| 127 |  128 | Iris-virginica  |            4.9 |           1.8 |
+| 128 |  129 | Iris-virginica  |            5.6 |           2.1 |
+| 129 |  130 | Iris-virginica  |            5.8 |           1.6 |
+| 130 |  131 | Iris-virginica  |            6.1 |           1.9 |
+| 131 |  132 | Iris-virginica  |            6.4 |           2   |
+| 132 |  133 | Iris-virginica  |            5.6 |           2.2 |
+| 133 |  134 | Iris-virginica  |            5.1 |           1.5 |
+| 134 |  135 | Iris-virginica  |            5.6 |           1.4 |
+| 135 |  136 | Iris-virginica  |            6.1 |           2.3 |
+| 136 |  137 | Iris-virginica  |            5.6 |           2.4 |
+| 137 |  138 | Iris-virginica  |            5.5 |           1.8 |
+| 138 |  139 | Iris-virginica  |            4.8 |           1.8 |
+| 139 |  140 | Iris-virginica  |            5.4 |           2.1 |
+| 140 |  141 | Iris-virginica  |            5.6 |           2.4 |
+| 141 |  142 | Iris-virginica  |            5.1 |           2.3 |
+| 142 |  143 | Iris-virginica  |            5.1 |           1.9 |
+| 143 |  144 | Iris-virginica  |            5.9 |           2.3 |
+| 144 |  145 | Iris-virginica  |            5.7 |           2.5 |
+| 145 |  146 | Iris-virginica  |            5.2 |           2.3 |
+| 146 |  147 | Iris-virginica  |            5   |           1.9 |
+| 147 |  148 | Iris-virginica  |            5.2 |           2   |
+| 148 |  149 | Iris-virginica  |            5.4 |           2.3 |
+| 149 |  150 | Iris-virginica  |            5.1 |           1.8 |
++-----+------+-----------------+----------------+---------------+
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Mengambil database dari postgresql</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="n">PG_HOST</span> <span class="o">=</span> <span class="s2">&quot;pg-ee5fcb6-irisposgresqll.g.aivencloud.com&quot;</span>
+<span class="n">PG_PORT</span> <span class="o">=</span> <span class="s2">&quot;13492&quot;</span>
+<span class="n">PG_NAME</span> <span class="o">=</span> <span class="s2">&quot;defaultdb&quot;</span>
+<span class="n">PG_USER</span> <span class="o">=</span> <span class="s2">&quot;avnadmin&quot;</span>
+<span class="n">PG_PASS</span> <span class="o">=</span> <span class="s2">&quot;AVNS_82XRmz2cSUlzQs353EZ&quot;</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="n">PG_HOST</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">PG_PORT</span><span class="p">,</span>
+        <span class="n">dbname</span><span class="o">=</span><span class="n">PG_NAME</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">PG_USER</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="n">PG_PASS</span><span class="p">,</span>
+        <span class="n">sslmode</span><span class="o">=</span><span class="s2">&quot;require&quot;</span>
+    <span class="p">)</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="c1"># Menjalankan query</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM irispostgresql.irispostgresql;&quot;</span><span class="p">)</span>  <span class="c1"># Ganti dengan nama skema &amp; tabel yang benar</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="c1"># Mengambil nama kolom</span>
+    <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+
+    <span class="c1"># Menampilkan hasil dalam bentuk tabel</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;psql&quot;</span><span class="p">))</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="c1"># Menutup koneksi</span>
+    <span class="k">if</span> <span class="n">cur</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----+------+-----------------+----------------+---------------+
+|     |   id | Class           |   sepal length |   sepal width |
+|-----+------+-----------------+----------------+---------------|
+|   0 |    1 | Iris-setosa     |            5.1 |           3.5 |
+|   1 |    2 | Iris-setosa     |            4.9 |           3   |
+|   2 |    3 | Iris-setosa     |            4.7 |           3.2 |
+|   3 |    4 | Iris-setosa     |            4.6 |           3.1 |
+|   4 |    5 | Iris-setosa     |            5   |           3.6 |
+|   5 |    6 | Iris-setosa     |            5.4 |           3.9 |
+|   6 |    7 | Iris-setosa     |            4.6 |           3.4 |
+|   7 |    8 | Iris-setosa     |            5   |           3.4 |
+|   8 |    9 | Iris-setosa     |            4.4 |           2.9 |
+|   9 |   10 | Iris-setosa     |            4.9 |           3.1 |
+|  10 |   11 | Iris-setosa     |            5.4 |           3.7 |
+|  11 |   12 | Iris-setosa     |            4.8 |           3.4 |
+|  12 |   13 | Iris-setosa     |            4.8 |           3   |
+|  13 |   14 | Iris-setosa     |            4.3 |           3   |
+|  14 |   15 | Iris-setosa     |            5.8 |           4   |
+|  15 |   16 | Iris-setosa     |            5.7 |           4.4 |
+|  16 |   17 | Iris-setosa     |            5.4 |           3.9 |
+|  17 |   18 | Iris-setosa     |            5.1 |           3.5 |
+|  18 |   19 | Iris-setosa     |            5.7 |           3.8 |
+|  19 |   20 | Iris-setosa     |            5.1 |           3.8 |
+|  20 |   21 | Iris-setosa     |            5.4 |           3.4 |
+|  21 |   22 | Iris-setosa     |            5.1 |           3.7 |
+|  22 |   23 | Iris-setosa     |            4.6 |           3.6 |
+|  23 |   24 | Iris-setosa     |            5.1 |           3.3 |
+|  24 |   25 | Iris-setosa     |            4.8 |           3.4 |
+|  25 |   26 | Iris-setosa     |            5   |           3   |
+|  26 |   27 | Iris-setosa     |            5   |           3.4 |
+|  27 |   28 | Iris-setosa     |            5.2 |           3.5 |
+|  28 |   29 | Iris-setosa     |            5.2 |           3.4 |
+|  29 |   30 | Iris-setosa     |            4.7 |           3.2 |
+|  30 |   31 | Iris-setosa     |            4.8 |           3.1 |
+|  31 |   32 | Iris-setosa     |            5.4 |           3.4 |
+|  32 |   33 | Iris-setosa     |            5.2 |           4.1 |
+|  33 |   34 | Iris-setosa     |            5.5 |           4.2 |
+|  34 |   35 | Iris-setosa     |            4.9 |           3.1 |
+|  35 |   36 | Iris-setosa     |            5   |           3.2 |
+|  36 |   37 | Iris-setosa     |            5.5 |           3.5 |
+|  37 |   38 | Iris-setosa     |            4.9 |           3.1 |
+|  38 |   39 | Iris-setosa     |            4.4 |           3   |
+|  39 |   40 | Iris-setosa     |            5.1 |           3.4 |
+|  40 |   41 | Iris-setosa     |            5   |           3.5 |
+|  41 |   42 | Iris-setosa     |            4.5 |           2.3 |
+|  42 |   43 | Iris-setosa     |            4.4 |           3.2 |
+|  43 |   44 | Iris-setosa     |            5   |           3.5 |
+|  44 |   45 | Iris-setosa     |            5.1 |           3.8 |
+|  45 |   46 | Iris-setosa     |            4.8 |           3   |
+|  46 |   47 | Iris-setosa     |            5.1 |           3.8 |
+|  47 |   48 | Iris-setosa     |            4.6 |           3.2 |
+|  48 |   49 | Iris-setosa     |            5.3 |           3.7 |
+|  49 |   50 | Iris-setosa     |            5   |           3.3 |
+|  50 |   51 | Iris-versicolor |            7   |           3.2 |
+|  51 |   52 | Iris-versicolor |            6.4 |           3.2 |
+|  52 |   53 | Iris-versicolor |            6.9 |           3.1 |
+|  53 |   54 | Iris-versicolor |            5.5 |           2.3 |
+|  54 |   55 | Iris-versicolor |            6.5 |           2.8 |
+|  55 |   56 | Iris-versicolor |            5.7 |           2.8 |
+|  56 |   57 | Iris-versicolor |            6.3 |           3.3 |
+|  57 |   58 | Iris-versicolor |            4.9 |           2.4 |
+|  58 |   59 | Iris-versicolor |            6.6 |           2.9 |
+|  59 |   60 | Iris-versicolor |            5.2 |           2.7 |
+|  60 |   61 | Iris-versicolor |            5   |           2   |
+|  61 |   62 | Iris-versicolor |            5.9 |           3   |
+|  62 |   63 | Iris-versicolor |            6   |           2.2 |
+|  63 |   64 | Iris-versicolor |            6.1 |           2.9 |
+|  64 |   65 | Iris-versicolor |            5.6 |           2.9 |
+|  65 |   66 | Iris-versicolor |            6.7 |           3.1 |
+|  66 |   67 | Iris-versicolor |            5.6 |           3   |
+|  67 |   68 | Iris-versicolor |            5.8 |           2.7 |
+|  68 |   69 | Iris-versicolor |            6.2 |           2.2 |
+|  69 |   70 | Iris-versicolor |            5.6 |           2.5 |
+|  70 |   71 | Iris-versicolor |            5.9 |           3.2 |
+|  71 |   72 | Iris-versicolor |            6.1 |           2.8 |
+|  72 |   73 | Iris-versicolor |            6.3 |           2.5 |
+|  73 |   74 | Iris-versicolor |            6.1 |           2.8 |
+|  74 |   75 | Iris-versicolor |            6.4 |           2.9 |
+|  75 |   76 | Iris-versicolor |            6.6 |           3   |
+|  76 |   77 | Iris-versicolor |            6.8 |           2.8 |
+|  77 |   78 | Iris-versicolor |            6.7 |           3   |
+|  78 |   79 | Iris-versicolor |            6   |           2.9 |
+|  79 |   80 | Iris-versicolor |            5.7 |           2.6 |
+|  80 |   81 | Iris-versicolor |            5.5 |           2.4 |
+|  81 |   82 | Iris-versicolor |            5.5 |           2.4 |
+|  82 |   83 | Iris-versicolor |            5.8 |           2.7 |
+|  83 |   84 | Iris-versicolor |            6   |           2.7 |
+|  84 |   85 | Iris-versicolor |            5.4 |           3   |
+|  85 |   86 | Iris-versicolor |            6   |           3.4 |
+|  86 |   87 | Iris-versicolor |            6.7 |           3.1 |
+|  87 |   88 | Iris-versicolor |            6.3 |           2.3 |
+|  88 |   89 | Iris-versicolor |            5.6 |           3   |
+|  89 |   90 | Iris-versicolor |            5.5 |           2.5 |
+|  90 |   91 | Iris-versicolor |            5.5 |           2.6 |
+|  91 |   92 | Iris-versicolor |            6.1 |           3   |
+|  92 |   93 | Iris-versicolor |            5.8 |           2.6 |
+|  93 |   94 | Iris-versicolor |            5   |           2.3 |
+|  94 |   95 | Iris-versicolor |            5.6 |           2.7 |
+|  95 |   96 | Iris-versicolor |            5.7 |           3   |
+|  96 |   97 | Iris-versicolor |            5.7 |           2.9 |
+|  97 |   98 | Iris-versicolor |            6.2 |           2.9 |
+|  98 |   99 | Iris-versicolor |            5.1 |           2.5 |
+|  99 |  100 | Iris-versicolor |            5.7 |           2.8 |
+| 100 |  101 | Iris-virginica  |            6.3 |           3.3 |
+| 101 |  102 | Iris-virginica  |            5.8 |           2.7 |
+| 102 |  103 | Iris-virginica  |            7.1 |           3   |
+| 103 |  104 | Iris-virginica  |            6.3 |           2.9 |
+| 104 |  105 | Iris-virginica  |            6.5 |           3   |
+| 105 |  106 | Iris-virginica  |            7.6 |           3   |
+| 106 |  107 | Iris-virginica  |            4.9 |           2.5 |
+| 107 |  108 | Iris-virginica  |            7.3 |           2.9 |
+| 108 |  109 | Iris-virginica  |            6.7 |           2.5 |
+| 109 |  110 | Iris-virginica  |            7.2 |           3.6 |
+| 110 |  111 | Iris-virginica  |            6.5 |           3.2 |
+| 111 |  112 | Iris-virginica  |            6.4 |           2.7 |
+| 112 |  113 | Iris-virginica  |            6.8 |           3   |
+| 113 |  114 | Iris-virginica  |            5.7 |           2.5 |
+| 114 |  115 | Iris-virginica  |            5.8 |           2.8 |
+| 115 |  116 | Iris-virginica  |            6.4 |           3.2 |
+| 116 |  117 | Iris-virginica  |            6.5 |           3   |
+| 117 |  118 | Iris-virginica  |            7.7 |           3.8 |
+| 118 |  119 | Iris-virginica  |            7.7 |           2.6 |
+| 119 |  120 | Iris-virginica  |            6   |           2.2 |
+| 120 |  121 | Iris-virginica  |            6.9 |           3.2 |
+| 121 |  122 | Iris-virginica  |            5.6 |           2.8 |
+| 122 |  123 | Iris-virginica  |            7.7 |           2.8 |
+| 123 |  124 | Iris-virginica  |            6.3 |           2.7 |
+| 124 |  125 | Iris-virginica  |            6.7 |           3.3 |
+| 125 |  126 | Iris-virginica  |            7.2 |           3.2 |
+| 126 |  127 | Iris-virginica  |            6.2 |           2.8 |
+| 127 |  128 | Iris-virginica  |            6.1 |           3   |
+| 128 |  129 | Iris-virginica  |            6.4 |           2.8 |
+| 129 |  130 | Iris-virginica  |            7.2 |           3   |
+| 130 |  131 | Iris-virginica  |            7.4 |           2.8 |
+| 131 |  132 | Iris-virginica  |            7.9 |           3.8 |
+| 132 |  133 | Iris-virginica  |            6.4 |           2.8 |
+| 133 |  134 | Iris-virginica  |            6.3 |           2.8 |
+| 134 |  135 | Iris-virginica  |            6.1 |           2.6 |
+| 135 |  136 | Iris-virginica  |            7.7 |           3   |
+| 136 |  137 | Iris-virginica  |            6.3 |           3.4 |
+| 137 |  138 | Iris-virginica  |            6.4 |           3.1 |
+| 138 |  139 | Iris-virginica  |            6   |           3   |
+| 139 |  140 | Iris-virginica  |            6.9 |           3.1 |
+| 140 |  141 | Iris-virginica  |            6.7 |           3.1 |
+| 141 |  142 | Iris-virginica  |            6.9 |           3.1 |
+| 142 |  143 | Iris-virginica  |            5.8 |           2.7 |
+| 143 |  144 | Iris-virginica  |            6.8 |           3.2 |
+| 144 |  145 | Iris-virginica  |            6.7 |           3.3 |
+| 145 |  146 | Iris-virginica  |            6.7 |           3   |
+| 146 |  147 | Iris-virginica  |            6.3 |           2.5 |
+| 147 |  148 | Iris-virginica  |            6.5 |           3   |
+| 148 |  149 | Iris-virginica  |            6.2 |           3.4 |
+| 149 |  150 | Iris-virginica  |            5.9 |           3   |
+| 150 |    1 | Iris-setosa     |            5.1 |           3.5 |
+| 151 |    2 | Iris-setosa     |            4.9 |           3   |
+| 152 |    3 | Iris-setosa     |            4.7 |           3.2 |
+| 153 |    4 | Iris-setosa     |            4.6 |           3.1 |
+| 154 |    5 | Iris-setosa     |            5   |           3.6 |
+| 155 |    6 | Iris-setosa     |            5.4 |           3.9 |
+| 156 |    7 | Iris-setosa     |            4.6 |           3.4 |
+| 157 |    8 | Iris-setosa     |            5   |           3.4 |
+| 158 |    9 | Iris-setosa     |            4.4 |           2.9 |
+| 159 |   10 | Iris-setosa     |            4.9 |           3.1 |
+| 160 |   11 | Iris-setosa     |            5.4 |           3.7 |
+| 161 |   12 | Iris-setosa     |            4.8 |           3.4 |
+| 162 |   13 | Iris-setosa     |            4.8 |           3   |
+| 163 |   14 | Iris-setosa     |            4.3 |           3   |
+| 164 |   15 | Iris-setosa     |            5.8 |           4   |
+| 165 |   16 | Iris-setosa     |            5.7 |           4.4 |
+| 166 |   17 | Iris-setosa     |            5.4 |           3.9 |
+| 167 |   18 | Iris-setosa     |            5.1 |           3.5 |
+| 168 |   19 | Iris-setosa     |            5.7 |           3.8 |
+| 169 |   20 | Iris-setosa     |            5.1 |           3.8 |
+| 170 |   21 | Iris-setosa     |            5.4 |           3.4 |
+| 171 |   22 | Iris-setosa     |            5.1 |           3.7 |
+| 172 |   23 | Iris-setosa     |            4.6 |           3.6 |
+| 173 |   24 | Iris-setosa     |            5.1 |           3.3 |
+| 174 |   25 | Iris-setosa     |            4.8 |           3.4 |
+| 175 |   26 | Iris-setosa     |            5   |           3   |
+| 176 |   27 | Iris-setosa     |            5   |           3.4 |
+| 177 |   28 | Iris-setosa     |            5.2 |           3.5 |
+| 178 |   29 | Iris-setosa     |            5.2 |           3.4 |
+| 179 |   30 | Iris-setosa     |            4.7 |           3.2 |
+| 180 |   31 | Iris-setosa     |            4.8 |           3.1 |
+| 181 |   32 | Iris-setosa     |            5.4 |           3.4 |
+| 182 |   33 | Iris-setosa     |            5.2 |           4.1 |
+| 183 |   34 | Iris-setosa     |            5.5 |           4.2 |
+| 184 |   35 | Iris-setosa     |            4.9 |           3.1 |
+| 185 |   36 | Iris-setosa     |            5   |           3.2 |
+| 186 |   37 | Iris-setosa     |            5.5 |           3.5 |
+| 187 |   38 | Iris-setosa     |            4.9 |           3.1 |
+| 188 |   39 | Iris-setosa     |            4.4 |           3   |
+| 189 |   40 | Iris-setosa     |            5.1 |           3.4 |
+| 190 |   41 | Iris-setosa     |            5   |           3.5 |
+| 191 |   42 | Iris-setosa     |            4.5 |           2.3 |
+| 192 |   43 | Iris-setosa     |            4.4 |           3.2 |
+| 193 |   44 | Iris-setosa     |            5   |           3.5 |
+| 194 |   45 | Iris-setosa     |            5.1 |           3.8 |
+| 195 |   46 | Iris-setosa     |            4.8 |           3   |
+| 196 |   47 | Iris-setosa     |            5.1 |           3.8 |
+| 197 |   48 | Iris-setosa     |            4.6 |           3.2 |
+| 198 |   49 | Iris-setosa     |            5.3 |           3.7 |
+| 199 |   50 | Iris-setosa     |            5   |           3.3 |
+| 200 |   51 | Iris-versicolor |            7   |           3.2 |
+| 201 |   52 | Iris-versicolor |            6.4 |           3.2 |
+| 202 |   53 | Iris-versicolor |            6.9 |           3.1 |
+| 203 |   54 | Iris-versicolor |            5.5 |           2.3 |
+| 204 |   55 | Iris-versicolor |            6.5 |           2.8 |
+| 205 |   56 | Iris-versicolor |            5.7 |           2.8 |
+| 206 |   57 | Iris-versicolor |            6.3 |           3.3 |
+| 207 |   58 | Iris-versicolor |            4.9 |           2.4 |
+| 208 |   59 | Iris-versicolor |            6.6 |           2.9 |
+| 209 |   60 | Iris-versicolor |            5.2 |           2.7 |
+| 210 |   61 | Iris-versicolor |            5   |           2   |
+| 211 |   62 | Iris-versicolor |            5.9 |           3   |
+| 212 |   63 | Iris-versicolor |            6   |           2.2 |
+| 213 |   64 | Iris-versicolor |            6.1 |           2.9 |
+| 214 |   65 | Iris-versicolor |            5.6 |           2.9 |
+| 215 |   66 | Iris-versicolor |            6.7 |           3.1 |
+| 216 |   67 | Iris-versicolor |            5.6 |           3   |
+| 217 |   68 | Iris-versicolor |            5.8 |           2.7 |
+| 218 |   69 | Iris-versicolor |            6.2 |           2.2 |
+| 219 |   70 | Iris-versicolor |            5.6 |           2.5 |
+| 220 |   71 | Iris-versicolor |            5.9 |           3.2 |
+| 221 |   72 | Iris-versicolor |            6.1 |           2.8 |
+| 222 |   73 | Iris-versicolor |            6.3 |           2.5 |
+| 223 |   74 | Iris-versicolor |            6.1 |           2.8 |
+| 224 |   75 | Iris-versicolor |            6.4 |           2.9 |
+| 225 |   76 | Iris-versicolor |            6.6 |           3   |
+| 226 |   77 | Iris-versicolor |            6.8 |           2.8 |
+| 227 |   78 | Iris-versicolor |            6.7 |           3   |
+| 228 |   79 | Iris-versicolor |            6   |           2.9 |
+| 229 |   80 | Iris-versicolor |            5.7 |           2.6 |
+| 230 |   81 | Iris-versicolor |            5.5 |           2.4 |
+| 231 |   82 | Iris-versicolor |            5.5 |           2.4 |
+| 232 |   83 | Iris-versicolor |            5.8 |           2.7 |
+| 233 |   84 | Iris-versicolor |            6   |           2.7 |
+| 234 |   85 | Iris-versicolor |            5.4 |           3   |
+| 235 |   86 | Iris-versicolor |            6   |           3.4 |
+| 236 |   87 | Iris-versicolor |            6.7 |           3.1 |
+| 237 |   88 | Iris-versicolor |            6.3 |           2.3 |
+| 238 |   89 | Iris-versicolor |            5.6 |           3   |
+| 239 |   90 | Iris-versicolor |            5.5 |           2.5 |
+| 240 |   91 | Iris-versicolor |            5.5 |           2.6 |
+| 241 |   92 | Iris-versicolor |            6.1 |           3   |
+| 242 |   93 | Iris-versicolor |            5.8 |           2.6 |
+| 243 |   94 | Iris-versicolor |            5   |           2.3 |
+| 244 |   95 | Iris-versicolor |            5.6 |           2.7 |
+| 245 |   96 | Iris-versicolor |            5.7 |           3   |
+| 246 |   97 | Iris-versicolor |            5.7 |           2.9 |
+| 247 |   98 | Iris-versicolor |            6.2 |           2.9 |
+| 248 |   99 | Iris-versicolor |            5.1 |           2.5 |
+| 249 |  100 | Iris-versicolor |            5.7 |           2.8 |
+| 250 |  101 | Iris-virginica  |            6.3 |           3.3 |
+| 251 |  102 | Iris-virginica  |            5.8 |           2.7 |
+| 252 |  103 | Iris-virginica  |            7.1 |           3   |
+| 253 |  104 | Iris-virginica  |            6.3 |           2.9 |
+| 254 |  105 | Iris-virginica  |            6.5 |           3   |
+| 255 |  106 | Iris-virginica  |            7.6 |           3   |
+| 256 |  107 | Iris-virginica  |            4.9 |           2.5 |
+| 257 |  108 | Iris-virginica  |            7.3 |           2.9 |
+| 258 |  109 | Iris-virginica  |            6.7 |           2.5 |
+| 259 |  110 | Iris-virginica  |            7.2 |           3.6 |
+| 260 |  111 | Iris-virginica  |            6.5 |           3.2 |
+| 261 |  112 | Iris-virginica  |            6.4 |           2.7 |
+| 262 |  113 | Iris-virginica  |            6.8 |           3   |
+| 263 |  114 | Iris-virginica  |            5.7 |           2.5 |
+| 264 |  115 | Iris-virginica  |            5.8 |           2.8 |
+| 265 |  116 | Iris-virginica  |            6.4 |           3.2 |
+| 266 |  117 | Iris-virginica  |            6.5 |           3   |
+| 267 |  118 | Iris-virginica  |            7.7 |           3.8 |
+| 268 |  119 | Iris-virginica  |            7.7 |           2.6 |
+| 269 |  120 | Iris-virginica  |            6   |           2.2 |
+| 270 |  121 | Iris-virginica  |            6.9 |           3.2 |
+| 271 |  122 | Iris-virginica  |            5.6 |           2.8 |
+| 272 |  123 | Iris-virginica  |            7.7 |           2.8 |
+| 273 |  124 | Iris-virginica  |            6.3 |           2.7 |
+| 274 |  125 | Iris-virginica  |            6.7 |           3.3 |
+| 275 |  126 | Iris-virginica  |            7.2 |           3.2 |
+| 276 |  127 | Iris-virginica  |            6.2 |           2.8 |
+| 277 |  128 | Iris-virginica  |            6.1 |           3   |
+| 278 |  129 | Iris-virginica  |            6.4 |           2.8 |
+| 279 |  130 | Iris-virginica  |            7.2 |           3   |
+| 280 |  131 | Iris-virginica  |            7.4 |           2.8 |
+| 281 |  132 | Iris-virginica  |            7.9 |           3.8 |
+| 282 |  133 | Iris-virginica  |            6.4 |           2.8 |
+| 283 |  134 | Iris-virginica  |            6.3 |           2.8 |
+| 284 |  135 | Iris-virginica  |            6.1 |           2.6 |
+| 285 |  136 | Iris-virginica  |            7.7 |           3   |
+| 286 |  137 | Iris-virginica  |            6.3 |           3.4 |
+| 287 |  138 | Iris-virginica  |            6.4 |           3.1 |
+| 288 |  139 | Iris-virginica  |            6   |           3   |
+| 289 |  140 | Iris-virginica  |            6.9 |           3.1 |
+| 290 |  141 | Iris-virginica  |            6.7 |           3.1 |
+| 291 |  142 | Iris-virginica  |            6.9 |           3.1 |
+| 292 |  143 | Iris-virginica  |            5.8 |           2.7 |
+| 293 |  144 | Iris-virginica  |            6.8 |           3.2 |
+| 294 |  145 | Iris-virginica  |            6.7 |           3.3 |
+| 295 |  146 | Iris-virginica  |            6.7 |           3   |
+| 296 |  147 | Iris-virginica  |            6.3 |           2.5 |
+| 297 |  148 | Iris-virginica  |            6.5 |           3   |
+| 298 |  149 | Iris-virginica  |            6.2 |           3.4 |
+| 299 |  150 | Iris-virginica  |            5.9 |           3   |
++-----+------+-----------------+----------------+---------------+
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Menggabungkan kolom pada mysql dan postgresql</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="c1"># 🛠 Konfigurasi koneksi ke MySQL (Aiven.io)</span>
+<span class="n">DB_HOST</span> <span class="o">=</span> <span class="s2">&quot;mysql-3d9be5d4-irismysqll.g.aivencloud.com&quot;</span>
+<span class="n">DB_PORT</span> <span class="o">=</span> <span class="mi">28758</span>
+<span class="n">DB_NAME</span> <span class="o">=</span> <span class="s2">&quot;defaultdb&quot;</span>
+<span class="n">DB_USER</span> <span class="o">=</span> <span class="s2">&quot;avnadmin&quot;</span>
+<span class="n">DB_PASS</span> <span class="o">=</span> <span class="s2">&quot;AVNS_9SRQX7luHCPCP1wxyhh&quot;</span>
+
+<span class="c1"># 🛠 Konfigurasi koneksi ke PostgreSQL (Aiven.io)</span>
+<span class="n">PG_HOST</span> <span class="o">=</span> <span class="s2">&quot;pg-ee5fcb6-irisposgresqll.g.aivencloud.com&quot;</span>
+<span class="n">PG_PORT</span> <span class="o">=</span> <span class="mi">13492</span>
+<span class="n">PG_NAME</span> <span class="o">=</span> <span class="s2">&quot;defaultdb&quot;</span>
+<span class="n">PG_USER</span> <span class="o">=</span> <span class="s2">&quot;avnadmin&quot;</span>
+<span class="n">PG_PASS</span> <span class="o">=</span> <span class="s2">&quot;AVNS_82XRmz2cSUlzQs353EZ&quot;</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Koneksi PostgreSQL</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="n">PG_HOST</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">PG_PORT</span><span class="p">,</span> <span class="n">dbname</span><span class="o">=</span><span class="n">PG_NAME</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">PG_USER</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">PG_PASS</span><span class="p">,</span> <span class="n">sslmode</span><span class="o">=</span><span class="s2">&quot;require&quot;</span>
+    <span class="p">)</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="c1"># Ambil data dari PostgreSQL (ID, Class, Sepal Length, Sepal Width)</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM irispostgresql.irispostgresql;&quot;</span><span class="p">)</span>  <span class="c1"># Sesuaikan tabel</span>
+    <span class="n">pg_rows</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">pg_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+    <span class="n">pg_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pg_rows</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">pg_columns</span><span class="p">)</span>
+
+    <span class="c1"># Koneksi MySQL</span>
+    <span class="n">mysql_conn</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="n">DB_HOST</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">DB_PORT</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">DB_USER</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="n">DB_PASS</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="n">DB_NAME</span><span class="p">,</span>
+        <span class="n">cursorclass</span><span class="o">=</span><span class="n">pymysql</span><span class="o">.</span><span class="n">cursors</span><span class="o">.</span><span class="n">DictCursor</span>
+    <span class="p">)</span>
+    <span class="n">mysql_cur</span> <span class="o">=</span> <span class="n">mysql_conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="c1"># Ambil data dari MySQL (ID, Petal Length, Petal Width)</span>
+    <span class="n">mysql_cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM defaultdb.irissql;&quot;</span><span class="p">)</span>  <span class="c1"># Sesuaikan tabel</span>
+    <span class="n">mysql_rows</span> <span class="o">=</span> <span class="n">mysql_cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">mysql_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mysql_rows</span><span class="p">)</span>
+
+    <span class="c1"># Hapus &quot;Class&quot; dari MySQL, karena gak ada di tabelnya</span>
+    <span class="n">pg_df</span> <span class="o">=</span> <span class="n">pg_df</span><span class="p">[[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;Class&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal width&quot;</span><span class="p">]]</span>
+    <span class="n">mysql_df</span> <span class="o">=</span> <span class="n">mysql_df</span><span class="p">[[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;petal length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal width&quot;</span><span class="p">]]</span>  <span class="c1"># Pastikan kolom yang benar</span>
+
+    <span class="c1"># Merge berdasarkan &quot;id&quot;</span>
+    <span class="n">combined_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pg_df</span><span class="p">,</span> <span class="n">mysql_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Pastikan urutan kolom sesuai</span>
+    <span class="n">ordered_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;Class&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal width&quot;</span><span class="p">,</span> <span class="s2">&quot;petal length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal width&quot;</span><span class="p">]</span>
+    <span class="n">combined_df</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="n">ordered_columns</span><span class="p">]</span>
+
+    <span class="c1"># Menampilkan 3 data awal, tanda &quot;...&quot; di tengah, dan 3 data akhir</span>
+    <span class="n">df_selected</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
+        <span class="n">combined_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s2">&quot;...&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">combined_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)],</span> <span class="n">columns</span><span class="o">=</span><span class="n">combined_df</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>
+        <span class="n">combined_df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="p">])</span>
+
+    <span class="c1"># Menampilkan hasil dalam format tabel</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">df_selected</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;psql&quot;</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="c1"># Menutup koneksi database</span>
+    <span class="k">if</span> <span class="n">cur</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">mysql_cur</span><span class="p">:</span>
+        <span class="n">mysql_cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">mysql_conn</span><span class="p">:</span>
+        <span class="n">mysql_conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+------+----------------+----------------+---------------+----------------+---------------+
+| id   | Class          | sepal length   | sepal width   | petal length   | petal width   |
+|------+----------------+----------------+---------------+----------------+---------------|
+| 1    | Iris-setosa    | 5.1            | 3.5           | 1.4            | 0.2           |
+| 2    | Iris-setosa    | 4.9            | 3.0           | 1.4            | 0.2           |
+| 3    | Iris-setosa    | 4.7            | 3.2           | 1.3            | 0.2           |
+| ...  | ...            | ...            | ...           | ...            | ...           |
+| 148  | Iris-virginica | 6.5            | 3.0           | 5.2            | 2.0           |
+| 149  | Iris-virginica | 6.2            | 3.4           | 5.4            | 2.3           |
+| 150  | Iris-virginica | 5.9            | 3.0           | 5.1            | 1.8           |
++------+----------------+----------------+---------------+----------------+---------------+
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Menghitung nilai pada setiap kolom/statistik deskriptoif data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="n">selected_columns</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[[</span><span class="s1">&#39;sepal length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal width&#39;</span><span class="p">,</span> <span class="s1">&#39;petal length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal width&#39;</span><span class="p">]]</span>
+
+<span class="n">summary</span> <span class="o">=</span> <span class="n">selected_columns</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">])</span>
+
+<span class="n">summary</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">summary</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&lt;lambda&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;modus&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">&#39;keys&#39;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">&#39;pretty&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+-------------------+---------------------+--------------------+--------------------+
+|        |   sepal length    |     sepal width     |    petal length    |    petal width     |
++--------+-------------------+---------------------+--------------------+--------------------+
+|  mean  | 5.843333333333334 |        3.054        | 3.758666666666666  | 1.1986666666666668 |
+| modus  |        5.0        |         3.0         |        1.5         |        0.2         |
+| median |        5.8        |         3.0         |        4.35        |        1.3         |
+|  std   | 0.826680242273541 | 0.43286862999773973 | 1.7614674129956833 | 0.7618834843342035 |
+|  min   |        4.3        |         2.0         |        1.0         |        0.1         |
+|  max   |        7.9        |         4.4         |        6.9         |        2.5         |
++--------+-------------------+---------------------+--------------------+--------------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="n">selected_columns</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Histogram Distribusi Data&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">selected_columns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boxplot Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">combined_df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Class&quot;</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7c5e3a3f3c86159ca2d60270335fa5329f9a7228b6ca586cef6324cbdfd25577.png" src="_images/7c5e3a3f3c86159ca2d60270335fa5329f9a7228b6ca586cef6324cbdfd25577.png" />
+<img alt="_images/23e9612f38881275d6034076b84c52b8d02d1d917e146c0bbb16a0b785a3865b.png" src="_images/23e9612f38881275d6034076b84c52b8d02d1d917e146c0bbb16a0b785a3865b.png" />
+<img alt="_images/a5d3961da0984e915369002938a585bd6767a552b3fe4a14258394c816f68d1d.png" src="_images/a5d3961da0984e915369002938a585bd6767a552b3fe4a14258394c816f68d1d.png" />
+</div>
+</div>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -430,21 +1216,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
