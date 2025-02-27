@@ -5,5 +5,3 @@ Projek ini bertujuan untuk mendokumentasikan setiap materi penambangan data sela
 
 Hubungi email abid.ays23456@gmail.com
 
-```{tableofcontents}
-```
