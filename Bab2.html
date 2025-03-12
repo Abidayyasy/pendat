@@ -188,6 +188,7 @@
 
 
 
+
 </ul>
 
     </div>
@@ -389,6 +390,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tipe-tipe-data-dalam-data-understanding">TIPE-TIPE DATA DALAM DATA UNDERSTANDING</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-menggunakan-knn">DETEKSI OUTLIER MENGGUNAKAN KNN</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#praktek">PRAKTEK</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-menggunakan-metode-lof">Deteksi Outlier Menggunakan Metode LOF</a></li>
 </ul>
 
             </nav>
@@ -524,16 +526,7 @@ Data Understanding adalah tahao awal dalam proses data mining yang bertujuan unt
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pymysql
-  Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
-Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/45.0 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.0/45.0 kB</span> <span class=" -Color -Color-Red">2.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pymysql
-Successfully installed pymysql-1.1.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymysql in /usr/local/lib/python3.11/dist-packages (1.1.1)
 </pre></div>
 </div>
 </div>
@@ -545,20 +538,7 @@ Successfully installed pymysql-1.1.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting psycopg2-binary
-  Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
-Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.3/3.0 MB</span> <span class=" -Color -Color-Red">7.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">44.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">33.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: psycopg2-binary
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed psycopg2-binary-2.9.10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: psycopg2-binary in /usr/local/lib/python3.11/dist-packages (2.9.10)
 </pre></div>
 </div>
 </div>
@@ -1777,7 +1757,9 @@ jumlah total data:150
 </div>
 </div>
 </div>
-<p>#Deteksi Outlier Menggunakan Metode LOF</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="deteksi-outlier-menggunakan-metode-lof">
+<h1>Deteksi Outlier Menggunakan Metode LOF<a class="headerlink" href="#deteksi-outlier-menggunakan-metode-lof" title="Link to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p>Tanpa Library</p></li>
 </ol>
@@ -2084,6 +2066,7 @@ Titik Tetangga Terdekat     RD    LRD  LOF Score (Manual)
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tipe-tipe-data-dalam-data-understanding">TIPE-TIPE DATA DALAM DATA UNDERSTANDING</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-menggunakan-knn">DETEKSI OUTLIER MENGGUNAKAN KNN</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#praktek">PRAKTEK</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-menggunakan-metode-lof">Deteksi Outlier Menggunakan Metode LOF</a></li>
 </ul>
 
   </nav></div>
