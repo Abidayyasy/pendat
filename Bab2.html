@@ -526,7 +526,18 @@ Data Understanding adalah tahao awal dalam proses data mining yang bertujuan unt
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymysql in /usr/local/lib/python3.11/dist-packages (1.1.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pymysql
+  Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
+Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/45.0 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.0/45.0 kB</span> <span class=" -Color -Color-Red">1.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pymysql
+Successfully installed pymysql-1.1.1
 </pre></div>
 </div>
 </div>
@@ -538,7 +549,21 @@ Data Understanding adalah tahao awal dalam proses data mining yang bertujuan unt
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: psycopg2-binary in /usr/local/lib/python3.11/dist-packages (2.9.10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting psycopg2-binary
+  Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.1/3.0 MB</span> <span class=" -Color -Color-Red">2.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.9/3.0 MB</span> <span class=" -Color -Color-Red">12.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">32.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">25.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: psycopg2-binary
+Successfully installed psycopg2-binary-2.9.10
 </pre></div>
 </div>
 </div>
@@ -1838,7 +1863,7 @@ jumlah total data:150
 <span class="p">])</span>
 
 <span class="c1"># Nama titik untuk mempermudah interpretasi</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;ABCDEFGHIJ&quot;</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;KLMNOPQRST&quot;</span><span class="p">)</span>
 
 <span class="c1"># Hitung LOF secara manual</span>
 <span class="n">distances</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">lrd</span><span class="p">,</span> <span class="n">lof_manual</span> <span class="o">=</span> <span class="n">calculate_lof_manual</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -1859,96 +1884,141 @@ jumlah total data:150
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jarak Euclidean antar titik:
-        A       B       C       D       E       F       G       H      I  \
-A    0.00    2.24    5.83    7.81   10.63   12.81   15.62   19.85  38.90   
-B    2.24    0.00    3.61    5.83    8.49   10.63   13.45   17.69  36.80   
-C    5.83    3.61    0.00    3.00    5.00    7.07    9.90   14.14  33.30   
-D    7.81    5.83    3.00    0.00    3.16    5.39    8.06   12.21  31.11   
-E   10.63    8.49    5.00    3.16    0.00    2.24    5.00    9.22  28.32   
-F   12.81   10.63    7.07    5.39    2.24    0.00    2.83    7.07  26.25   
-G   15.62   13.45    9.90    8.06    5.00    2.83    0.00    4.24  23.43   
-H   19.85   17.69   14.14   12.21    9.22    7.07    4.24    0.00  19.21   
-I   38.90   36.80   33.30   31.11   28.32   26.25   23.43   19.21   0.00   
-J  137.89  135.77  132.25  130.11  127.29  125.18  122.35  118.11  98.99   
+        K       L       M       N       O       P       Q       R      S  \
+K    0.00    2.24    5.83    7.81   10.63   12.81   15.62   19.85  38.90   
+L    2.24    0.00    3.61    5.83    8.49   10.63   13.45   17.69  36.80   
+M    5.83    3.61    0.00    3.00    5.00    7.07    9.90   14.14  33.30   
+N    7.81    5.83    3.00    0.00    3.16    5.39    8.06   12.21  31.11   
+O   10.63    8.49    5.00    3.16    0.00    2.24    5.00    9.22  28.32   
+P   12.81   10.63    7.07    5.39    2.24    0.00    2.83    7.07  26.25   
+Q   15.62   13.45    9.90    8.06    5.00    2.83    0.00    4.24  23.43   
+R   19.85   17.69   14.14   12.21    9.22    7.07    4.24    0.00  19.21   
+S   38.90   36.80   33.30   31.11   28.32   26.25   23.43   19.21   0.00   
+T  137.89  135.77  132.25  130.11  127.29  125.18  122.35  118.11  98.99   
 
-        J  
-A  137.89  
-B  135.77  
-C  132.25  
-D  130.11  
-E  127.29  
-F  125.18  
-G  122.35  
-H  118.11  
-I   98.99  
-J    0.00  
+        T  
+K  137.89  
+L  135.77  
+M  132.25  
+N  130.11  
+O  127.29  
+P  125.18  
+Q  122.35  
+R  118.11  
+S   98.99  
+T    0.00  
 
 K-tetangga terdekat:
 Titik Tetangga Terdekat
-    A         [B, C, D]
-    B         [A, C, D]
-    C         [D, B, E]
-    D         [C, E, F]
-    E         [F, D, C]
-    F         [E, G, D]
-    G         [F, H, E]
-    H         [G, F, E]
-    I         [H, G, F]
-    J         [I, H, G]
+    K         [L, M, N]
+    L         [K, M, N]
+    M         [N, L, O]
+    N         [M, O, P]
+    O         [P, N, M]
+    P         [O, Q, N]
+    Q         [P, R, O]
+    R         [Q, P, O]
+    S         [R, Q, P]
+    T         [S, R, Q]
 
 Reachability Distance (RD):
 Titik     RD
-    A   5.29
-    B   3.89
-    C   3.87
-    D   3.85
-    E   3.47
-    F   3.48
-    G   4.02
-    H   6.84
-    I  22.96
-    J 113.15
+    K   5.29
+    L   3.89
+    M   3.87
+    N   3.85
+    O   3.47
+    P   3.48
+    Q   4.02
+    R   6.84
+    S  22.96
+    T 113.15
 
 Local Reachability Density (LRD):
 Titik    LRD
-    A 0.1889
-    B 0.2570
-    C 0.2585
-    D 0.2598
-    E 0.2885
-    F 0.2871
-    G 0.2485
-    H 0.1461
-    I 0.0435
-    J 0.0088
+    K 0.1889
+    L 0.2570
+    M 0.2585
+    N 0.2598
+    O 0.2885
+    P 0.2871
+    Q 0.2485
+    R 0.1461
+    S 0.0435
+    T 0.0088
 
 Local Outlier Factor (LOF):
 Titik  LOF Score (Manual)
-    A              1.3678
-    B              0.9173
-    C              1.0385
-    D              1.0702
-    E              0.9305
-    F              0.9252
-    G              0.9680
-    H              1.8802
-    I              5.2181
-    J             16.5267
+    K              1.3678
+    L              0.9173
+    M              1.0385
+    N              1.0702
+    O              0.9305
+    P              0.9252
+    Q              0.9680
+    R              1.8802
+    S              5.2181
+    T             16.5267
 
 Ringkasan Akhir dalam bentuk tabel:
 Titik Tetangga Terdekat     RD    LRD  LOF Score (Manual)
-    A         [B, C, D]   5.29 0.1889              1.3678
-    B         [A, C, D]   3.89 0.2570              0.9173
-    C         [D, B, E]   3.87 0.2585              1.0385
-    D         [C, E, F]   3.85 0.2598              1.0702
-    E         [F, D, C]   3.47 0.2885              0.9305
-    F         [E, G, D]   3.48 0.2871              0.9252
-    G         [F, H, E]   4.02 0.2485              0.9680
-    H         [G, F, E]   6.84 0.1461              1.8802
-    I         [H, G, F]  22.96 0.0435              5.2181
-    J         [I, H, G] 113.15 0.0088             16.5267
+    K         [L, M, N]   5.29 0.1889              1.3678
+    L         [K, M, N]   3.89 0.2570              0.9173
+    M         [N, L, O]   3.87 0.2585              1.0385
+    N         [M, O, P]   3.85 0.2598              1.0702
+    O         [P, N, M]   3.47 0.2885              0.9305
+    P         [O, Q, N]   3.48 0.2871              0.9252
+    Q         [P, R, O]   4.02 0.2485              0.9680
+    R         [Q, P, O]   6.84 0.1461              1.8802
+    S         [R, Q, P]  22.96 0.0435              5.2181
+    T         [S, R, Q] 113.15 0.0088             16.5267
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">):</span>
+    <span class="c1"># Menentukan ukuran radius untuk plotting berdasarkan LOF score</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+    <span class="c1"># Plot data</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data points&quot;</span><span class="p">)</span>  <span class="c1"># Titik data biasa</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span>  <span class="c1"># Ukuran titik berdasarkan LOF score</span>
+        <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+        <span class="n">facecolors</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outlier scores&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature 1&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Feature 2&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Local Outlier Factor (LOF) Manual Visualization&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Contoh data (10 sampel dengan 2 fitur, termasuk outlier)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>  <span class="c1"># Outlier</span>
+<span class="p">])</span>
+
+<span class="c1"># Contoh LOF Scores yang sudah dihitung sebelumnya (simulasi)</span>
+<span class="n">lof_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>  <span class="c1"># Nilai lebih besar dari 1.5 adalah outlier</span>
+
+<span class="c1"># Panggil fungsi visualisasi</span>
+<span class="n">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d5a4b6f07a795c60e88d313eba0e0e7d751a454b7b30e7fa744ed0364a96c74c.png" src="_images/d5a4b6f07a795c60e88d313eba0e0e7d751a454b7b30e7fa744ed0364a96c74c.png" />
 </div>
 </div>
 <ol class="arabic simple" start="2">
@@ -1967,7 +2037,7 @@ Titik Tetangga Terdekat     RD    LRD  LOF Score (Manual)
 <span class="p">])</span>
 
 <span class="c1"># Nama titik untuk mempermudah interpretasi</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;ABCDEFGHIJ&quot;</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;KLMNOPQRST&quot;</span><span class="p">)</span>
 
 <span class="c1"># Inisialisasi model LOF dari sklearn</span>
 <span class="n">lof_model</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
@@ -1989,18 +2059,63 @@ Titik Tetangga Terdekat     RD    LRD  LOF Score (Manual)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Titik  LOF Score (sklearn) Outlier Flag
-    A               1.1703       Inlier
-    B               1.1062       Inlier
-    C               0.9841       Inlier
-    D               0.9748       Inlier
-    E               1.0075       Inlier
-    F               0.9201       Inlier
-    G               1.1461       Inlier
-    H               1.2733       Inlier
-    I               3.7424      Outlier
-    J              12.7286      Outlier
+    K               1.1703       Inlier
+    L               1.1062       Inlier
+    M               0.9841       Inlier
+    N               0.9748       Inlier
+    O               1.0075       Inlier
+    P               0.9201       Inlier
+    Q               1.1461       Inlier
+    R               1.2733       Inlier
+    S               3.7424      Outlier
+    T              12.7286      Outlier
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">):</span>
+    <span class="c1"># Menentukan ukuran radius untuk plotting berdasarkan LOF score</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+    <span class="c1"># Plot data</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data points&quot;</span><span class="p">)</span>  <span class="c1"># Titik data biasa</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span>  <span class="c1"># Ukuran titik berdasarkan LOF score</span>
+        <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+        <span class="n">facecolors</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outlier scores&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature 1&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Feature 2&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Local Outlier Factor (LOF) Manual Visualization&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Contoh data (10 sampel dengan 2 fitur, termasuk outlier)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>  <span class="c1"># Outlier</span>
+<span class="p">])</span>
+
+<span class="c1"># Contoh LOF Scores yang sudah dihitung sebelumnya (simulasi)</span>
+<span class="n">lof_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>  <span class="c1"># Nilai lebih besar dari 1.5 adalah outlier</span>
+
+<span class="c1"># Panggil fungsi visualisasi</span>
+<span class="n">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d5a4b6f07a795c60e88d313eba0e0e7d751a454b7b30e7fa744ed0364a96c74c.png" src="_images/d5a4b6f07a795c60e88d313eba0e0e7d751a454b7b30e7fa744ed0364a96c74c.png" />
 </div>
 </div>
 </section>
