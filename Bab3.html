@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Buku Penambangan Data &#8212; Pendat</title>
+    <title>BAB 3 - DETEKSI OUTLIER &#8212; Pendat</title>
   
   
   
@@ -57,10 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Bab3';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="BAB 1 - DATA MINING" href="Bab1.html" />
+    <link rel="next" title="DETEKSI OUTLIER MENGGUNAKAN LOF" href="Bab3-2.html" />
+    <link rel="prev" title="BAB 2 - DATA UNDERSTANDING" href="Bab2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -143,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -174,13 +173,13 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Buku Penambangan Data
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bab1.html">BAB 1 - DATA MINING</a></li>
 
 
@@ -191,7 +190,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Bab3.html">BAB 3 - DETEKSI OUTLIER</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">BAB 3 - DETEKSI OUTLIER</a></li>
 
 
 
@@ -268,7 +267,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FBab3.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -298,7 +297,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/Bab3.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -308,7 +307,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -369,7 +368,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -380,11 +381,23 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Buku Penambangan Data</h1>
+    <h1>BAB 3 - DETEKSI OUTLIER</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">BAB 3 - DETEKSI OUTLIER</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-outlier">APA ITU OUTLIER</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kenapa-penting-dideteksi">KENAPA PENTING DIDETEKSI</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-mendeteksi-outlier">CARA MENDETEKSI OUTLIER</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -394,13 +407,91 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="buku-penambangan-data">
-<h1>Buku Penambangan Data<a class="headerlink" href="#buku-penambangan-data" title="Link to this heading">#</a></h1>
-<p>Perkenalkan nama saya Muhammad Abid Ayyasy, saya adalah seorang mahasiswa prodi Teknik Informatika dengan NIM 230411100042 yang sedang mengambil mata kuliah penambangan data</p>
-<p>Projek ini bertujuan untuk mendokumentasikan setiap materi penambangan data selama satu semester</p>
-<p>Hubungi email <a class="reference external" href="mailto:abid&#46;ays23456&#37;&#52;&#48;gmail&#46;com">abid<span>&#46;</span>ays23456<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="bab-3-deteksi-outlier">
+<h1>BAB 3 - DETEKSI OUTLIER<a class="headerlink" href="#bab-3-deteksi-outlier" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="apa-itu-outlier">
+<h1>APA ITU OUTLIER<a class="headerlink" href="#apa-itu-outlier" title="Link to this heading">#</a></h1>
+<p>Outlier itu kayak si anak band rock di tengah acara opera klasik—beda sendiri, mencolok, dan bisa bikin hasil analisis jadi kacau. Dalam statistik dan machine learning, outlier adalah data yang jauh menyimpang dari pola umum dalam sebuah dataset.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="kenapa-penting-dideteksi">
+<h1>KENAPA PENTING DIDETEKSI<a class="headerlink" href="#kenapa-penting-dideteksi" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Bisa jadi error, terKadang outlier muncul karena kesalahan input, sensor rusak, atau noise dalam data.</p></li>
+<li><p>Bisa bawa informasi penting – Kadang justru outlier yang mengandung insight menarik, misalnya transaksi aneh yang ternyata fraud.</p></li>
+<li><p>Bisa ngacauin model – Beberapa model statistik dan machine learning (kayak regresi linear) sensitif banget terhadap outlier.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="cara-mendeteksi-outlier">
+<h1>CARA MENDETEKSI OUTLIER<a class="headerlink" href="#cara-mendeteksi-outlier" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Metode Statistik</p></li>
+</ol>
+<p>a. Z-Score (Standardization Method)</p>
+<ul>
+<li><p>Mengukur seberapa jauh suatu data dari rata-rata dalam satuan standar deviasi.</p></li>
+<li><p>Rumusnya:</p>
+<p><img alt="image.png" src="data:image/png;base64,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" /></p>
+</li>
+<li><p>Jika ∣Z∣&gt;3, biasanya dianggap outlier.</p></li>
+<li><p>Cocok buat: Data yang berdistribusi normal (Gaussian).</p></li>
+<li><p>Kelemahan: Kalau data tidak normal, hasilnya bisa menyesatkan.</p></li>
+</ul>
+<p>b. IQR (Interquartile Range)</p>
+<ul class="simple">
+<li><p>Berdasarkan kuartil (Q1 dan Q3).</p></li>
+<li><p>Rumusnya:
+IQR
+=
+𝑄
+3
+−
+𝑄
+1</p></li>
+<li><p>Outlier adalah data yang berada di luar batas:</p></li>
+<li><p>Bawah:
+𝑄1 − 1.5 × 𝐼𝑄𝑅</p></li>
+<li><p>Atas:
+𝑄3 + 1.5 × 𝐼𝑄𝑅</p></li>
+<li><p>Cocok buat: Data dengan distribusi tidak normal.</p></li>
+<li><p>Kelemahan: Tidak efektif kalau outlier menyebar merata dalam data.</p></li>
+</ul>
+<p>📊 2. Metode Visualisasi</p>
+<p>a. Boxplot</p>
+<ul class="simple">
+<li><p>Menampilkan median, kuartil, dan outlier sebagai titik-titik di luar whisker.</p></li>
+<li><p>Cocok buat: Identifikasi outlier secara cepat.</p></li>
+</ul>
+<p>b. Scatterplot</p>
+<ul class="simple">
+<li><p>Jika ada titik yang jauh dari kelompok utama, kemungkinan besar itu outlier.</p></li>
+<li><p>Cocok buat: Data berdimensi rendah (1D atau 2D).</p></li>
+</ul>
+<p>🤖 3. Metode Machine Learning &amp; Clustering</p>
+<p>a. K-Nearest Neighbors (KNN)</p>
+<ul class="simple">
+<li><p>Menghitung jarak ke k tetangga terdekat.</p></li>
+<li><p>Jika rata-rata jaraknya jauh dari yang lain, kemungkinan besar itu outlier.</p></li>
+<li><p>Cocok buat: Data dengan pola yang jelas.</p></li>
+</ul>
+<p>b. Local Outlier Factor (LOF)</p>
+<ul class="simple">
+<li><p>Mengukur kepadatan lokal suatu titik dibandingkan dengan tetangganya.</p></li>
+<li><p>Jika kepadatannya lebih rendah dari sekitarnya, berarti outlier.</p></li>
+<li><p>Cocok buat: Data dengan kepadatan yang bervariasi.</p></li>
+</ul>
+<p>c. Isolation Forest</p>
+<ul class="simple">
+<li><p>Model berbasis pohon keputusan untuk mengisolasi data.</p></li>
+<li><p>Semakin cepat suatu titik bisa diisolasi, semakin besar kemungkinan itu outlier.</p></li>
+<li><p>Cocok buat: Dataset besar dengan banyak fitur.</p></li>
+</ul>
+<p>d. DBSCAN (Density-Based Clustering)</p>
+<ul class="simple">
+<li><p>Menentukan outlier berdasarkan kepadatan cluster.</p></li>
+<li><p>Titik yang tidak masuk dalam cluster dianggap outlier.</p></li>
+<li><p>Cocok buat: Data dengan bentuk cluster yang tidak teratur.</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -433,12 +524,21 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Bab2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">BAB 2 - DATA UNDERSTANDING</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="Bab1.html"
+       href="Bab3-2.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">BAB 1 - DATA MINING</p>
+        <p class="prev-next-title">DETEKSI OUTLIER MENGGUNAKAN LOF</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -448,6 +548,25 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">BAB 3 - DETEKSI OUTLIER</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-outlier">APA ITU OUTLIER</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kenapa-penting-dideteksi">KENAPA PENTING DIDETEKSI</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-mendeteksi-outlier">CARA MENDETEKSI OUTLIER</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
