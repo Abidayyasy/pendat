@@ -1,0 +1,77 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from scipy.stats import norm
+import numpy as np
+
+features = ["sepal length", "sepal width", "petal length", "petal width"]
+
+# Hitung prior probability tiap kelas
+priors = {}
+total_data = len(combined_df)
+
+for c in classes:
+    priors[c] = len(combined_df[combined_df["Class"] == c]) / total_data
+
+for idx, row in combined_df.iterrows():
+    class_label = row["Class"]
+    data_values = row[features].values
+
+    likelihoods = {}
+
+    for c in classes:
+        likelihoods[c] = []
+        subset = combined_df[combined_df["Class"] == c]
+
+        for feature in features:
+            mean = subset[feature].mean()
+            std_dev = subset[feature].std()  # Pakai std() langsung biar gak perlu akar
+
+            if std_dev == 0:
+                likelihood = 1  # Hindari NaN kalau std_dev nol
+            else:
+                likelihood = norm.pdf(row[feature], mean, std_dev)
+
+            likelihoods[c].append(likelihood)
+
+        # Kalikan semua likelihood dalam satu kelas + dikali prior
+        likelihoods[c] = np.prod(likelihoods[c]) * priors[c]
+
+    # Debugging: Cek likelihood tiap kelas sebelum menentukan prediksi
+    print(f"Data {idx+1}: class = {class_label}")
+    print(f"data column = {data_values}")
+    print(f"Likelihoods: {likelihoods}\n")
+
+
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-9-922626870e31>[0m in [0;36m<cell line: 0>[0;34m()[0m
+[1;32m      8[0m [0mtotal_data[0m [0;34m=[0m [0mlen[0m[0;34m([0m[0mcombined_df[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      9[0m [0;34m[0m[0m
+[0;32m---> 10[0;31m [0;32mfor[0m [0mc[0m [0;32min[0m [0mclasses[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     11[0m     [0mpriors[0m[0;34m[[0m[0mc[0m[0;34m][0m [0;34m=[0m [0mlen[0m[0;34m([0m[0mcombined_df[0m[0;34m[[0m[0mcombined_df[0m[0;34m[[0m[0;34m"Class"[0m[0;34m][0m [0;34m==[0m [0mc[0m[0;34m][0m[0;34m)[0m [0;34m/[0m [0mtotal_data[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     12[0m [0;34m[0m[0m
+
+[0;31mNameError[0m: name 'classes' is not defined
+

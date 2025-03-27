@@ -198,6 +198,11 @@
 
 <li class="toctree-l1"><a class="reference internal" href="Bab3-2.html">DETEKSI OUTLIER MENGGUNAKAN LOF</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="Bab4.html">NAIVE BAYES</a></li>
+
+
+
+
 </ul>
 
     </div>
@@ -467,16 +472,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pymysql
-  Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
-Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/45.0 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.0/45.0 kB</span> <span class=" -Color -Color-Red">2.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pymysql
-Successfully installed pymysql-1.1.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymysql in /usr/local/lib/python3.11/dist-packages (1.1.1)
 </pre></div>
 </div>
 </div>
@@ -488,20 +484,7 @@ Successfully installed pymysql-1.1.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting psycopg2-binary
-  Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
-Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.2/3.0 MB</span> <span class=" -Color -Color-Red">6.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">45.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">34.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: psycopg2-binary
-Successfully installed psycopg2-binary-2.9.10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: psycopg2-binary in /usr/local/lib/python3.11/dist-packages (2.9.10)
 </pre></div>
 </div>
 </div>
@@ -571,19 +554,160 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: (2003, &quot;Can&#39;t connect to MySQL server on &#39;mysql-3d9be5d4-irismysqll.g.aivencloud.com&#39; ([Errno -2] Name or service not known)&quot;)
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-4-146ce15352da&gt;</span> in <span class="ni">&lt;cell line: 0&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="k">finally</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="c1"># Menutup koneksi</span>
-<span class="ne">---&gt; </span><span class="mi">39</span>     <span class="k">if</span> <span class="n">cur</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>         <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
-
-<span class="ne">NameError</span>: name &#39;cur&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----+------+-----------------+----------------+---------------+
+|     |   id | Class           |   petal length |   petal width |
+|-----+------+-----------------+----------------+---------------|
+|   0 |    1 | Iris-setosa     |           86.4 |          70   |
+|   1 |    2 | Iris-setosa     |            1.4 |           0.2 |
+|   2 |    3 | Iris-setosa     |            1.3 |           0.2 |
+|   3 |    4 | Iris-setosa     |            1.5 |           0.2 |
+|   4 |    5 | Iris-setosa     |            1.4 |           0.2 |
+|   5 |    6 | Iris-setosa     |            1.7 |           0.4 |
+|   6 |    7 | Iris-setosa     |            1.4 |           0.3 |
+|   7 |    8 | Iris-setosa     |            1.5 |           0.2 |
+|   8 |    9 | Iris-setosa     |            1.4 |           0.2 |
+|   9 |   10 | Iris-setosa     |            1.5 |           0.1 |
+|  10 |   11 | Iris-setosa     |            1.5 |           0.2 |
+|  11 |   12 | Iris-setosa     |            1.6 |           0.2 |
+|  12 |   13 | Iris-setosa     |            1.4 |           0.1 |
+|  13 |   14 | Iris-setosa     |            1.1 |           0.1 |
+|  14 |   15 | Iris-setosa     |            1.2 |           0.2 |
+|  15 |   16 | Iris-setosa     |            1.5 |           0.4 |
+|  16 |   17 | Iris-setosa     |            1.3 |           0.4 |
+|  17 |   18 | Iris-setosa     |            1.4 |           0.3 |
+|  18 |   19 | Iris-setosa     |            1.7 |           0.3 |
+|  19 |   20 | Iris-setosa     |            1.5 |           0.3 |
+|  20 |   21 | Iris-setosa     |            1.7 |           0.2 |
+|  21 |   22 | Iris-setosa     |            1.5 |           0.4 |
+|  22 |   23 | Iris-setosa     |            1   |           0.2 |
+|  23 |   24 | Iris-setosa     |            1.7 |           0.5 |
+|  24 |   25 | Iris-setosa     |            1.9 |           0.2 |
+|  25 |   26 | Iris-setosa     |            1.6 |           0.2 |
+|  26 |   27 | Iris-setosa     |            1.6 |           0.4 |
+|  27 |   28 | Iris-setosa     |            1.5 |           0.2 |
+|  28 |   29 | Iris-setosa     |            1.4 |           0.2 |
+|  29 |   30 | Iris-setosa     |            1.6 |           0.2 |
+|  30 |   31 | Iris-setosa     |            1.6 |           0.2 |
+|  31 |   32 | Iris-setosa     |            1.5 |           0.4 |
+|  32 |   33 | Iris-setosa     |            1.5 |           0.1 |
+|  33 |   34 | Iris-setosa     |            1.4 |           0.2 |
+|  34 |   35 | Iris-setosa     |            1.5 |           0.1 |
+|  35 |   36 | Iris-setosa     |            1.2 |           0.2 |
+|  36 |   37 | Iris-setosa     |            1.3 |           0.2 |
+|  37 |   38 | Iris-setosa     |            1.5 |           0.1 |
+|  38 |   39 | Iris-setosa     |            1.3 |           0.2 |
+|  39 |   40 | Iris-setosa     |            1.5 |           0.2 |
+|  40 |   41 | Iris-setosa     |            1.3 |           0.3 |
+|  41 |   42 | Iris-setosa     |            1.3 |           0.3 |
+|  42 |   43 | Iris-setosa     |            1.3 |           0.2 |
+|  43 |   44 | Iris-setosa     |            1.6 |           0.6 |
+|  44 |   45 | Iris-setosa     |            1.9 |           0.4 |
+|  45 |   46 | Iris-setosa     |            1.4 |           0.3 |
+|  46 |   47 | Iris-setosa     |            1.6 |           0.2 |
+|  47 |   48 | Iris-setosa     |            1.4 |           0.2 |
+|  48 |   49 | Iris-setosa     |            1.5 |           0.2 |
+|  49 |   50 | Iris-setosa     |            1.4 |           0.2 |
+|  50 |   51 | Iris-versicolor |            4.7 |           1.4 |
+|  51 |   52 | Iris-versicolor |            4.5 |           1.5 |
+|  52 |   53 | Iris-versicolor |            4.9 |           1.5 |
+|  53 |   54 | Iris-versicolor |            4   |           1.3 |
+|  54 |   55 | Iris-versicolor |            4.6 |           1.5 |
+|  55 |   56 | Iris-versicolor |            4.5 |           1.3 |
+|  56 |   57 | Iris-versicolor |            4.7 |           1.6 |
+|  57 |   58 | Iris-versicolor |            3.3 |           1   |
+|  58 |   59 | Iris-versicolor |            4.6 |           1.3 |
+|  59 |   60 | Iris-versicolor |            3.9 |           1.4 |
+|  60 |   61 | Iris-versicolor |            3.5 |           1   |
+|  61 |   62 | Iris-versicolor |            4.2 |           1.5 |
+|  62 |   63 | Iris-versicolor |            4   |           1   |
+|  63 |   64 | Iris-versicolor |            4.7 |           1.4 |
+|  64 |   65 | Iris-versicolor |            3.6 |           1.3 |
+|  65 |   66 | Iris-versicolor |            4.4 |           1.4 |
+|  66 |   67 | Iris-versicolor |            4.5 |           1.5 |
+|  67 |   68 | Iris-versicolor |            4.1 |           1   |
+|  68 |   69 | Iris-versicolor |            4.5 |           1.5 |
+|  69 |   70 | Iris-versicolor |            3.9 |           1.1 |
+|  70 |   71 | Iris-versicolor |            4.8 |           1.8 |
+|  71 |   72 | Iris-versicolor |            4   |           1.3 |
+|  72 |   73 | Iris-versicolor |            4.9 |           1.5 |
+|  73 |   74 | Iris-versicolor |            4.7 |           1.2 |
+|  74 |   75 | Iris-versicolor |            4.3 |           1.3 |
+|  75 |   76 | Iris-versicolor |            4.4 |           1.4 |
+|  76 |   77 | Iris-versicolor |            4.8 |           1.4 |
+|  77 |   78 | Iris-versicolor |            5   |           1.7 |
+|  78 |   79 | Iris-versicolor |            4.5 |           1.5 |
+|  79 |   80 | Iris-versicolor |            3.5 |           1   |
+|  80 |   81 | Iris-versicolor |            3.8 |           1.1 |
+|  81 |   82 | Iris-versicolor |            3.7 |           1   |
+|  82 |   83 | Iris-versicolor |            3.9 |           1.2 |
+|  83 |   84 | Iris-versicolor |            5.1 |           1.6 |
+|  84 |   85 | Iris-versicolor |            4.5 |           1.5 |
+|  85 |   86 | Iris-versicolor |            4.5 |           1.6 |
+|  86 |   87 | Iris-versicolor |            4.7 |           1.5 |
+|  87 |   88 | Iris-versicolor |            4.4 |           1.3 |
+|  88 |   89 | Iris-versicolor |            4.1 |           1.3 |
+|  89 |   90 | Iris-versicolor |            4   |           1.3 |
+|  90 |   91 | Iris-versicolor |            4.4 |           1.2 |
+|  91 |   92 | Iris-versicolor |            4.6 |           1.4 |
+|  92 |   93 | Iris-versicolor |            4   |           1.2 |
+|  93 |   94 | Iris-versicolor |            3.3 |           1   |
+|  94 |   95 | Iris-versicolor |            4.2 |           1.3 |
+|  95 |   96 | Iris-versicolor |            4.2 |           1.2 |
+|  96 |   97 | Iris-versicolor |            4.2 |           1.3 |
+|  97 |   98 | Iris-versicolor |            4.3 |           1.3 |
+|  98 |   99 | Iris-versicolor |            3   |           1.1 |
+|  99 |  100 | Iris-versicolor |            4.1 |           1.3 |
+| 100 |  101 | Iris-virginica  |            6   |           2.5 |
+| 101 |  102 | Iris-virginica  |            5.1 |           1.9 |
+| 102 |  103 | Iris-virginica  |            5.9 |           2.1 |
+| 103 |  104 | Iris-virginica  |            5.6 |           1.8 |
+| 104 |  105 | Iris-virginica  |            5.8 |           2.2 |
+| 105 |  106 | Iris-virginica  |            6.6 |           2.1 |
+| 106 |  107 | Iris-virginica  |            4.5 |           1.7 |
+| 107 |  108 | Iris-virginica  |            6.3 |           1.8 |
+| 108 |  109 | Iris-virginica  |            5.8 |           1.8 |
+| 109 |  110 | Iris-virginica  |            6.1 |           2.5 |
+| 110 |  111 | Iris-virginica  |            5.1 |           2   |
+| 111 |  112 | Iris-virginica  |            5.3 |           1.9 |
+| 112 |  113 | Iris-virginica  |            5.5 |           2.1 |
+| 113 |  114 | Iris-virginica  |            5   |           2   |
+| 114 |  115 | Iris-virginica  |            5.1 |           2.4 |
+| 115 |  116 | Iris-virginica  |            5.3 |           2.3 |
+| 116 |  117 | Iris-virginica  |            5.5 |           1.8 |
+| 117 |  118 | Iris-virginica  |            6.7 |           2.2 |
+| 118 |  119 | Iris-virginica  |            6.9 |           2.3 |
+| 119 |  120 | Iris-virginica  |            5   |           1.5 |
+| 120 |  121 | Iris-virginica  |            5.7 |           2.3 |
+| 121 |  122 | Iris-virginica  |            4.9 |           2   |
+| 122 |  123 | Iris-virginica  |            6.7 |           2   |
+| 123 |  124 | Iris-virginica  |            4.9 |           1.8 |
+| 124 |  125 | Iris-virginica  |            5.7 |           2.1 |
+| 125 |  126 | Iris-virginica  |            6   |           1.8 |
+| 126 |  127 | Iris-virginica  |            4.8 |           1.8 |
+| 127 |  128 | Iris-virginica  |            4.9 |           1.8 |
+| 128 |  129 | Iris-virginica  |            5.6 |           2.1 |
+| 129 |  130 | Iris-virginica  |            5.8 |           1.6 |
+| 130 |  131 | Iris-virginica  |            6.1 |           1.9 |
+| 131 |  132 | Iris-virginica  |            6.4 |           2   |
+| 132 |  133 | Iris-virginica  |            5.6 |           2.2 |
+| 133 |  134 | Iris-virginica  |            5.1 |           1.5 |
+| 134 |  135 | Iris-virginica  |            5.6 |           1.4 |
+| 135 |  136 | Iris-virginica  |            6.1 |           2.3 |
+| 136 |  137 | Iris-virginica  |            5.6 |           2.4 |
+| 137 |  138 | Iris-virginica  |            5.5 |           1.8 |
+| 138 |  139 | Iris-virginica  |            4.8 |           1.8 |
+| 139 |  140 | Iris-virginica  |            5.4 |           2.1 |
+| 140 |  141 | Iris-virginica  |            5.6 |           2.4 |
+| 141 |  142 | Iris-virginica  |            5.1 |           2.3 |
+| 142 |  143 | Iris-virginica  |            5.1 |           1.9 |
+| 143 |  144 | Iris-virginica  |            5.9 |           2.3 |
+| 144 |  145 | Iris-virginica  |            5.7 |           2.5 |
+| 145 |  146 | Iris-virginica  |            5.2 |           2.3 |
+| 146 |  147 | Iris-virginica  |            5   |           1.9 |
+| 147 |  148 | Iris-virginica  |            5.2 |           2   |
+| 148 |  149 | Iris-virginica  |            5.4 |           2.3 |
+| 149 |  150 | Iris-virginica  |            5.1 |           1.8 |
++-----+------+-----------------+----------------+---------------+
 </pre></div>
 </div>
 </div>
@@ -631,6 +755,164 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
         <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
         <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----+------+-----------------+----------------+---------------+-----------------+--------------+
+|     |   id | Class           |   sepal length |   sepal width |   outlier_score | is_outlier   |
+|-----+------+-----------------+----------------+---------------+-----------------+--------------|
+|   0 |    2 | Iris-setosa     |            4.9 |           3   |        0.173205 | False        |
+|   1 |   11 | Iris-setosa     |            5.4 |           3.7 |        0.331662 | False        |
+|   2 |   12 | Iris-setosa     |            4.8 |           3.4 |        0.3      | False        |
+|   3 |   13 | Iris-setosa     |            4.8 |           3   |        0.173205 | False        |
+|   4 |   14 | Iris-setosa     |            4.3 |           3   |        0.479583 | False        |
+|   5 |   15 | Iris-setosa     |            5.8 |           4   |        0.556776 | False        |
+|   6 |   16 | Iris-setosa     |            5.7 |           4.4 |        0.616441 | False        |
+|   7 |   17 | Iris-setosa     |            5.4 |           3.9 |        0.387298 | False        |
+|   8 |   18 | Iris-setosa     |            5.1 |           3.5 |        0.173205 | False        |
+|   9 |   19 | Iris-setosa     |            5.7 |           3.8 |        0.509902 | False        |
+|  10 |   20 | Iris-setosa     |            5.1 |           3.8 |        0.264575 | False        |
+|  11 |   21 | Iris-setosa     |            5.4 |           3.4 |        0.360555 | False        |
+|  12 |   22 | Iris-setosa     |            5.1 |           3.7 |        0.264575 | False        |
+|  13 |   23 | Iris-setosa     |            4.6 |           3.6 |        0.538516 | False        |
+|  14 |   24 | Iris-setosa     |            5.1 |           3.3 |        0.387298 | False        |
+|  15 |   46 | Iris-setosa     |            4.8 |           3   |        0.264575 | False        |
+|  16 |   47 | Iris-setosa     |            5.1 |           3.8 |        0.3      | False        |
+|  17 |   48 | Iris-setosa     |            4.6 |           3.2 |        0.223607 | False        |
+|  18 |   49 | Iris-setosa     |            5.3 |           3.7 |        0.244949 | False        |
+|  19 |   50 | Iris-setosa     |            5   |           3.3 |        0.223607 | False        |
+|  20 |   51 | Iris-versicolor |            7   |           3.2 |        0.458258 | False        |
+|  21 |   52 | Iris-versicolor |            6.4 |           3.2 |        0.374166 | False        |
+|  22 |   53 | Iris-versicolor |            6.9 |           3.1 |        0.34641  | False        |
+|  23 |   54 | Iris-versicolor |            5.5 |           2.3 |        0.43589  | False        |
+|  24 |   55 | Iris-versicolor |            6.5 |           2.8 |        0.374166 | False        |
+|  25 |   56 | Iris-versicolor |            5.7 |           2.8 |        0.331662 | False        |
+|  26 |   86 | Iris-versicolor |            6   |           3.4 |        0.469042 | False        |
+|  27 |   87 | Iris-versicolor |            6.7 |           3.1 |        0.331662 | False        |
+|  28 |   88 | Iris-versicolor |            6.3 |           2.3 |        0.608276 | False        |
+|  29 |   89 | Iris-versicolor |            5.6 |           3   |        0.316228 | False        |
+|  30 |   90 | Iris-versicolor |            5.5 |           2.5 |        0.3      | False        |
+|  31 |   91 | Iris-versicolor |            5.5 |           2.6 |        0.424264 | False        |
+|  32 |   92 | Iris-versicolor |            6.1 |           3   |        0.34641  | False        |
+|  33 |   93 | Iris-versicolor |            5.8 |           2.6 |        0.264575 | False        |
+|  34 |   94 | Iris-versicolor |            5   |           2.3 |        0.648074 | False        |
+|  35 |   95 | Iris-versicolor |            5.6 |           2.7 |        0.3      | False        |
+|  36 |   58 | Iris-versicolor |            4.9 |           2.4 |        0.72111  | False        |
+|  37 |   59 | Iris-versicolor |            6.6 |           2.9 |        0.316228 | False        |
+|  38 |   60 | Iris-versicolor |            5.2 |           2.7 |        0.52915  | False        |
+|  39 |   61 | Iris-versicolor |            5   |           2   |        0.714143 | False        |
+|  40 |   62 | Iris-versicolor |            5.9 |           3   |        0.360555 | False        |
+|  41 |   63 | Iris-versicolor |            6   |           2.2 |        0.583095 | False        |
+|  42 |   64 | Iris-versicolor |            6.1 |           2.9 |        0.424264 | False        |
+|  43 |   65 | Iris-versicolor |            5.6 |           2.9 |        0.519615 | False        |
+|  44 |   66 | Iris-versicolor |            6.7 |           3.1 |        0.34641  | False        |
+|  45 |   67 | Iris-versicolor |            5.6 |           3   |        0.412311 | False        |
+|  46 |   68 | Iris-versicolor |            5.8 |           2.7 |        0.360555 | False        |
+|  47 |   69 | Iris-versicolor |            6.2 |           2.2 |        0.678233 | False        |
+|  48 |   70 | Iris-versicolor |            5.6 |           2.5 |        0.264575 | False        |
+|  49 |   71 | Iris-versicolor |            5.9 |           3.2 |        0.424264 | False        |
+|  50 |   72 | Iris-versicolor |            6.1 |           2.8 |        0.4      | False        |
+|  51 |   73 | Iris-versicolor |            6.3 |           2.5 |        0.424264 | False        |
+|  52 |   74 | Iris-versicolor |            6.1 |           2.8 |        0.43589  | False        |
+|  53 |   75 | Iris-versicolor |            6.4 |           2.9 |        0.387298 | False        |
+|  54 |   76 | Iris-versicolor |            6.6 |           3   |        0.316228 | False        |
+|  55 |   77 | Iris-versicolor |            6.8 |           2.8 |        0.374166 | False        |
+|  56 |   78 | Iris-versicolor |            6.7 |           3   |        0.424264 | False        |
+|  57 |   79 | Iris-versicolor |            6   |           2.9 |        0.34641  | False        |
+|  58 |   80 | Iris-versicolor |            5.7 |           2.6 |        0.447214 | False        |
+|  59 |   81 | Iris-versicolor |            5.5 |           2.4 |        0.3      | False        |
+|  60 |   82 | Iris-versicolor |            5.5 |           2.4 |        0.43589  | False        |
+|  61 |   83 | Iris-versicolor |            5.8 |           2.7 |        0.3      | False        |
+|  62 |   84 | Iris-versicolor |            6   |           2.7 |        0.374166 | False        |
+|  63 |   85 | Iris-versicolor |            5.4 |           3   |        0.489898 | False        |
+|  64 |   96 | Iris-versicolor |            5.7 |           3   |        0.331662 | False        |
+|  65 |   97 | Iris-versicolor |            5.7 |           2.9 |        0.223607 | False        |
+|  66 |   98 | Iris-versicolor |            6.2 |           2.9 |        0.34641  | False        |
+|  67 |   99 | Iris-versicolor |            5.1 |           2.5 |        0.793725 | True         |
+|  68 |  100 | Iris-versicolor |            5.7 |           2.8 |        0.244949 | False        |
+|  69 |  101 | Iris-virginica  |            6.3 |           3.3 |        0.556776 | False        |
+|  70 |  102 | Iris-virginica  |            5.8 |           2.7 |        0.331662 | False        |
+|  71 |  103 | Iris-virginica  |            7.1 |           3   |        0.458258 | False        |
+|  72 |  104 | Iris-virginica  |            6.3 |           2.9 |        0.387298 | False        |
+|  73 |  105 | Iris-virginica  |            6.5 |           3   |        0.387298 | False        |
+|  74 |  106 | Iris-virginica  |            7.6 |           3   |        0.547723 | False        |
+|  75 |  107 | Iris-virginica  |            4.9 |           2.5 |        0.877496 | True         |
+|  76 |    3 | Iris-setosa     |            4.7 |           3.2 |        0.264575 | False        |
+|  77 |    4 | Iris-setosa     |            4.6 |           3.1 |        0.244949 | False        |
+|  78 |    5 | Iris-setosa     |            5   |           3.6 |        0.244949 | False        |
+|  79 |    6 | Iris-setosa     |            5.4 |           3.9 |        0.374166 | False        |
+|  80 |    7 | Iris-setosa     |            4.6 |           3.4 |        0.316228 | False        |
+|  81 |    8 | Iris-setosa     |            5   |           3.4 |        0.223607 | False        |
+|  82 |    9 | Iris-setosa     |            4.4 |           2.9 |        0.34641  | False        |
+|  83 |   10 | Iris-setosa     |            4.9 |           3.1 |        0.173205 | False        |
+|  84 |   25 | Iris-setosa     |            4.8 |           3.4 |        0.424264 | False        |
+|  85 |   26 | Iris-setosa     |            5   |           3   |        0.223607 | False        |
+|  86 |   27 | Iris-setosa     |            5   |           3.4 |        0.244949 | False        |
+|  87 |   28 | Iris-setosa     |            5.2 |           3.5 |        0.223607 | False        |
+|  88 |   29 | Iris-setosa     |            5.2 |           3.4 |        0.223607 | False        |
+|  89 |   30 | Iris-setosa     |            4.7 |           3.2 |        0.223607 | False        |
+|  90 |   31 | Iris-setosa     |            4.8 |           3.1 |        0.173205 | False        |
+|  91 |   32 | Iris-setosa     |            5.4 |           3.4 |        0.316228 | False        |
+|  92 |   33 | Iris-setosa     |            5.2 |           4.1 |        0.424264 | False        |
+|  93 |   34 | Iris-setosa     |            5.5 |           4.2 |        0.412311 | False        |
+|  94 |   35 | Iris-setosa     |            4.9 |           3.1 |        0.173205 | False        |
+|  95 |   36 | Iris-setosa     |            5   |           3.2 |        0.331662 | False        |
+|  96 |   37 | Iris-setosa     |            5.5 |           3.5 |        0.34641  | False        |
+|  97 |   38 | Iris-setosa     |            4.9 |           3.1 |        0.173205 | False        |
+|  98 |   39 | Iris-setosa     |            4.4 |           3   |        0.3      | False        |
+|  99 |   40 | Iris-setosa     |            5.1 |           3.4 |        0.173205 | False        |
+| 100 |   41 | Iris-setosa     |            5   |           3.5 |        0.244949 | False        |
+| 101 |   42 | Iris-setosa     |            4.5 |           2.3 |        0.781025 | True         |
+| 102 |   43 | Iris-setosa     |            4.4 |           3.2 |        0.3      | False        |
+| 103 |   44 | Iris-setosa     |            5   |           3.5 |        0.374166 | False        |
+| 104 |   45 | Iris-setosa     |            5.1 |           3.8 |        0.412311 | False        |
+| 105 |   57 | Iris-versicolor |            6.3 |           3.3 |        0.458258 | False        |
+| 106 |  108 | Iris-virginica  |            7.3 |           2.9 |        0.547723 | False        |
+| 107 |  109 | Iris-virginica  |            6.7 |           2.5 |        0.616441 | False        |
+| 108 |  110 | Iris-virginica  |            7.2 |           3.6 |        0.754983 | True         |
+| 109 |  111 | Iris-virginica  |            6.5 |           3.2 |        0.424264 | False        |
+| 110 |  112 | Iris-virginica  |            6.4 |           2.7 |        0.387298 | False        |
+| 111 |  113 | Iris-virginica  |            6.8 |           3   |        0.374166 | False        |
+| 112 |  114 | Iris-virginica  |            5.7 |           2.5 |        0.519615 | False        |
+| 113 |  115 | Iris-virginica  |            5.8 |           2.8 |        0.519615 | False        |
+| 114 |  116 | Iris-virginica  |            6.4 |           3.2 |        0.387298 | False        |
+| 115 |  117 | Iris-virginica  |            6.5 |           3   |        0.387298 | False        |
+| 116 |  118 | Iris-virginica  |            7.7 |           3.8 |        1.00499  | True         |
+| 117 |  119 | Iris-virginica  |            7.7 |           2.6 |        0.927362 | True         |
+| 118 |  120 | Iris-virginica  |            6   |           2.2 |        0.583095 | False        |
+| 119 |  121 | Iris-virginica  |            6.9 |           3.2 |        0.3      | False        |
+| 120 |  122 | Iris-virginica  |            5.6 |           2.8 |        0.458258 | False        |
+| 121 |  123 | Iris-virginica  |            7.7 |           2.8 |        0.678233 | False        |
+| 122 |  124 | Iris-virginica  |            6.3 |           2.7 |        0.360555 | False        |
+| 123 |  125 | Iris-virginica  |            6.7 |           3.3 |        0.374166 | False        |
+| 124 |  126 | Iris-virginica  |            7.2 |           3.2 |        0.469042 | False        |
+| 125 |  127 | Iris-virginica  |            6.2 |           2.8 |        0.387298 | False        |
+| 126 |  128 | Iris-virginica  |            6.1 |           3   |        0.3      | False        |
+| 127 |  129 | Iris-virginica  |            6.4 |           2.8 |        0.374166 | False        |
+| 128 |  130 | Iris-virginica  |            7.2 |           3   |        0.556776 | False        |
+| 129 |  131 | Iris-virginica  |            7.4 |           2.8 |        0.509902 | False        |
+| 130 |  132 | Iris-virginica  |            7.9 |           3.8 |        0.932738 | True         |
+| 131 |  133 | Iris-virginica  |            6.4 |           2.8 |        0.43589  | False        |
+| 132 |  134 | Iris-virginica  |            6.3 |           2.8 |        0.43589  | False        |
+| 133 |  135 | Iris-virginica  |            6.1 |           2.6 |        0.663325 | False        |
+| 134 |  136 | Iris-virginica  |            7.7 |           3   |        0.678233 | False        |
+| 135 |  137 | Iris-virginica  |            6.3 |           3.4 |        0.43589  | False        |
+| 136 |  138 | Iris-virginica  |            6.4 |           3.1 |        0.43589  | False        |
+| 137 |  139 | Iris-virginica  |            6   |           3   |        0.316228 | False        |
+| 138 |  140 | Iris-virginica  |            6.9 |           3.1 |        0.374166 | False        |
+| 139 |  141 | Iris-virginica  |            6.7 |           3.1 |        0.34641  | False        |
+| 140 |  142 | Iris-virginica  |            6.9 |           3.1 |        0.509902 | False        |
+| 141 |  143 | Iris-virginica  |            5.8 |           2.7 |        0.331662 | False        |
+| 142 |  144 | Iris-virginica  |            6.8 |           3.2 |        0.34641  | False        |
+| 143 |  145 | Iris-virginica  |            6.7 |           3.3 |        0.4      | False        |
+| 144 |  146 | Iris-virginica  |            6.7 |           3   |        0.374166 | False        |
+| 145 |  147 | Iris-virginica  |            6.3 |           2.5 |        0.412311 | False        |
+| 146 |  148 | Iris-virginica  |            6.5 |           3   |        0.360555 | False        |
+| 147 |  149 | Iris-virginica  |            6.2 |           3.4 |        0.616441 | False        |
+| 148 |  150 | Iris-virginica  |            5.9 |           3   |        0.331662 | False        |
+| 149 |    1 | Iris-setosa     |           20.1 |          30.5 |      109.046    | True         |
++-----+------+-----------------+----------------+---------------+-----------------+--------------+
 </pre></div>
 </div>
 </div>
@@ -708,62 +990,18 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
-
-<span class="n">X</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[[</span><span class="s2">&quot;sepal length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal width&quot;</span><span class="p">,</span> <span class="s2">&quot;petal length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal width&quot;</span><span class="p">]]</span>
-
-<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">nbrs</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
-<span class="n">nbrs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="n">distances</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="n">outlier_threshold</span> <span class="o">=</span> <span class="n">combined_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;outlier_score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;is_outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">outlier_threshold</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Data dengan Outlier ===&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">combined_df</span><span class="p">[</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;is_outlier&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;psql&quot;</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
-
-<span class="c1"># Contoh data</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[[</span><span class="s2">&quot;sepal length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal width&quot;</span><span class="p">,</span> <span class="s2">&quot;petal length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal width&quot;</span><span class="p">]]</span>
-
-<span class="c1"># Menentukan jumlah tetangga (k)</span>
-<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">nbrs</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
-<span class="n">nbrs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="c1"># Menghitung jarak ke tetangga terdekat</span>
-<span class="n">distances</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="c1"># Menggunakan rata-rata dari K tetangga sebagai skor outlier</span>
-<span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Menentukan threshold berdasarkan persentil 95%</span>
-<span class="n">outlier_threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">],</span> <span class="mi">95</span><span class="p">)</span>
-
-<span class="c1"># Menandai data sebagai outlier jika skornya di atas threshold</span>
-<span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;is_outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">outlier_threshold</span>
-
-<span class="c1"># Menampilkan hasil</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Data dengan Outlier ===&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">combined_df</span><span class="p">[</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;is_outlier&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;psql&quot;</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+------+----------------+----------------+---------------+----------------+---------------+
+| id   | Class          | sepal length   | sepal width   | petal length   | petal width   |
+|------+----------------+----------------+---------------+----------------+---------------|
+| 2    | Iris-setosa    | 4.9            | 3.0           | 1.4            | 0.2           |
+| 11   | Iris-setosa    | 5.4            | 3.7           | 1.5            | 0.2           |
+| 12   | Iris-setosa    | 4.8            | 3.4           | 1.6            | 0.2           |
+| ...  | ...            | ...            | ...           | ...            | ...           |
+| 149  | Iris-virginica | 6.2            | 3.4           | 5.4            | 2.3           |
+| 150  | Iris-virginica | 5.9            | 3.0           | 5.1            | 1.8           |
+| 1    | Iris-setosa    | 20.1           | 30.5          | 86.4           | 70.0          |
++------+----------------+----------------+---------------+----------------+---------------+
 </pre></div>
 </div>
 </div>
@@ -792,6 +1030,16 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Data dengan Outlier ===
++------+-------------+----------------+---------------+----------------+---------------+-----------------+--------------+
+|   id | Class       |   sepal length |   sepal width |   petal length |   petal width |   outlier_score | is_outlier   |
+|------+-------------+----------------+---------------+----------------+---------------+-----------------+--------------|
+|    1 | Iris-setosa |           20.1 |          30.5 |           86.4 |            70 |         108.792 | True         |
++------+-------------+----------------+---------------+----------------+---------------+-----------------+--------------+
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -803,9 +1051,10 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 <span class="n">X</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[[</span><span class="s2">&quot;sepal length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal width&quot;</span><span class="p">,</span> <span class="s2">&quot;petal length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal width&quot;</span><span class="p">]]</span>
 
 <span class="c1"># Menentukan jumlah tetangga (k)</span>
-<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># Menggunakan seluruh data sebagai tetangga</span>
 <span class="n">nbrs</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
 <span class="n">nbrs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
 
 <span class="c1"># Menghitung jarak ke tetangga terdekat</span>
 <span class="n">distances</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -814,15 +1063,401 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 <span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Menentukan threshold berdasarkan persentil 95%</span>
-<span class="n">outlier_threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">],</span> <span class="mi">95</span><span class="p">)</span>
+<span class="n">outlier_threshold</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Ubah threshold langsung ke 10</span>
+<span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;is_outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">outlier_threshold</span>
 
-<span class="c1"># Menandai data sebagai outlier jika skornya di atas threshold</span>
-<span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;is_outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier_score&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">outlier_threshold</span>
+
+<span class="c1"># Cek jumlah total data</span>
+<span class="n">total_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">combined_df</span><span class="p">)</span>
+
+<span class="c1"># Cek jumlah data yang terdeteksi sebagai outlier</span>
+<span class="n">outlier_count</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;is_outlier&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total data: </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah outlier: </span><span class="si">{</span><span class="n">outlier_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Persentase outlier: </span><span class="si">{</span><span class="n">outlier_count</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total_data</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
 
 <span class="c1"># Menampilkan hasil</span>
 <span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Data dengan Outlier ===&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">combined_df</span><span class="p">[</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;is_outlier&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;psql&quot;</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total data: 150
+Jumlah outlier: 1
+Persentase outlier: 0.67%
+
+=== Data dengan Outlier ===
++------+-------------+----------------+---------------+----------------+---------------+-----------------+--------------+
+|   id | Class       |   sepal length |   sepal width |   petal length |   petal width |   outlier_score | is_outlier   |
+|------+-------------+----------------+---------------+----------------+---------------+-----------------+--------------|
+|    1 | Iris-setosa |           20.1 |          30.5 |           86.4 |            70 |         111.111 | True         |
++------+-------------+----------------+---------------+----------------+---------------+-----------------+--------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">X_inliers</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">X_inliers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">X_inliers</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">X_inliers</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">X_outliers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">X_inliers</span><span class="p">,</span> <span class="n">X_outliers</span><span class="p">]</span>
+
+<span class="n">n_outliers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_outliers</span><span class="p">)</span>
+<span class="n">ground_truth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">ground_truth</span><span class="p">[</span><span class="o">-</span><span class="n">n_outliers</span><span class="p">:]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">contamination</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">combined_df</span><span class="p">[[</span><span class="s2">&quot;sepal length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal width&quot;</span><span class="p">,</span> <span class="s2">&quot;petal length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal width&quot;</span><span class="p">]])</span>
+
+<span class="n">ground_truth</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s1">&#39;Iris-setosa&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Iris-versicolor&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Iris-virginica&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">ground_truth</span> <span class="o">=</span> <span class="n">ground_truth</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)]</span>
+
+<span class="n">n_errors</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">!=</span> <span class="n">ground_truth</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">X_scores</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">negative_outlier_factor_</span>
+
+<span class="n">outlier_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">outlier_scores</span> <span class="o">=</span> <span class="n">X_scores</span><span class="p">[</span><span class="n">outlier_index</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data yang diduga outlier&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="s2">&quot;y_pred&quot;</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;grid&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;jumlah total data:</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">combined_df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data yang diduga outlier
+[ 1  1  1  1  1 -1 -1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+  1  1  1  1  1  1  1  1  1  1 -1  1 -1  1  1 -1  1  1  1  1  1  1  1  1
+  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1 -1  1  1  1  1
+  1  1 -1 -1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1 -1  1  1
+  1  1  1  1  1 -1  1  1  1  1  1  1  1  1  1  1  1  1  1  1 -1 -1  1  1
+  1 -1  1  1  1  1  1  1  1  1 -1  1  1  1  1  1  1  1  1  1  1  1  1  1
+  1  1  1  1  1 -1]
++---------+----------+
+|   index |   y_pred |
++=========+==========+
+|       0 |        1 |
++---------+----------+
+|       1 |        1 |
++---------+----------+
+|       2 |        1 |
++---------+----------+
+|       3 |        1 |
++---------+----------+
+|       4 |        1 |
++---------+----------+
+|       5 |       -1 |
++---------+----------+
+|       6 |       -1 |
++---------+----------+
+|       7 |        1 |
++---------+----------+
+|       8 |        1 |
++---------+----------+
+|       9 |        1 |
++---------+----------+
+|      10 |        1 |
++---------+----------+
+|      11 |        1 |
++---------+----------+
+|      12 |        1 |
++---------+----------+
+|      13 |        1 |
++---------+----------+
+|      14 |        1 |
++---------+----------+
+|      15 |        1 |
++---------+----------+
+|      16 |        1 |
++---------+----------+
+|      17 |        1 |
++---------+----------+
+|      18 |        1 |
++---------+----------+
+|      19 |        1 |
++---------+----------+
+|      20 |        1 |
++---------+----------+
+|      21 |        1 |
++---------+----------+
+|      22 |        1 |
++---------+----------+
+|      23 |        1 |
++---------+----------+
+|      24 |        1 |
++---------+----------+
+|      25 |        1 |
++---------+----------+
+|      26 |        1 |
++---------+----------+
+|      27 |        1 |
++---------+----------+
+|      28 |        1 |
++---------+----------+
+|      29 |        1 |
++---------+----------+
+|      30 |        1 |
++---------+----------+
+|      31 |        1 |
++---------+----------+
+|      32 |        1 |
++---------+----------+
+|      33 |        1 |
++---------+----------+
+|      34 |       -1 |
++---------+----------+
+|      35 |        1 |
++---------+----------+
+|      36 |       -1 |
++---------+----------+
+|      37 |        1 |
++---------+----------+
+|      38 |        1 |
++---------+----------+
+|      39 |       -1 |
++---------+----------+
+|      40 |        1 |
++---------+----------+
+|      41 |        1 |
++---------+----------+
+|      42 |        1 |
++---------+----------+
+|      43 |        1 |
++---------+----------+
+|      44 |        1 |
++---------+----------+
+|      45 |        1 |
++---------+----------+
+|      46 |        1 |
++---------+----------+
+|      47 |        1 |
++---------+----------+
+|      48 |        1 |
++---------+----------+
+|      49 |        1 |
++---------+----------+
+|      50 |        1 |
++---------+----------+
+|      51 |        1 |
++---------+----------+
+|      52 |        1 |
++---------+----------+
+|      53 |        1 |
++---------+----------+
+|      54 |        1 |
++---------+----------+
+|      55 |        1 |
++---------+----------+
+|      56 |        1 |
++---------+----------+
+|      57 |        1 |
++---------+----------+
+|      58 |        1 |
++---------+----------+
+|      59 |        1 |
++---------+----------+
+|      60 |        1 |
++---------+----------+
+|      61 |        1 |
++---------+----------+
+|      62 |        1 |
++---------+----------+
+|      63 |        1 |
++---------+----------+
+|      64 |        1 |
++---------+----------+
+|      65 |        1 |
++---------+----------+
+|      66 |        1 |
++---------+----------+
+|      67 |       -1 |
++---------+----------+
+|      68 |        1 |
++---------+----------+
+|      69 |        1 |
++---------+----------+
+|      70 |        1 |
++---------+----------+
+|      71 |        1 |
++---------+----------+
+|      72 |        1 |
++---------+----------+
+|      73 |        1 |
++---------+----------+
+|      74 |       -1 |
++---------+----------+
+|      75 |       -1 |
++---------+----------+
+|      76 |        1 |
++---------+----------+
+|      77 |        1 |
++---------+----------+
+|      78 |        1 |
++---------+----------+
+|      79 |        1 |
++---------+----------+
+|      80 |        1 |
++---------+----------+
+|      81 |        1 |
++---------+----------+
+|      82 |        1 |
++---------+----------+
+|      83 |        1 |
++---------+----------+
+|      84 |        1 |
++---------+----------+
+|      85 |        1 |
++---------+----------+
+|      86 |        1 |
++---------+----------+
+|      87 |        1 |
++---------+----------+
+|      88 |        1 |
++---------+----------+
+|      89 |        1 |
++---------+----------+
+|      90 |        1 |
++---------+----------+
+|      91 |        1 |
++---------+----------+
+|      92 |        1 |
++---------+----------+
+|      93 |       -1 |
++---------+----------+
+|      94 |        1 |
++---------+----------+
+|      95 |        1 |
++---------+----------+
+|      96 |        1 |
++---------+----------+
+|      97 |        1 |
++---------+----------+
+|      98 |        1 |
++---------+----------+
+|      99 |        1 |
++---------+----------+
+|     100 |        1 |
++---------+----------+
+|     101 |       -1 |
++---------+----------+
+|     102 |        1 |
++---------+----------+
+|     103 |        1 |
++---------+----------+
+|     104 |        1 |
++---------+----------+
+|     105 |        1 |
++---------+----------+
+|     106 |        1 |
++---------+----------+
+|     107 |        1 |
++---------+----------+
+|     108 |        1 |
++---------+----------+
+|     109 |        1 |
++---------+----------+
+|     110 |        1 |
++---------+----------+
+|     111 |        1 |
++---------+----------+
+|     112 |        1 |
++---------+----------+
+|     113 |        1 |
++---------+----------+
+|     114 |        1 |
++---------+----------+
+|     115 |        1 |
++---------+----------+
+|     116 |       -1 |
++---------+----------+
+|     117 |       -1 |
++---------+----------+
+|     118 |        1 |
++---------+----------+
+|     119 |        1 |
++---------+----------+
+|     120 |        1 |
++---------+----------+
+|     121 |       -1 |
++---------+----------+
+|     122 |        1 |
++---------+----------+
+|     123 |        1 |
++---------+----------+
+|     124 |        1 |
++---------+----------+
+|     125 |        1 |
++---------+----------+
+|     126 |        1 |
++---------+----------+
+|     127 |        1 |
++---------+----------+
+|     128 |        1 |
++---------+----------+
+|     129 |        1 |
++---------+----------+
+|     130 |       -1 |
++---------+----------+
+|     131 |        1 |
++---------+----------+
+|     132 |        1 |
++---------+----------+
+|     133 |        1 |
++---------+----------+
+|     134 |        1 |
++---------+----------+
+|     135 |        1 |
++---------+----------+
+|     136 |        1 |
++---------+----------+
+|     137 |        1 |
++---------+----------+
+|     138 |        1 |
++---------+----------+
+|     139 |        1 |
++---------+----------+
+|     140 |        1 |
++---------+----------+
+|     141 |        1 |
++---------+----------+
+|     142 |        1 |
++---------+----------+
+|     143 |        1 |
++---------+----------+
+|     144 |        1 |
++---------+----------+
+|     145 |        1 |
++---------+----------+
+|     146 |        1 |
++---------+----------+
+|     147 |        1 |
++---------+----------+
+|     148 |        1 |
++---------+----------+
+|     149 |       -1 |
++---------+----------+
+jumlah total data:150
 </pre></div>
 </div>
 </div>
