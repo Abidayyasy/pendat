@@ -189,7 +189,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bab3.html">BAB 3 - DETEKSI OUTLIER</a></li>
 
 
@@ -197,6 +196,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Bab3-1.html">DETEKSI OUTLIER MENGGUNAKAN KNN</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">DETEKSI OUTLIER MENGGUNAKAN LOF</a></li>
+
+
 
 <li class="toctree-l1"><a class="reference internal" href="Bab4.html">NAIVE BAYES</a></li>
 
@@ -400,6 +401,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DETEKSI OUTLIER MENGGUNAKAN LOF</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kapan-lof-lebih-baik-dari-metode-lain">Kapan LOF Lebih Baik dari Metode Lain?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-nya">CODE NYA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-baris-per-baris">PENJELASAN CODE BARIS PER BARIS</a></li>
 </ul>
 
             </nav>
@@ -446,6 +449,456 @@ document.write(`
 <p>✅ Lebih akurat daripada KNN biasa dalam deteksi anomali.</p>
 <p>✅ Tidak memerlukan distribusi data normal.</p>
 <p>❌ Kurang cocok untuk dataset yang terlalu kecil (karena sulit menentukan kepadatan lokal).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="code-nya">
+<h1>CODE NYA<a class="headerlink" href="#code-nya" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Ga pake library</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">euclidean</span>
+
+<span class="k">def</span> <span class="nf">calculate_lof_manual</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+    <span class="c1"># Hitung jarak Euclidean antar setiap titik</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+    <span class="c1"># Tentukan k-tetangga terdekat untuk setiap titik (tanpa diri sendiri)</span>
+    <span class="n">neighbors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Ganti indeks dengan label untuk tetangga terdekat</span>
+    <span class="n">neighbors_labels</span> <span class="o">=</span> <span class="p">[[</span><span class="n">labels</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+    <span class="c1"># Hitung reachability distance (RD)</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">neighbor_idx</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="n">k_distance</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="n">neighbor_idx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">[</span><span class="n">neighbor_idx</span><span class="p">])[</span><span class="n">k</span><span class="p">]]</span>
+            <span class="n">rd</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">neighbor_idx</span><span class="p">],</span> <span class="n">k_distance</span><span class="p">)</span>
+
+    <span class="c1"># Hitung local reachability density (LRD)</span>
+    <span class="n">lrd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">lrd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rd</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># Hitung LOF</span>
+    <span class="n">lof_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">lrd_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="n">lrd</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">/</span> <span class="n">lrd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="n">lof_scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lrd_ratios</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">distances</span><span class="p">,</span> <span class="n">neighbors_labels</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">lrd</span><span class="p">,</span> <span class="n">lof_scores</span>
+
+<span class="c1"># Contoh data dan label</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;KLMNOPQRST&quot;</span><span class="p">)</span>
+
+<span class="c1"># Hitung LOF secara manual</span>
+<span class="n">distances</span><span class="p">,</span> <span class="n">neighbors_labels</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">lrd</span><span class="p">,</span> <span class="n">lof_scores</span> <span class="o">=</span> <span class="n">calculate_lof_manual</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Buat dataframe hasil</span>
+<span class="n">df_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Titik&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+    <span class="s2">&quot;Euclidean Distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))],</span>
+    <span class="s2">&quot;K-Tetangga Terdekat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">neighbors_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))],</span>
+    <span class="s2">&quot;Reachability Distance (RD)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))],</span>
+    <span class="s2">&quot;Local Reachability Density (LRD)&quot;</span><span class="p">:</span> <span class="n">lrd</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;LOF Score&quot;</span><span class="p">:</span> <span class="n">lof_scores</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;Outlier Flag&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Outlier&quot;</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mf">1.5</span> <span class="k">else</span> <span class="s2">&quot;Inlier&quot;</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">lof_scores</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df_result</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Titik                                                                           Euclidean Distances K-Tetangga Terdekat    Reachability Distance (RD)  Local Reachability Density (LRD)  LOF Score Outlier Flag
+    K           [0.0, 2.2361, 5.831, 7.8102, 10.6301, 12.8062, 15.6205, 19.8494, 38.8973, 137.8876]             L, M, N        [5.831, 5.831, 7.8102]                            0.1541     1.1703       Inlier
+    L            [2.2361, 0.0, 3.6056, 5.831, 8.4853, 10.6301, 13.4536, 17.6918, 36.7967, 135.7719]             K, M, N          [7.8102, 5.0, 5.831]                            0.1609     1.1062       Inlier
+    M                     [5.831, 3.6056, 0.0, 3.0, 5.0, 7.0711, 9.8995, 14.1421, 33.3017, 132.246]             N, L, O          [5.3852, 5.831, 5.0]                            0.1850     0.9841       Inlier
+    N                 [7.8102, 5.831, 3.0, 0.0, 3.1623, 5.3852, 8.0623, 12.2066, 31.1127, 130.1076]             M, O, P            [5.0, 5.0, 5.3852]                            0.1950     0.9748       Inlier
+    O                   [10.6301, 8.4853, 5.0, 3.1623, 0.0, 2.2361, 5.0, 9.2195, 28.3196, 127.2871]             P, N, M         [5.3852, 5.3852, 5.0]                            0.1902     1.0075       Inlier
+    P            [12.8062, 10.6301, 7.0711, 5.3852, 2.2361, 0.0, 2.8284, 7.0711, 26.2488, 125.1759]             O, Q, N            [5.0, 5.0, 5.3852]                            0.1950     0.9201       Inlier
+    Q               [15.6205, 13.4536, 9.8995, 8.0623, 5.0, 2.8284, 0.0, 4.2426, 23.4307, 122.3479]             P, R, O         [5.3852, 9.2195, 5.0]                            0.1530     1.1461       Inlier
+    R          [19.8494, 17.6918, 14.1421, 12.2066, 9.2195, 7.0711, 4.2426, 0.0, 19.2094, 118.1059]             Q, P, O         [5.0, 7.0711, 9.2195]                            0.1409     1.2733       Inlier
+    S        [38.8973, 36.7967, 33.3017, 31.1127, 28.3196, 26.2488, 23.4307, 19.2094, 0.0, 98.9949]             R, Q, P   [19.2094, 23.4307, 26.2488]                            0.0435     3.7424      Outlier
+    T [137.8876, 135.7719, 132.246, 130.1076, 127.2871, 125.1759, 122.3479, 118.1059, 98.9949, 0.0]             S, R, Q [98.9949, 118.1059, 122.3479]                            0.0088    12.7286      Outlier
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">):</span>
+    <span class="c1"># Menentukan ukuran radius untuk plotting berdasarkan LOF score</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+    <span class="c1"># Plot data</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data points&quot;</span><span class="p">)</span>  <span class="c1"># Titik data biasa</span>
+
+    <span class="c1"># Plot titik berdasarkan LOF score (ukuran berdasarkan LOF)</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span>  <span class="c1"># Ukuran titik berdasarkan LOF score</span>
+        <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+        <span class="n">facecolors</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outlier scores&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Menambahkan garis penghubung untuk tetangga terdekat</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">neighbor_idx</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">neighbor_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">neighbor_idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># Menambahkan label untuk setiap titik</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature 1&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Feature 2&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Local Outlier Factor (LOF) Visualization with Neighbors&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Contoh data dan label</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;KLMNOPQRST&quot;</span><span class="p">)</span>
+
+<span class="c1"># Contoh neighbors (k-tetangga terdekat)</span>
+<span class="n">neighbors</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="c1"># Contoh LOF Scores yang sudah dihitung sebelumnya (simulasi)</span>
+<span class="n">lof_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>  <span class="c1"># Nilai lebih besar dari 1.5 adalah outlier</span>
+
+<span class="c1"># Panggil fungsi visualisasi</span>
+<span class="n">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ee0aa6905d8744894f4b52fca0df35c2d0c9f81b33f0ca6d6f9f10be157cf144.png" src="_images/ee0aa6905d8744894f4b52fca0df35c2d0c9f81b33f0ca6d6f9f10be157cf144.png" />
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Pake library</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+
+<span class="c1"># Contoh Data 10 sampel dengan 2 fitur, dengan satu outlier</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>  <span class="c1"># Outlier</span>
+<span class="p">])</span>
+
+<span class="c1"># Nama titik untuk mempermudah interpretasi</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;KLMNOPQRST&quot;</span><span class="p">)</span>
+
+<span class="c1"># Inisialisasi model LOF dari sklearn</span>
+<span class="n">lof_model</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+
+<span class="c1"># Fit model dan hitung LOF</span>
+<span class="n">lof_scores</span> <span class="o">=</span> <span class="o">-</span><span class="n">lof_model</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># -1 untuk outlier, 1 untuk inlier</span>
+<span class="n">lof_values</span> <span class="o">=</span> <span class="o">-</span><span class="n">lof_model</span><span class="o">.</span><span class="n">negative_outlier_factor_</span>  <span class="c1"># Nilai LOF</span>
+
+<span class="c1"># Buat DataFrame hasil perhitungan</span>
+<span class="n">df_lof</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Titik&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+    <span class="s2">&quot;LOF Score (sklearn)&quot;</span><span class="p">:</span> <span class="n">lof_values</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;Outlier Flag&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Outlier&quot;</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mf">1.5</span> <span class="k">else</span> <span class="s2">&quot;Inlier&quot;</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">lof_values</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df_lof</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Titik  LOF Score (sklearn) Outlier Flag
+    K               1.1703       Inlier
+    L               1.1062       Inlier
+    M               0.9841       Inlier
+    N               0.9748       Inlier
+    O               1.0075       Inlier
+    P               0.9201       Inlier
+    Q               1.1461       Inlier
+    R               1.2733       Inlier
+    S               3.7424      Outlier
+    T              12.7286      Outlier
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">):</span>
+    <span class="c1"># Menentukan ukuran radius untuk plotting berdasarkan LOF score</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+    <span class="c1"># Plot data</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data points&quot;</span><span class="p">)</span>  <span class="c1"># Titik data biasa</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span>  <span class="c1"># Ukuran titik berdasarkan LOF score</span>
+        <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+        <span class="n">facecolors</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outlier scores&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature 1&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Feature 2&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Local Outlier Factor (LOF) Manual Visualization&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Contoh data (10 sampel dengan 2 fitur, termasuk outlier)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>  <span class="c1"># Outlier</span>
+<span class="p">])</span>
+
+<span class="c1"># Contoh LOF Scores yang sudah dihitung sebelumnya (simulasi)</span>
+<span class="n">lof_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>  <span class="c1"># Nilai lebih besar dari 1.5 adalah outlier</span>
+
+<span class="c1"># Panggil fungsi visualisasi</span>
+<span class="n">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d5a4b6f07a795c60e88d313eba0e0e7d751a454b7b30e7fa744ed0364a96c74c.png" src="_images/d5a4b6f07a795c60e88d313eba0e0e7d751a454b7b30e7fa744ed0364a96c74c.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="penjelasan-code-baris-per-baris">
+<h1>PENJELASAN CODE BARIS PER BARIS<a class="headerlink" href="#penjelasan-code-baris-per-baris" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">euclidean</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Code di atas untuk mengimport beberapa library yang dibutuhkan seperti:</p>
+<p>numpy digunakan untuk operasi matriks dan array multidimensi.</p>
+<p>pandas digunakan untuk membuat dan mengelola data dalam bentuk dataframe (tabel) yang mudah dibaca dan diproses.</p>
+<p>scipy.spatial.distance digunakan untuk menghitung jarak antara dua titik, dalam hal ini menggunakan jarak Euclidean.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_lof_manual</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-6-1ad2b581905c&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">calculate_lof_manual</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+                                                <span class="o">^</span>
+<span class="ne">SyntaxError</span>: incomplete input
+</pre></div>
+</div>
+</div>
+</div>
+<p>Code di atas untuk membuat fungsi calculate_lof_manual yang berguna untuk menerima input:</p>
+<p>data: array data (titik dalam ruang fitur).</p>
+<p>labels: label dari titik data (misalnya, untuk mempermudah pengidentifikasian titik).</p>
+<p>k: parameter yang menyatakan jumlah tetangga terdekat yang akan digunakan dalam perhitungan LOF (default adalah 3).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Code di atas untuk menginisiasi variabel</p>
+<p>n adalah jumlah titik data (baris dari data).</p>
+<p>distances adalah array 2D (matriks) untuk menyimpan jarak Euclidean antar setiap titik.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Code di atas untuk menghitung jarak eulidean antar titik</p>
+<p>Dua loop bertingkat (i dan j) digunakan untuk menghitung jarak Euclidean antar setiap pasangan titik (termasuk titik itu sendiri).</p>
+<p>Fungsi euclidean menghitung jarak antara dua titik.</p>
+<p>Matriks distances menyimpan hasil perhitungan jarak tersebut.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">neighbors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Code di atas untuk menentukan k terdekat</p>
+<p>np.argsort(distances, axis=1) mengurutkan jarak pada setiap baris (axis=1), dan [:, 1:k+1] mengambil kolom mulai dari indeks 1 hingga k+1 (untuk menghindari diri sendiri sebagai tetangga).</p>
+<p>neighbors adalah indeks dari k tetangga terdekat untuk setiap titik.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">neighbors_labels</span> <span class="o">=</span> <span class="p">[[</span><span class="n">labels</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Code di atas untuk mengganti indeks dengan label untuk tetangga terdekat</p>
+<p>Di sini, kita mengganti indeks neighbors[i] yang berupa angka dengan label yang sesuai, sehingga kita mendapatkan nama label dari tetangga terdekat (misalnya, ‘K’, ‘L’, ‘M’, dll).</p>
+<p>neighbors_labels adalah list yang berisi nama-nama label tetangga terdekat.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">rd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">neighbor_idx</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="n">k_distance</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="n">neighbor_idx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">[</span><span class="n">neighbor_idx</span><span class="p">])[</span><span class="n">k</span><span class="p">]]</span>
+            <span class="n">rd</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">neighbor_idx</span><span class="p">],</span> <span class="n">k_distance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>CODE DI ATAS UNTUK MENGHITUNG REACHABILITY DISTANCE</p>
+<p>Matriks rd diinisialisasi untuk menyimpan nilai reachability distance.</p>
+<p>Loop pertama (i) berjalan untuk setiap titik data, dan loop kedua (j) untuk setiap tetangga terdekat (hingga k tetangga).</p>
+<p>neighbor_idx adalah indeks tetangga ke-j untuk titik i.</p>
+<p>k_distance adalah jarak k-tetangga untuk tetangga yang sedang diproses.</p>
+<p>rd[i, j] adalah nilai reachability distance untuk titik i dan tetangga j. Reachability distance dihitung sebagai nilai maksimum antara jarak titik ke tetangga dan jarak k-tetangga dari tetangga tersebut.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">lrd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">lrd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rd</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>CODE DI ATAS UNTUK MENGHITUNG LOCAL REACHABILITY DENSITY</p>
+<p>lrd adalah array untuk menyimpan nilai local reachability density.</p>
+<p>Nilai LRD untuk titik i dihitung dengan rumus:</p>
+<p><img alt="image.png" src="data:image/png;base64,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" /></p>
+<p>yaitu kebalikan dari rata-rata reachability distance. LRD menggambarkan kepadatan lokal berdasarkan jarak ke tetangga terdekat.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">lof_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">lrd_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="n">lrd</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">/</span> <span class="n">lrd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="n">lof_scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lrd_ratios</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>CODE DI ATAS UNTUK MENGHITUNG LOCAL OUTLIER FACTOR</p>
+<p>lof_scores adalah array untuk menyimpan nilai LOF untuk setiap titik.</p>
+<p>Untuk setiap titik i, rasio antara LRD titik i dan LRD dari tetangga terdekatnya dihitung, kemudian rata-rata rasio tersebut diambil sebagai LOF score.</p>
+<p>Jika LOF score lebih besar dari 1, itu berarti titik tersebut adalah outlier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="k">return</span> <span class="n">distances</span><span class="p">,</span> <span class="n">neighbors_labels</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">lrd</span><span class="p">,</span> <span class="n">lof_scores</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>CODE DI ATAS UNTUK MENGEMBALIKAN HASIL</p>
+<p>Fungsi ini mengembalikan:</p>
+<ul class="simple">
+<li><p>distances: matriks jarak Euclidean antar titik.</p></li>
+<li><p>neighbors_labels: daftar tetangga terdekat berdasarkan label.</p></li>
+<li><p>rd: matriks reachability distance.</p></li>
+<li><p>lrd: array local reachability density.</p></li>
+<li><p>lof_scores: array Local Outlier Factor untuk setiap titik.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;KLMNOPQRST&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>CODE DI ATAS UNTUK CONTOH DATA DAN LABEL</p>
+<p>data: 10 titik data dalam bentuk array 2D (setiap titik memiliki dua fitur).</p>
+<p>labels: Label untuk masing-masing titik data (misalnya, ‘K’, ‘L’, ‘M’, dll.).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distances</span><span class="p">,</span> <span class="n">neighbors_labels</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">lrd</span><span class="p">,</span> <span class="n">lof_scores</span> <span class="o">=</span> <span class="n">calculate_lof_manual</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>CODE DI ATAS UNTUK MENGHITUNG LOF SECARA MANUAL</p>
+<p>Memanggil fungsi calculate_lof_manual untuk menghitung LOF dan hasil lainnya (seperti jarak, tetangga terdekat, dsb.) dengan menggunakan data dan label yang sudah disediakan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Titik&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+    <span class="s2">&quot;Euclidean Distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))],</span>
+    <span class="s2">&quot;K-Tetangga Terdekat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">neighbors_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))],</span>
+    <span class="s2">&quot;Reachability Distance (RD)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))],</span>
+    <span class="s2">&quot;Local Reachability Density (LRD)&quot;</span><span class="p">:</span> <span class="n">lrd</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;LOF Score&quot;</span><span class="p">:</span> <span class="n">lof_scores</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;Outlier Flag&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Outlier&quot;</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mf">1.5</span> <span class="k">else</span> <span class="s2">&quot;Inlier&quot;</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">lof_scores</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>CODE DI ATAS UNTUK MEMBUAT DATAFRAME UNTUK MENAMPILKAN HASIL</p>
+<p>Membuat DataFrame untuk memudahkan tampilan hasil perhitungan LOF.</p>
+<p>Setiap kolom dalam DataFrame menunjukkan:</p>
+<ul class="simple">
+<li><p>Titik data.</p></li>
+<li><p>Jarak Euclidean antar titik.</p></li>
+<li><p>K-tetangga terdekat dengan label.</p></li>
+<li><p>Reachability Distance.</p></li>
+<li><p>Local Reachability Density.</p></li>
+<li><p>LOF score.</p></li>
+<li><p>Flag apakah titik tersebut outlier atau inlier berdasarkan nilai LOF.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df_result</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>CODE DI ATAS UNTUK MENAMPILKAN HASIL</p>
+<p>Menampilkan DataFrame tanpa indeks baris, sehingga hasilnya lebih rapi dan mudah dibaca.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -514,6 +967,8 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DETEKSI OUTLIER MENGGUNAKAN LOF</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kapan-lof-lebih-baik-dari-metode-lain">Kapan LOF Lebih Baik dari Metode Lain?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-nya">CODE NYA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-baris-per-baris">PENJELASAN CODE BARIS PER BARIS</a></li>
 </ul>
 
   </nav></div>
