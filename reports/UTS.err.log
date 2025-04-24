@@ -1,0 +1,103 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import pandas as pd
+
+# Jika y_train dan y_test sudah berupa numpy array, cukup lakukan ravel untuk memastikan 1D
+y_train = y_train.ravel()
+y_test = y_test.ravel()
+
+# Inisialisasi model RandomForest
+model = RandomForestClassifier(random_state=42)
+
+# Melatih model menggunakan data latih
+model.fit(X_train, y_train)
+
+# Prediksi hasil pada data uji
+y_pred = model.predict(X_test)
+
+# Evaluasi performa model
+accuracy = accuracy_score(y_test, y_pred)
+print("Akurasi Model:", accuracy)
+
+# Menampilkan Classification Report sebagai tabel dengan presisi lebih tinggi
+report = classification_report(y_test, y_pred, zero_division=0, output_dict=True)
+print("\nClassification Report:")
+report_df = pd.DataFrame(report).transpose()  # Convert the classification report to DataFrame
+
+# Set format presisi lebih tinggi (5 tempat desimal)
+pd.set_option('display.float_format', '{:.5f}'.format)
+
+# Menampilkan tabel classification report
+print(report_df)
+
+# Matriks Kebingungannya
+conf_matrix = confusion_matrix(y_test, y_pred)
+print("\nConfusion Matrix:")
+conf_matrix_df = pd.DataFrame(conf_matrix,
+                              columns=model.classes_,
+                              index=model.classes_)
+print(conf_matrix_df)
+
+# Plotting Confusion Matrix (Heatmap)
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=model.classes_, yticklabels=model.classes_)
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
+
+# Plotting Classification Report (Precision, Recall, F1-score)
+# Jika 'accuracy' ada di report, hapus kolom 'accuracy'
+if 'accuracy' in report_df.columns:
+    report_df = report_df.drop('accuracy', axis=1)
+
+# Plot bar chart untuk Classification Report
+report_df.plot(kind='bar', figsize=(10, 6))
+plt.title('Classification Report')
+plt.ylabel('Scores')
+plt.xticks(rotation=45)
+plt.show()
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+[0;32m<ipython-input-7-66edf0656dc3>[0m in [0;36m<cell line: 0>[0;34m()[0m
+[1;32m      6[0m [0;34m[0m[0m
+[1;32m      7[0m [0;31m# Jika y_train dan y_test sudah berupa numpy array, cukup lakukan ravel untuk memastikan 1D[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 8[0;31m [0my_train[0m [0;34m=[0m [0my_train[0m[0;34m.[0m[0mravel[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      9[0m [0my_test[0m [0;34m=[0m [0my_test[0m[0;34m.[0m[0mravel[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     10[0m [0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py[0m in [0;36m__getattr__[0;34m(self, name)[0m
+[1;32m   6297[0m         ):
+[1;32m   6298[0m             [0;32mreturn[0m [0mself[0m[0;34m[[0m[0mname[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 6299[0;31m         [0;32mreturn[0m [0mobject[0m[0;34m.[0m[0m__getattribute__[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mname[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   6300[0m [0;34m[0m[0m
+[1;32m   6301[0m     [0;34m@[0m[0mfinal[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mAttributeError[0m: 'DataFrame' object has no attribute 'ravel'
+
