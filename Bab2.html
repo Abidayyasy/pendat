@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -199,10 +199,14 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Bab4.html">NAIVE BAYES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bab4.html">NAIF BAYES</a></li>
 
 
 
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="UTS.html">UTS</a></li>
 
 
 
@@ -603,9 +607,9 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymysql</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pymysql</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
 <span class="n">MYSQL_HOST</span> <span class="o">=</span> <span class="s2">&quot;mysql-3d9be5d4-irismysqll.g.aivencloud.com&quot;</span>
 <span class="n">MYSQL_PORT</span> <span class="o">=</span> <span class="mi">28758</span>  <span class="c1"># Aiven MySQL biasanya menggunakan port 25060</span>
@@ -812,9 +816,9 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psycopg2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
 <span class="n">PG_HOST</span> <span class="o">=</span> <span class="s2">&quot;pg-ee5fcb6-irisposgresqll.g.aivencloud.com&quot;</span>
 <span class="n">PG_PORT</span> <span class="o">=</span> <span class="s2">&quot;13492&quot;</span>
@@ -1020,10 +1024,10 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
-<span class="kn">import</span> <span class="nn">pymysql</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psycopg2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pymysql</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
 <span class="n">DB_HOST</span> <span class="o">=</span> <span class="s2">&quot;mysql-3d9be5d4-irismysqll.g.aivencloud.com&quot;</span>
 <span class="n">DB_PORT</span> <span class="o">=</span> <span class="mi">28758</span>
@@ -1109,12 +1113,12 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
-<span class="kn">import</span> <span class="nn">pymysql</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psycopg2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pymysql</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">NearestNeighbors</span>
 
 <span class="c1"># Koneksi Database</span>
 <span class="n">DB_HOST</span> <span class="o">=</span> <span class="s2">&quot;mysql-3d9be5d4-irismysqll.g.aivencloud.com&quot;</span>
@@ -1230,7 +1234,7 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 <span class="nn">/usr/lib/python3.11/encodings/utf_8.py</span> in <span class="ni">decode</span><span class="nt">(input, errors)</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">encode</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">utf_8_encode</span>
 <span class="g g-Whitespace">     </span><span class="mi">14</span> 
-<span class="ne">---&gt; </span><span class="mi">15</span> <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">):</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="k">return</span> <span class="n">codecs</span><span class="o">.</span><span class="n">utf_8_decode</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">17</span> 
 
@@ -1244,8 +1248,8 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
 <span class="n">selected_columns</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[[</span><span class="s1">&#39;sepal length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal width&#39;</span><span class="p">,</span> <span class="s1">&#39;petal length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal width&#39;</span><span class="p">]]</span>
 
@@ -1277,8 +1281,8 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
 
@@ -1305,9 +1309,9 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">NearestNeighbors</span>
 
 <span class="c1"># Contoh dataset dengan outlier</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">]])</span>  <span class="c1"># Titik (50,50) adalah outlier</span>
@@ -1346,10 +1350,10 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib.legend_handler</span> <span class="kn">import</span> <span class="n">HandlerPathCollection</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.legend_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">HandlerPathCollection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
 
 <span class="c1"># Asumsi: combined_df sudah didefinisikan sebelumnya</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[[</span><span class="s2">&quot;sepal length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal width&quot;</span><span class="p">,</span> <span class="s2">&quot;petal length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal width&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
@@ -1370,7 +1374,7 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">X_scores</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">X_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">X_scores</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
 
 <span class="c1"># Fungsi untuk memperbarui ukuran marker legend</span>
-<span class="k">def</span> <span class="nf">update_legend_marker_size</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">orig</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_legend_marker_size</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">orig</span><span class="p">):</span>
     <span class="n">handle</span><span class="o">.</span><span class="n">update_from</span><span class="p">(</span><span class="n">orig</span><span class="p">)</span>
     <span class="n">handle</span><span class="o">.</span><span class="n">set_sizes</span><span class="p">([</span><span class="mi">20</span><span class="p">])</span>
 
@@ -1400,10 +1404,10 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="k">def</span> <span class="nf">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">visualize_lof</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lof_scores</span><span class="p">):</span>
     <span class="c1"># Menentukan ukuran radius untuk plotting berdasarkan LOF score</span>
     <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">lof_scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">lof_scores</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
 

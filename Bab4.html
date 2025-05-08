@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Bab4';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UTS" href="UTS.html" />
     <link rel="prev" title="DETEKSI OUTLIER MENGGUNAKAN LOF" href="Bab3-2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -202,6 +203,10 @@
 
 
 
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="UTS.html">UTS</a></li>
 
 
 
@@ -624,9 +629,9 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymysql</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pymysql</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
 <span class="n">MYSQL_HOST</span> <span class="o">=</span> <span class="s2">&quot;mysql-3d9be5d4-irismysqll.g.aivencloud.com&quot;</span>
 <span class="n">MYSQL_PORT</span> <span class="o">=</span> <span class="mi">28758</span>  <span class="c1"># Aiven MySQL biasanya menggunakan port 25060</span>
@@ -833,9 +838,9 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psycopg2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
 <span class="n">PG_HOST</span> <span class="o">=</span> <span class="s2">&quot;pg-ee5fcb6-irisposgresqll.g.aivencloud.com&quot;</span>
 <span class="n">PG_PORT</span> <span class="o">=</span> <span class="s2">&quot;13492&quot;</span>
@@ -1041,10 +1046,10 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-pac
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
-<span class="kn">import</span> <span class="nn">pymysql</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psycopg2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pymysql</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
 <span class="n">DB_HOST</span> <span class="o">=</span> <span class="s2">&quot;mysql-3d9be5d4-irismysqll.g.aivencloud.com&quot;</span>
 <span class="n">DB_PORT</span> <span class="o">=</span> <span class="mi">28758</span>
@@ -1165,9 +1170,9 @@ Name: count, dtype: int64
 <p>Mean dan variance dari tiap fitur per kelas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># Menghitung mean dan variance untuk setiap fitur berdasarkan kelas</span>
 <span class="n">class_labels</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -1215,10 +1220,10 @@ Name: count, dtype: int64
 <p>Hitung likelihood</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># Fungsi untuk menghitung likelihood dengan pengecekan nilai kecil</span>
-<span class="k">def</span> <span class="nf">likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">variance</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">variance</span><span class="p">):</span>
     <span class="n">likelihood_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">variance</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">variance</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">likelihood_value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">likelihood_value</span> <span class="o">=</span> <span class="mf">1e-300</span>  <span class="c1"># pakai angka sangat kecil biar tetap valid</span>
@@ -1856,10 +1861,10 @@ Likelihoods: {&#39;Iris-setosa&#39;: [np.float64(1.3020073365643631e-11), np.flo
 <p>Hitung posterior probability</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># Fungsi untuk menghitung posterior probability</span>
-<span class="k">def</span> <span class="nf">calculate_posterior</span><span class="p">(</span><span class="n">prior_probs</span><span class="p">,</span> <span class="n">likelihoods_by_class</span><span class="p">):</span> <span class="c1"># Changed likelihoods to likelihoods_by_class</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_posterior</span><span class="p">(</span><span class="n">prior_probs</span><span class="p">,</span> <span class="n">likelihoods_by_class</span><span class="p">):</span> <span class="c1"># Changed likelihoods to likelihoods_by_class</span>
     <span class="n">posterior_probs</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">class_label</span> <span class="ow">in</span> <span class="n">prior_probs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">prior</span> <span class="o">=</span> <span class="n">prior_probs</span><span class="p">[</span><span class="n">class_label</span><span class="p">]</span>
@@ -2360,7 +2365,7 @@ Posterior Probabilities: {&#39;Iris-setosa&#39;: np.float64(4.021125287452535e-4
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk menghitung prediksi kelas berdasarkan posterior probability</span>
-<span class="k">def</span> <span class="nf">predict_class</span><span class="p">(</span><span class="n">posterior_values</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">predict_class</span><span class="p">(</span><span class="n">posterior_values</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">posterior_values</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">posterior_values</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
 
 <span class="c1"># Menghitung prediksi untuk seluruh dataset</span>
@@ -3002,7 +3007,7 @@ Predicted = Iris-setosa
 <p>NILAI AKURASI</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
 
 <span class="c1"># Menghitung akurasi</span>
 <span class="n">y_true</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>  <span class="c1"># Data kelas yang sebenarnya</span>
@@ -3084,9 +3089,9 @@ Predicted = Iris-setosa
 <p>Hitung parameter distribusi gaussian (mean dan variance)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># Ambil data yang telah dibersihkan (tanpa outlier)</span>
 <span class="n">class_labels</span> <span class="o">=</span> <span class="n">cleaned_df</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -3145,10 +3150,10 @@ Predicted = Iris-setosa
 <p>Hitung likelihood</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># Fungsi untuk menghitung likelihood dengan pengecekan nilai kecil</span>
-<span class="k">def</span> <span class="nf">likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">variance</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">variance</span><span class="p">):</span>
     <span class="n">likelihood_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">variance</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">variance</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">likelihood_value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">likelihood_value</span> <span class="o">=</span> <span class="mf">1e-300</span>  <span class="c1"># pakai angka sangat kecil biar tetap valid</span>
@@ -3767,10 +3772,10 @@ Likelihoods: {&#39;Iris-setosa&#39;: [np.float64(5.44752825302712e-18), np.float
 <p>Hitung posterior probability</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># Fungsi untuk menghitung posterior probability</span>
-<span class="k">def</span> <span class="nf">calculate_posterior</span><span class="p">(</span><span class="n">prior_probs</span><span class="p">,</span> <span class="n">likelihoods_by_class</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_posterior</span><span class="p">(</span><span class="n">prior_probs</span><span class="p">,</span> <span class="n">likelihoods_by_class</span><span class="p">):</span>
     <span class="n">posterior_probs</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">class_label</span> <span class="ow">in</span> <span class="n">prior_probs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1"># loop through all class labels</span>
         <span class="n">prior</span> <span class="o">=</span> <span class="n">prior_probs</span><span class="p">[</span><span class="n">class_label</span><span class="p">]</span>
@@ -4259,7 +4264,7 @@ Posterior Probabilities: {&#39;Iris-virginica&#39;: np.float64(0.000529980872445
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk menghitung prediksi kelas berdasarkan posterior probability</span>
-<span class="k">def</span> <span class="nf">predict_class</span><span class="p">(</span><span class="n">posterior_values</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">predict_class</span><span class="p">(</span><span class="n">posterior_values</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">posterior_values</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">posterior_values</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
 
 <span class="c1"># Menghitung prediksi untuk seluruh dataset</span>
@@ -4881,7 +4886,7 @@ Predicted = Iris-virginica
 <p>NILAI AKURASI</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
 
 <span class="c1"># Menghitung akurasi</span>
 <span class="n">y_true</span> <span class="o">=</span> <span class="n">cleaned_df</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>  <span class="c1"># Data kelas yang sebenarnya (menggunakan cleaned_df)</span>
@@ -4943,6 +4948,15 @@ Predicted = Iris-virginica
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">DETEKSI OUTLIER MENGGUNAKAN LOF</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="UTS.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">UTS</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
