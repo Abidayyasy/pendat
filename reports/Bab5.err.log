@@ -1,0 +1,52 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+val_X = np.array([row[1:] for row in data_remove_class])
+k_means_C2 = KMeans(
+    n_clusters=2,
+    init='k-means++',
+    n_init=10,
+    max_iter=300,
+    tol=0.0001,
+    verbose=1,
+    random_state=42,
+    copy_x=True,
+    algorithm='lloyd'
+)
+
+k_means_C2.fit(val_X)
+
+labelC2 = k_means_C2.labels_
+centroidsC2 = k_means_C2.cluster_centers_
+InertiaC2 = k_means_C2.inertia_
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-5-49a89a021316>[0m in [0;36m<cell line: 0>[0;34m()[0m
+[0;32m----> 1[0;31m [0mval_X[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0;34m[[0m[0mrow[0m[0;34m[[0m[0;36m1[0m[0;34m:[0m[0;34m][0m [0;32mfor[0m [0mrow[0m [0;32min[0m [0mdata_remove_class[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m k_means_C2 = KMeans(
+[1;32m      3[0m     [0mn_clusters[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m     [0minit[0m[0;34m=[0m[0;34m'k-means++'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m     [0mn_init[0m[0;34m=[0m[0;36m10[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'np' is not defined
+
