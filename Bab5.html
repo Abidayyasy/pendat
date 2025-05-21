@@ -408,6 +408,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">K-MEANS CLUSTERING</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-k-means">Apa itu K Means</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihannya">Kelebihannya</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kekurangannya">Kekurangannya</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja">Cara Kerja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-impelementasi">Tahapan Impelementasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-nya">Code nya</a></li>
 </ul>
 </li>
@@ -428,37 +432,68 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="apa-itu-k-means">
 <h1>Apa itu K Means<a class="headerlink" href="#apa-itu-k-means" title="Link to this heading">#</a></h1>
-<p>K-Means adalah salah satu algoritma unsupervised machine learning yang digunakan untuk mengelompokkan data ke dalam beberapa cluster berdasarkan kesamaan fitur. Intinya, algoritma ini bertujuan untuk membagi data menjadi k kelompok atau cluster yang masing-masing data dalam cluster memiliki kemiripan yang tinggi satu sama lain.</p>
-<p>Bagaimana K-Means Bekerja?</p>
+<p>K-Means adalah salah satu algoritma unsupervised learning yang paling populer dalam analisis data, terutama untuk melakukan proses clustering atau pengelompokan data. Tujuan utama dari K-Means adalah membagi data ke dalam sejumlah cluster (kelompok) berdasarkan kemiripan karakteristik antar data. Jumlah cluster ditentukan di awal oleh pengguna (disebut sebagai nilai k).</p>
+<section id="kelebihannya">
+<h2>Kelebihannya<a class="headerlink" href="#kelebihannya" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Menentukan jumlah cluster (k): Langkah pertama adalah memilih jumlah cluster yang diinginkan, yaitu k. Misalnya, kamu memilih k=3 untuk 3 cluster.</p></li>
-<li><p>Menentukan titik centroid awal: K-Means secara acak memilih k titik yang disebut centroid untuk mewakili setiap cluster. Titik-titik centroid ini adalah pusat awal dari cluster.</p></li>
-<li><p>Menetapkan data ke cluster: Setelah centroid ditentukan, setiap data akan dipetakan ke dalam cluster yang paling dekat dengan centroid-nya. Kedekatan ini diukur dengan jarak Euclidean, yaitu jarak linier antara data dan centroid.</p></li>
-<li><p>Menghitung ulang centroid: Setelah semua data dikelompokkan, centroid dihitung ulang berdasarkan rata-rata posisi data dalam cluster tersebut. Ini dilakukan dengan mencari titik pusat dari data yang ada dalam cluster.</p></li>
-<li><p>Mengulangi langkah 3 dan 4: Proses ini akan diulang secara iteratif. Setiap iterasi, data akan dipetakan ulang ke centroid yang baru, dan centroid dihitung ulang berdasarkan pembagian data terbaru.</p></li>
-<li><p>Konvergensi: Proses akan berhenti ketika centroid tidak berubah lagi (atau perubahan sangat kecil). Pada titik ini, cluster dianggap stabil dan selesai.</p></li>
+<li><p>Sederhana dan mudah diimplementasikan.</p></li>
+<li><p>Waktu komputasi relatif cepat, terutama untuk dataset besar.</p></li>
+<li><p>Efisien dalam menangani data numerik dan data berukuran besar.</p></li>
 </ul>
-<p>Contoh Visualisasi K-Means Clustering:</p>
-<p>Misalkan kita memiliki dua fitur dalam dataset, seperti panjang dan lebar kelopak bunga (seperti pada dataset iris). Setelah menjalankan K-Means dengan k=2, kita akan mendapatkan dua cluster berdasarkan kedekatan antar data, dengan masing-masing cluster memiliki titik centroid yang mewakili posisi rata-rata data dalam cluster tersebut.</p>
-<p>Visualisasi dari proses K-Means akan memperlihatkan titik-titik data yang digabungkan dalam cluster yang berbeda, dengan centroid (titik pusat) yang jelas di tengah-tengah setiap cluster.</p>
-<p>Keunggulan K-Means:</p>
+</section>
+<section id="kekurangannya">
+<h2>Kekurangannya<a class="headerlink" href="#kekurangannya" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Cepat dan Efisien: K-Means bekerja dengan baik pada dataset besar dan dapat diimplementasikan dengan cepat.</p></li>
-<li><p>Fleksibel: Algoritma ini dapat diterapkan pada berbagai macam data numerik.</p></li>
-<li><p>Mudah Dimengerti: Konsepnya sederhana dan mudah dipahami, terutama dalam hal pembagian data ke dalam cluster berdasarkan kedekatannya.</p></li>
+<li><p>Harus menentukan jumlah cluster (k) sejak awal, yang kadang tidak diketahui.</p></li>
+<li><p>Sangat sensitif terhadap pemilihan titik awal (initial centroid).</p></li>
+<li><p>Kurang efektif untuk data non-linier atau data yang memiliki bentuk cluster tidak bulat.</p></li>
+<li><p>Rentan terhadap outlier.</p></li>
 </ul>
-<p>Kekurangan K-Means:</p>
+</section>
+<section id="cara-kerja">
+<h2>Cara Kerja<a class="headerlink" href="#cara-kerja" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Algoritma K-Means bekerja melalui iterasi dengan langkah-langkah utama sebagai berikut:</p></li>
+<li><p>Tentukan jumlah cluster (k) yang diinginkan.</p></li>
+<li><p>Pilih k titik awal sebagai centroid awal (biasanya acak atau dengan metode k-means++).</p></li>
+<li><p>Hitung jarak setiap data ke masing-masing centroid, dan kelompokkan ke centroid terdekat.</p></li>
+<li><p>Hitung ulang posisi centroid berdasarkan rata-rata titik pada setiap cluster.</p></li>
+<li><p>Ulangi langkah 3 dan 4 sampai:</p></li>
+</ol>
 <ul class="simple">
-<li><p>Memerlukan Penentuan Jumlah K: Salah satu kekurangan utama adalah kita perlu menentukan jumlah cluster k di awal, yang bisa jadi sulit tanpa pemahaman mendalam tentang data.</p></li>
-<li><p>Sensitif terhadap Inisialisasi Centroid: K-Means bisa terjebak dalam solusi suboptimal jika centroid awal dipilih secara acak. Untuk mengatasi hal ini, ada teknik seperti k-means++ yang dapat membantu pemilihan centroid awal yang lebih baik.</p></li>
-<li><p>Hanya untuk Data Numerik: K-Means mengandalkan jarak Euclidean, jadi lebih cocok untuk data numerik, bukan data kategorikal.</p></li>
+<li><p>Tidak ada perubahan signifikan dalam pembagian cluster, atau</p></li>
+<li><p>Jumlah iterasi maksimum tercapai.</p></li>
 </ul>
-<p>Evaluasi Hasil K-Means:</p>
-<p>Beberapa metrik yang dapat digunakan untuk mengevaluasi hasil K-Means adalah:</p>
+</section>
+<section id="tahapan-impelementasi">
+<h2>Tahapan Impelementasi<a class="headerlink" href="#tahapan-impelementasi" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Normalisasi Data:</p></li>
+</ol>
+<p>Sebelum dilakukan clustering, data terlebih dahulu dinormalisasi menggunakan metode Min-Max Normalization. Ini penting karena K-Means menggunakan jarak Euclidean sebagai ukuran kedekatan antar data. Jika data memiliki skala berbeda, atribut dengan nilai besar akan mendominasi hasil clustering. Dengan normalisasi, semua atribut berada dalam rentang yang sama (misalnya 0 hingga 1), sehingga setiap fitur memberikan kontribusi yang adil.</p>
+<ol class="arabic simple" start="2">
+<li><p>Proses Clustering:</p></li>
+</ol>
+<p>Setelah data dinormalisasi, dilakukan proses clustering menggunakan algoritma K-Means. Dalam penelitian ini, digunakan beberapa nilai k seperti 2, 3, dan 4 untuk diuji. Hasil clustering menunjukkan bagaimana data terpisah ke dalam kelompok tertentu berdasarkan karakteristik panjang dan lebar sepal maupun petal.</p>
+<ol class="arabic simple" start="3">
+<li><p>Evalusi Data:</p></li>
+</ol>
+<p>Evaluasi dilakukan untuk mengetahui kualitas hasil clustering. Dua metrik utama digunakan:</p>
 <ul class="simple">
-<li><p>Silhouette Score: Metrik ini mengukur seberapa baik setiap data dipetakan ke dalam cluster yang benar, dengan nilai antara -1 hingga 1. Nilai yang lebih tinggi menunjukkan clustering yang lebih baik.</p></li>
-<li><p>Inertia (SSE - Sum of Squared Errors): Ini mengukur seberapa jauh data dalam cluster dari centroid-nya. Nilai inertia yang lebih rendah menunjukkan cluster yang lebih kompak.</p></li>
+<li><p>Inertia: mengukur total jarak kuadrat dari setiap titik ke centroid clusternya. Nilai inertia yang kecil menunjukkan bahwa data berada dekat dengan pusat clusternya, yang berarti clustering lebih kompak.</p></li>
+<li><p>Silhouette Score: mengukur seberapa baik suatu data cocok berada dalam cluster-nya dibandingkan dengan cluster lain. Nilai berkisar dari -1 hingga 1. Semakin tinggi nilainya, semakin baik pemisahan antar cluster.</p></li>
 </ul>
+<p>Evaluasi ini digunakan untuk menentukan jumlah cluster terbaik.</p>
+<ol class="arabic simple" start="4">
+<li><p>Visualisasi SIlhouette dan Elbow:</p></li>
+</ol>
+<p>Visualisasi silhouette digunakan untuk menunjukkan seberapa baik setiap data berada di dalam clusternya. Dari grafik ini bisa diketahui apakah suatu cluster terlalu kecil, terlalu besar, atau tumpang tindih.</p>
+<p>Selain itu, metode elbow digunakan untuk menganalisis nilai inertia terhadap berbagai nilai k. Titik “tekukan” (elbow) pada grafik biasanya menunjukkan nilai k optimal sebelum penurunan inertia mulai melambat.</p>
+<ol class="arabic simple" start="5">
+<li><p>Penentuan Jumlah Cluster Terbaik:</p></li>
+</ol>
+<p>Dengan membandingkan nilai inertia dan silhouette score untuk berbagai nilai k, dapat ditentukan jumlah cluster optimal. Dalam kasus ini, nilai k dengan silhouette score tertinggi dianggap sebagai yang paling baik, karena menunjukkan pemisahan cluster yang jelas dan konsisten.</p>
+</section>
 <section id="code-nya">
 <h2>Code nya<a class="headerlink" href="#code-nya" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
@@ -480,7 +515,7 @@ document.write(`
   Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
 Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/45.0 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.0/45.0 kB</span> <span class=" -Color -Color-Red">1.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.0/45.0 kB</span> <span class=" -Color -Color-Red">1.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -492,10 +527,10 @@ Successfully installed pymysql-1.1.1
   Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
 Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.2/3.0 MB</span> <span class=" -Color -Color-Red">5.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.3/3.0 MB</span> <span class=" -Color -Color-Red">7.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.8/3.0 MB</span> <span class=" -Color -Color-Red">26.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.9/3.0 MB</span> <span class=" -Color -Color-Red">28.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">30.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
@@ -954,6 +989,185 @@ Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3
 </div>
 </div>
 <ol class="arabic simple" start="4">
+<li><p>Normalisasi Data</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Misal kamu sudah punya data_remove_class dari MySQL, berupa numpy array</span>
+<span class="c1"># Contoh: data_remove_class = df.to_numpy()</span>
+
+<span class="c1"># Inisialisasi scaler</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="c1"># Normalisasi data (fit &amp; transform)</span>
+<span class="n">data_normalized</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data_remove_class</span><span class="p">)</span>
+
+<span class="c1"># Cek hasil normalisasi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data setelah normalisasi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_normalized</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data setelah normalisasi:
+[[-9.00681170e-01  1.03205722e+00 -1.34127240e+00 -1.31297673e+00]
+ [-1.14301691e+00 -1.24957601e-01 -1.34127240e+00 -1.31297673e+00]
+ [-1.38535265e+00  3.37848329e-01 -1.39813811e+00 -1.31297673e+00]
+ [-1.50652052e+00  1.06445364e-01 -1.28440670e+00 -1.31297673e+00]
+ [-1.02184904e+00  1.26346019e+00 -1.34127240e+00 -1.31297673e+00]
+ [-5.37177559e-01  1.95766909e+00 -1.17067529e+00 -1.05003079e+00]
+ [-1.50652052e+00  8.00654259e-01 -1.34127240e+00 -1.18150376e+00]
+ [-1.02184904e+00  8.00654259e-01 -1.28440670e+00 -1.31297673e+00]
+ [-1.74885626e+00 -3.56360566e-01 -1.34127240e+00 -1.31297673e+00]
+ [-1.14301691e+00  1.06445364e-01 -1.28440670e+00 -1.44444970e+00]
+ [-5.37177559e-01  1.49486315e+00 -1.28440670e+00 -1.31297673e+00]
+ [-1.26418478e+00  8.00654259e-01 -1.22754100e+00 -1.31297673e+00]
+ [-1.26418478e+00 -1.24957601e-01 -1.34127240e+00 -1.44444970e+00]
+ [-1.87002413e+00 -1.24957601e-01 -1.51186952e+00 -1.44444970e+00]
+ [-5.25060772e-02  2.18907205e+00 -1.45500381e+00 -1.31297673e+00]
+ [-1.73673948e-01  3.11468391e+00 -1.28440670e+00 -1.05003079e+00]
+ [-5.37177559e-01  1.95766909e+00 -1.39813811e+00 -1.05003079e+00]
+ [-9.00681170e-01  1.03205722e+00 -1.34127240e+00 -1.18150376e+00]
+ [-1.73673948e-01  1.72626612e+00 -1.17067529e+00 -1.18150376e+00]
+ [-9.00681170e-01  1.72626612e+00 -1.28440670e+00 -1.18150376e+00]
+ [-5.37177559e-01  8.00654259e-01 -1.17067529e+00 -1.31297673e+00]
+ [-9.00681170e-01  1.49486315e+00 -1.28440670e+00 -1.05003079e+00]
+ [-1.50652052e+00  1.26346019e+00 -1.56873522e+00 -1.31297673e+00]
+ [-9.00681170e-01  5.69251294e-01 -1.17067529e+00 -9.18557817e-01]
+ [-1.26418478e+00  8.00654259e-01 -1.05694388e+00 -1.31297673e+00]
+ [-1.02184904e+00 -1.24957601e-01 -1.22754100e+00 -1.31297673e+00]
+ [-1.02184904e+00  8.00654259e-01 -1.22754100e+00 -1.05003079e+00]
+ [-7.79513300e-01  1.03205722e+00 -1.28440670e+00 -1.31297673e+00]
+ [-7.79513300e-01  8.00654259e-01 -1.34127240e+00 -1.31297673e+00]
+ [-1.38535265e+00  3.37848329e-01 -1.22754100e+00 -1.31297673e+00]
+ [-1.26418478e+00  1.06445364e-01 -1.22754100e+00 -1.31297673e+00]
+ [-5.37177559e-01  8.00654259e-01 -1.28440670e+00 -1.05003079e+00]
+ [-7.79513300e-01  2.42047502e+00 -1.28440670e+00 -1.44444970e+00]
+ [-4.16009689e-01  2.65187798e+00 -1.34127240e+00 -1.31297673e+00]
+ [-1.14301691e+00  1.06445364e-01 -1.28440670e+00 -1.44444970e+00]
+ [-1.02184904e+00  3.37848329e-01 -1.45500381e+00 -1.31297673e+00]
+ [-4.16009689e-01  1.03205722e+00 -1.39813811e+00 -1.31297673e+00]
+ [-1.14301691e+00  1.06445364e-01 -1.28440670e+00 -1.44444970e+00]
+ [-1.74885626e+00 -1.24957601e-01 -1.39813811e+00 -1.31297673e+00]
+ [-9.00681170e-01  8.00654259e-01 -1.28440670e+00 -1.31297673e+00]
+ [-1.02184904e+00  1.03205722e+00 -1.39813811e+00 -1.18150376e+00]
+ [-1.62768839e+00 -1.74477836e+00 -1.39813811e+00 -1.18150376e+00]
+ [-1.74885626e+00  3.37848329e-01 -1.39813811e+00 -1.31297673e+00]
+ [-1.02184904e+00  1.03205722e+00 -1.22754100e+00 -7.87084847e-01]
+ [-9.00681170e-01  1.72626612e+00 -1.05694388e+00 -1.05003079e+00]
+ [-1.26418478e+00 -1.24957601e-01 -1.34127240e+00 -1.18150376e+00]
+ [-9.00681170e-01  1.72626612e+00 -1.22754100e+00 -1.31297673e+00]
+ [-1.50652052e+00  3.37848329e-01 -1.34127240e+00 -1.31297673e+00]
+ [-6.58345429e-01  1.49486315e+00 -1.28440670e+00 -1.31297673e+00]
+ [-1.02184904e+00  5.69251294e-01 -1.34127240e+00 -1.31297673e+00]
+ [ 1.40150837e+00  3.37848329e-01  5.35295827e-01  2.64698913e-01]
+ [ 6.74501145e-01  3.37848329e-01  4.21564419e-01  3.96171883e-01]
+ [ 1.28034050e+00  1.06445364e-01  6.49027235e-01  3.96171883e-01]
+ [-4.16009689e-01 -1.74477836e+00  1.37235899e-01  1.33225943e-01]
+ [ 7.95669016e-01 -5.87763531e-01  4.78430123e-01  3.96171883e-01]
+ [-1.73673948e-01 -5.87763531e-01  4.21564419e-01  1.33225943e-01]
+ [ 5.53333275e-01  5.69251294e-01  5.35295827e-01  5.27644853e-01]
+ [-1.14301691e+00 -1.51337539e+00 -2.60824029e-01 -2.61192967e-01]
+ [ 9.16836886e-01 -3.56360566e-01  4.78430123e-01  1.33225943e-01]
+ [-7.79513300e-01 -8.19166497e-01  8.03701950e-02  2.64698913e-01]
+ [-1.02184904e+00 -2.43898725e+00 -1.47092621e-01 -2.61192967e-01]
+ [ 6.86617933e-02 -1.24957601e-01  2.50967307e-01  3.96171883e-01]
+ [ 1.89829664e-01 -1.97618132e+00  1.37235899e-01 -2.61192967e-01]
+ [ 3.10997534e-01 -3.56360566e-01  5.35295827e-01  2.64698913e-01]
+ [-2.94841818e-01 -3.56360566e-01 -9.02269170e-02  1.33225943e-01]
+ [ 1.03800476e+00  1.06445364e-01  3.64698715e-01  2.64698913e-01]
+ [-2.94841818e-01 -1.24957601e-01  4.21564419e-01  3.96171883e-01]
+ [-5.25060772e-02 -8.19166497e-01  1.94101603e-01 -2.61192967e-01]
+ [ 4.32165405e-01 -1.97618132e+00  4.21564419e-01  3.96171883e-01]
+ [-2.94841818e-01 -1.28197243e+00  8.03701950e-02 -1.29719997e-01]
+ [ 6.86617933e-02  3.37848329e-01  5.92161531e-01  7.90590793e-01]
+ [ 3.10997534e-01 -5.87763531e-01  1.37235899e-01  1.33225943e-01]
+ [ 5.53333275e-01 -1.28197243e+00  6.49027235e-01  3.96171883e-01]
+ [ 3.10997534e-01 -5.87763531e-01  5.35295827e-01  1.75297293e-03]
+ [ 6.74501145e-01 -3.56360566e-01  3.07833011e-01  1.33225943e-01]
+ [ 9.16836886e-01 -1.24957601e-01  3.64698715e-01  2.64698913e-01]
+ [ 1.15917263e+00 -5.87763531e-01  5.92161531e-01  2.64698913e-01]
+ [ 1.03800476e+00 -1.24957601e-01  7.05892939e-01  6.59117823e-01]
+ [ 1.89829664e-01 -3.56360566e-01  4.21564419e-01  3.96171883e-01]
+ [-1.73673948e-01 -1.05056946e+00 -1.47092621e-01 -2.61192967e-01]
+ [-4.16009689e-01 -1.51337539e+00  2.35044910e-02 -1.29719997e-01]
+ [-4.16009689e-01 -1.51337539e+00 -3.33612130e-02 -2.61192967e-01]
+ [-5.25060772e-02 -8.19166497e-01  8.03701950e-02  1.75297293e-03]
+ [ 1.89829664e-01 -8.19166497e-01  7.62758643e-01  5.27644853e-01]
+ [-5.37177559e-01 -1.24957601e-01  4.21564419e-01  3.96171883e-01]
+ [ 1.89829664e-01  8.00654259e-01  4.21564419e-01  5.27644853e-01]
+ [ 1.03800476e+00  1.06445364e-01  5.35295827e-01  3.96171883e-01]
+ [ 5.53333275e-01 -1.74477836e+00  3.64698715e-01  1.33225943e-01]
+ [-2.94841818e-01 -1.24957601e-01  1.94101603e-01  1.33225943e-01]
+ [-4.16009689e-01 -1.28197243e+00  1.37235899e-01  1.33225943e-01]
+ [-4.16009689e-01 -1.05056946e+00  3.64698715e-01  1.75297293e-03]
+ [ 3.10997534e-01 -1.24957601e-01  4.78430123e-01  2.64698913e-01]
+ [-5.25060772e-02 -1.05056946e+00  1.37235899e-01  1.75297293e-03]
+ [-1.02184904e+00 -1.74477836e+00 -2.60824029e-01 -2.61192967e-01]
+ [-2.94841818e-01 -8.19166497e-01  2.50967307e-01  1.33225943e-01]
+ [-1.73673948e-01 -1.24957601e-01  2.50967307e-01  1.75297293e-03]
+ [-1.73673948e-01 -3.56360566e-01  2.50967307e-01  1.33225943e-01]
+ [ 4.32165405e-01 -3.56360566e-01  3.07833011e-01  1.33225943e-01]
+ [-9.00681170e-01 -1.28197243e+00 -4.31421141e-01 -1.29719997e-01]
+ [-1.73673948e-01 -5.87763531e-01  1.94101603e-01  1.33225943e-01]
+ [ 5.53333275e-01  5.69251294e-01  1.27454998e+00  1.71090158e+00]
+ [-5.25060772e-02 -8.19166497e-01  7.62758643e-01  9.22063763e-01]
+ [ 1.52267624e+00 -1.24957601e-01  1.21768427e+00  1.18500970e+00]
+ [ 5.53333275e-01 -3.56360566e-01  1.04708716e+00  7.90590793e-01]
+ [ 7.95669016e-01 -1.24957601e-01  1.16081857e+00  1.31648267e+00]
+ [ 2.12851559e+00 -1.24957601e-01  1.61574420e+00  1.18500970e+00]
+ [-1.14301691e+00 -1.28197243e+00  4.21564419e-01  6.59117823e-01]
+ [ 1.76501198e+00 -3.56360566e-01  1.44514709e+00  7.90590793e-01]
+ [ 1.03800476e+00 -1.28197243e+00  1.16081857e+00  7.90590793e-01]
+ [ 1.64384411e+00  1.26346019e+00  1.33141568e+00  1.71090158e+00]
+ [ 7.95669016e-01  3.37848329e-01  7.62758643e-01  1.05353673e+00]
+ [ 6.74501145e-01 -8.19166497e-01  8.76490051e-01  9.22063763e-01]
+ [ 1.15917263e+00 -1.24957601e-01  9.90221459e-01  1.18500970e+00]
+ [-1.73673948e-01 -1.28197243e+00  7.05892939e-01  1.05353673e+00]
+ [-5.25060772e-02 -5.87763531e-01  7.62758643e-01  1.57942861e+00]
+ [ 6.74501145e-01  3.37848329e-01  8.76490051e-01  1.44795564e+00]
+ [ 7.95669016e-01 -1.24957601e-01  9.90221459e-01  7.90590793e-01]
+ [ 2.24968346e+00  1.72626612e+00  1.67260991e+00  1.31648267e+00]
+ [ 2.24968346e+00 -1.05056946e+00  1.78634131e+00  1.44795564e+00]
+ [ 1.89829664e-01 -1.97618132e+00  7.05892939e-01  3.96171883e-01]
+ [ 1.28034050e+00  3.37848329e-01  1.10395287e+00  1.44795564e+00]
+ [-2.94841818e-01 -5.87763531e-01  6.49027235e-01  1.05353673e+00]
+ [ 2.24968346e+00 -5.87763531e-01  1.67260991e+00  1.05353673e+00]
+ [ 5.53333275e-01 -8.19166497e-01  6.49027235e-01  7.90590793e-01]
+ [ 1.03800476e+00  5.69251294e-01  1.10395287e+00  1.18500970e+00]
+ [ 1.64384411e+00  3.37848329e-01  1.27454998e+00  7.90590793e-01]
+ [ 4.32165405e-01 -5.87763531e-01  5.92161531e-01  7.90590793e-01]
+ [ 3.10997534e-01 -1.24957601e-01  6.49027235e-01  7.90590793e-01]
+ [ 6.74501145e-01 -5.87763531e-01  1.04708716e+00  1.18500970e+00]
+ [ 1.64384411e+00 -1.24957601e-01  1.16081857e+00  5.27644853e-01]
+ [ 1.88617985e+00 -5.87763531e-01  1.33141568e+00  9.22063763e-01]
+ [ 2.49201920e+00  1.72626612e+00  1.50201279e+00  1.05353673e+00]
+ [ 6.74501145e-01 -5.87763531e-01  1.04708716e+00  1.31648267e+00]
+ [ 5.53333275e-01 -5.87763531e-01  7.62758643e-01  3.96171883e-01]
+ [ 3.10997534e-01 -1.05056946e+00  1.04708716e+00  2.64698913e-01]
+ [ 2.24968346e+00 -1.24957601e-01  1.33141568e+00  1.44795564e+00]
+ [ 5.53333275e-01  8.00654259e-01  1.04708716e+00  1.57942861e+00]
+ [ 6.74501145e-01  1.06445364e-01  9.90221459e-01  7.90590793e-01]
+ [ 1.89829664e-01 -1.24957601e-01  5.92161531e-01  7.90590793e-01]
+ [ 1.28034050e+00  1.06445364e-01  9.33355755e-01  1.18500970e+00]
+ [ 1.03800476e+00  1.06445364e-01  1.04708716e+00  1.57942861e+00]
+ [ 1.28034050e+00  1.06445364e-01  7.62758643e-01  1.44795564e+00]
+ [-5.25060772e-02 -8.19166497e-01  7.62758643e-01  9.22063763e-01]
+ [ 1.15917263e+00  3.37848329e-01  1.21768427e+00  1.44795564e+00]
+ [ 1.03800476e+00  5.69251294e-01  1.10395287e+00  1.71090158e+00]
+ [ 1.03800476e+00 -1.24957601e-01  8.19624347e-01  1.44795564e+00]
+ [ 5.53333275e-01 -1.28197243e+00  7.05892939e-01  9.22063763e-01]
+ [ 7.95669016e-01 -1.24957601e-01  8.19624347e-01  1.05353673e+00]
+ [ 4.32165405e-01  8.00654259e-01  9.33355755e-01  1.44795564e+00]
+ [ 6.86617933e-02 -1.24957601e-01  7.62758643e-01  7.90590793e-01]]
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="5">
 <li><p>Visualisasi</p></li>
 </ol>
 <div class="cell docutils container">
@@ -1005,8 +1219,8 @@ Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3
 <img alt="_images/de7c7164a6b9acab9221c1b43b08bbacce750bd97cc5af7000ac6a94e3c1a5b9.png" src="_images/de7c7164a6b9acab9221c1b43b08bbacce750bd97cc5af7000ac6a94e3c1a5b9.png" />
 </div>
 </div>
-<ol class="arabic simple" start="5">
-<li><p>Menghitung k means dengan k dari 2 sampai 4, beserta visualisasi nya</p></li>
+<ol class="arabic simple" start="6">
+<li><p>Clustering dengan K = 2</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1034,27 +1248,84 @@ Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-5-49a89a021316&gt;</span> in <span class="ni">&lt;cell line: 0&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data_remove_class</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">k_means_C2</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span>
+<span class="nn">&lt;ipython-input-6-49a89a021316&gt;</span> in <span class="ni">&lt;cell line: 0&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data_remove_class</span><span class="p">])</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">k_means_C2</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 
-<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+<span class="ne">NameError</span>: name &#39;KMeans&#39; is not defined
 </pre></div>
 </div>
 </div>
 </div>
+<ol class="arabic simple" start="7">
+<li><p>Visualisasi Hasil Clustering K = 2</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">val_X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">val_X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labelC2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroidsC2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroidsC2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Hasil Clustering (k=2)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fitur 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fitur 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/45da0e40318dddadfa47c283e2c200344c0812cd10f4788b7002ed33df19d461.png" src="_images/45da0e40318dddadfa47c283e2c200344c0812cd10f4788b7002ed33df19d461.png" />
+</div>
+</div>
+<ol class="arabic simple" start="8">
+<li><p>Nilai Inertia Hasil Clustering K = 2</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inertia dengan k = 2:&quot;</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia dengan k = 2: 105.16576351752823
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="9">
+<li><p>Silhouete Score dengan K =2</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
-<span class="c1"># Asumsikan data_remove_class sudah tersedia dan tidak mengandung kolom class</span>
-<span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data_remove_class</span><span class="p">])</span>
+<span class="n">k_means</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
 
-<span class="c1"># KMeans untuk k = 3</span>
+<span class="n">sil_score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">val_X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Silhouette Score untuk k=2: &quot;</span><span class="p">,</span> <span class="n">sil_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette Score untuk k=2:  0.7405544914557842
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="10">
+<li><p>Clustering dengan K = 3</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data_remove_class</span><span class="p">])</span>
+
 <span class="n">k_means_C3</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span>
     <span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span>
@@ -1153,6 +1424,68 @@ Converged at iteration 4: strict convergence.
 </div>
 </div>
 </div>
+<ol class="arabic simple" start="11">
+<li><p>Visualisasi Hasil Clustering K = 3</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">val_X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">val_X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labelC3</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroidsC3</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroidsC3</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Hasil Clustering (k=3)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fitur 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fitur 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c54210439415be06769eb5b57cdcc64c90e1eabdfa17a82e42bb1da243cb8a97.png" src="_images/c54210439415be06769eb5b57cdcc64c90e1eabdfa17a82e42bb1da243cb8a97.png" />
+</div>
+</div>
+<ol class="arabic simple" start="12">
+<li><p>Itung Inertia Hasil Clustering K = 3</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inertia dengan k = 3:&quot;</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia dengan k = 3: 48.99365658263308
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="13">
+<li><p>Silhouete Score dengan K = 3</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">k_means</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
+
+<span class="n">sil_score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">val_X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Silhouette Score untuk k = 3: &quot;</span><span class="p">,</span> <span class="n">sil_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette Score untuk k = 3:  0.5934015210796922
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="14">
+<li><p>Clustering dengan K = 4</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
@@ -1280,121 +1613,28 @@ Converged at iteration 11: strict convergence.
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="c1"># Misal val_X adalah data yang sudah ada</span>
-<span class="n">k_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>  <span class="c1"># Uji dengan K=2, K=3, dan K=4</span>
-
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_values</span><span class="p">:</span>
-    <span class="n">k_means</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-    <span class="n">labels</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
-    <span class="c1"># Visualisasi cluster</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">val_X</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">val_X</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-    <span class="c1"># Visualisasi centroid</span>
-    <span class="n">centroids</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">cluster_centers_</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centroids&#39;</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cluster Visualization (k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/bc54c9a9256b6c263760887a3f64d3ace9d2e49c135295f4cd815107273bbd28.png" src="_images/bc54c9a9256b6c263760887a3f64d3ace9d2e49c135295f4cd815107273bbd28.png" />
-<img alt="_images/3451aeb55eaf835aa8f9398cb57a3aa0aea98a409bdcae8433ca9fa296c93723.png" src="_images/3451aeb55eaf835aa8f9398cb57a3aa0aea98a409bdcae8433ca9fa296c93723.png" />
-<img alt="_images/8671a39eab76b314bc196a03b33e92f180b19135bf99f3b58b63a4f2fc157d14.png" src="_images/8671a39eab76b314bc196a03b33e92f180b19135bf99f3b58b63a4f2fc157d14.png" />
-</div>
-</div>
-<ol class="arabic simple" start="6">
-<li><p>Hitung nilai inertia dan siluet score dari setiap k dari 2 sampai 4</p></li>
+<ol class="arabic simple" start="15">
+<li><p>Visualisasi Hasil CLustering K = 4</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span>
-<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inertia dengan k = 2:&quot;</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">val_X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">val_X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labelC4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroidsC4</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroidsC4</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Hasil Clustering (k=4)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fitur 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fitur 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia dengan k = 2: 152.36870647733915
-</pre></div>
+<img alt="_images/5dfbf92346d319090d6d704349e56511fae0cd30405e4a0cad709266d0f5dbb0.png" src="_images/5dfbf92346d319090d6d704349e56511fae0cd30405e4a0cad709266d0f5dbb0.png" />
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">silhouette_score</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pymysql</span>
-
-<span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-<span class="n">k_means</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
-
-<span class="n">sil_score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">val_X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Silhouette Score untuk k=2: &quot;</span><span class="p">,</span> <span class="n">sil_score</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette Score untuk k=2:  0.6808136202936816
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span>
-<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inertia dengan k = 3:&quot;</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia dengan k = 3: 78.94506582597728
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-<span class="n">k_means</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
-
-<span class="n">sil_score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">val_X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Silhouette Score untuk k = 3: &quot;</span><span class="p">,</span> <span class="n">sil_score</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette Score untuk k = 3:  0.5509643746707443
-</pre></div>
-</div>
-</div>
-</div>
+<ol class="arabic simple" start="16">
+<li><p>Itung Inertia Hasil Clustering K = 4</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span>
@@ -1410,6 +1650,9 @@ Converged at iteration 11: strict convergence.
 </div>
 </div>
 </div>
+<ol class="arabic simple" start="17">
+<li><p>Silhouette Score dengan K = 4</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -1439,32 +1682,21 @@ Converged at iteration 11: strict convergence.
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="c1"># Asumsi data sudah ada di val_X (data yang digunakan untuk clustering)</span>
+<span class="c1"># Asumsi data sudah ada di val_X (misalnya hasil normalisasi)</span>
 
 <span class="n">k_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Uji untuk K=2, K=3, K=4</span>
-<span class="n">silhouette_scores</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">cluster_results</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_range</span><span class="p">:</span>
     <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
 
-    <span class="c1"># Hitung Silhouette Score</span>
     <span class="n">silhouette_values</span> <span class="o">=</span> <span class="n">silhouette_samples</span><span class="p">(</span><span class="n">val_X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
-    <span class="n">silhouette_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">val_X</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>  <span class="c1"># Menyimpan Silhouette Score untuk K</span>
-
-    <span class="c1"># Simpan hasil untuk plotting nanti</span>
-    <span class="n">cluster_results</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;labels&#39;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
-        <span class="s1">&#39;silhouette_values&#39;</span><span class="p">:</span> <span class="n">silhouette_values</span><span class="p">,</span>
-        <span class="s1">&#39;centroids&#39;</span><span class="p">:</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
-    <span class="p">}</span>
 
     <span class="c1"># ---- Silhouette Plot untuk K Cluster ----</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
     <span class="n">y_lower</span> <span class="o">=</span> <span class="mi">10</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>  <span class="c1"># Loop untuk masing-masing cluster</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
         <span class="n">ith_cluster_silhouette_values</span> <span class="o">=</span> <span class="n">silhouette_values</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
         <span class="n">ith_cluster_silhouette_values</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
@@ -1481,65 +1713,63 @@ Converged at iteration 11: strict convergence.
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Silhouette Coefficient&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cluster Label&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-
-    <span class="c1"># Centroid visualisation (titik centroid)</span>
-    <span class="n">centroids</span> <span class="o">=</span> <span class="n">cluster_results</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;centroids&#39;</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centroids&#39;</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/41a1b4056769593fb7d7bc688cbe0d5c8e3e5ba54fd3cac7643c211c914d60b7.png" src="_images/41a1b4056769593fb7d7bc688cbe0d5c8e3e5ba54fd3cac7643c211c914d60b7.png" />
+<img alt="_images/f5dc64d127fa48798f891808bcb07c16a99c7422626450813d5d374d71de00e4.png" src="_images/f5dc64d127fa48798f891808bcb07c16a99c7422626450813d5d374d71de00e4.png" />
+<img alt="_images/d99544d9b1d6213bc1e7ff61d8afd3d7bea7aeccbd3571d9f9cdc3850927205e.png" src="_images/d99544d9b1d6213bc1e7ff61d8afd3d7bea7aeccbd3571d9f9cdc3850927205e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">silhouette_score</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="c1"># ---- Plot Silhouette Score per K ----</span>
+<span class="c1"># Asumsikan data sudah dalam variabel val_X (misalnya hasil normalisasi)</span>
+<span class="c1"># Contoh: val_X = scaler.fit_transform(data) atau val_X = np.array(df)</span>
+
+<span class="n">k_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">inertia_values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">silhouette_scores</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_range</span><span class="p">:</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
+
+    <span class="n">inertia_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>  <span class="c1"># untuk Elbow Method</span>
+    <span class="n">silhouette_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">val_X</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>  <span class="c1"># untuk Silhouette</span>
+
+<span class="c1"># -------------------------</span>
+<span class="c1"># Elbow Method Plot</span>
+<span class="c1"># -------------------------</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_range</span><span class="p">,</span> <span class="n">silhouette_scores</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Silhouette Score per K (Iris Dataset)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Jumlah Cluster (K)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Silhouette Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_range</span><span class="p">,</span> <span class="n">inertia_values</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Elbow Method&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Jumlah Cluster (K)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Inertia&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">k_range</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="c1"># Tampilkan K optimal berdasarkan Silhouette Score tertinggi</span>
+<span class="c1"># -------------------------</span>
+<span class="c1"># Tampilkan K terbaik berdasarkan Silhouette Score tertinggi</span>
+<span class="c1"># -------------------------</span>
 <span class="n">optimal_k</span> <span class="o">=</span> <span class="n">k_range</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">silhouette_scores</span><span class="p">)]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">K dengan Silhouette Score terbaik adalah: K = </span><span class="si">{</span><span class="n">optimal_k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7e1771eee2bf3d5ab36459aa97c0db2cdd027633f73a40877f90410154c06da3.png" src="_images/7e1771eee2bf3d5ab36459aa97c0db2cdd027633f73a40877f90410154c06da3.png" />
-<img alt="_images/7548bf4b1e417ea62c2221a2a7624239d62a227ba7afa1d55a3ed18087a71a6d.png" src="_images/7548bf4b1e417ea62c2221a2a7624239d62a227ba7afa1d55a3ed18087a71a6d.png" />
-<img alt="_images/6dd160162e3d4de81c7d6bb2ec0ed1dd10cc0ebef5264114eba5c160d8827556.png" src="_images/6dd160162e3d4de81c7d6bb2ec0ed1dd10cc0ebef5264114eba5c160d8827556.png" />
-<img alt="_images/9fa56182c3545cb28d969c985fc2b58765c115e868a9ed68c706d5fff2130b28.png" src="_images/9fa56182c3545cb28d969c985fc2b58765c115e868a9ed68c706d5fff2130b28.png" />
+<img alt="_images/5eb6f908c28d6f1a790891ba86cefa9a1304524d1768518ac7cf8278bdb0c233.png" src="_images/5eb6f908c28d6f1a790891ba86cefa9a1304524d1768518ac7cf8278bdb0c233.png" />
+<img alt="_images/ca899911ac12babf76b61ca7a7fa1554c51c956458f12f8fa056a18582383034.png" src="_images/ca899911ac12babf76b61ca7a7fa1554c51c956458f12f8fa056a18582383034.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K dengan Silhouette Score terbaik adalah: K = 2
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">inertia_values</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
-    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-    <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">val_X</span><span class="p">)</span>
-    <span class="n">inertia_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>
-
-<span class="c1"># Plotting inertia vs k</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">inertia_values</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Elbow Method for Optimal k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Clusters (k)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Inertia&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/53e059ec517bb79d5ccd37d67ccce87f3cd633e8b2f7ec1299cdda261471edc1.png" src="_images/53e059ec517bb79d5ccd37d67ccce87f3cd633e8b2f7ec1299cdda261471edc1.png" />
 </div>
 </div>
 </section>
@@ -1602,6 +1832,10 @@ Converged at iteration 11: strict convergence.
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">K-MEANS CLUSTERING</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-k-means">Apa itu K Means</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihannya">Kelebihannya</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kekurangannya">Kekurangannya</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja">Cara Kerja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-impelementasi">Tahapan Impelementasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-nya">Code nya</a></li>
 </ul>
 </li>

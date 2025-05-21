@@ -41,12 +41,12 @@ InertiaC2 = k_means_C2.inertia_
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-5-49a89a021316>[0m in [0;36m<cell line: 0>[0;34m()[0m
-[0;32m----> 1[0;31m [0mval_X[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0;34m[[0m[0mrow[0m[0;34m[[0m[0;36m1[0m[0;34m:[0m[0;34m][0m [0;32mfor[0m [0mrow[0m [0;32min[0m [0mdata_remove_class[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m k_means_C2 = KMeans(
-[1;32m      3[0m     [0mn_clusters[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m<ipython-input-6-49a89a021316>[0m in [0;36m<cell line: 0>[0;34m()[0m
+[1;32m      1[0m [0mval_X[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0;34m[[0m[0mrow[0m[0;34m[[0m[0;36m1[0m[0;34m:[0m[0;34m][0m [0;32mfor[0m [0mrow[0m [0;32min[0m [0mdata_remove_class[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m k_means_C2 = KMeans(
+[0m[1;32m      3[0m     [0mn_clusters[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      4[0m     [0minit[0m[0;34m=[0m[0;34m'k-means++'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      5[0m     [0mn_init[0m[0;34m=[0m[0;36m10[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNameError[0m: name 'np' is not defined
+[0;31mNameError[0m: name 'KMeans' is not defined
 
