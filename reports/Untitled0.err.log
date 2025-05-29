@@ -1,0 +1,119 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+
+# Data 4 titik 2 dimensi
+X = np.array([
+    [1.0, 2.0],  # x1
+    [2.0, 3.0],  # x2
+    [3.0, 4.0],  # x3
+    [6.0, 7.0],   # x4
+    [7.0, 8.0]
+])
+
+# Matriks keanggotaan awal (u) untuk iterasi pertama
+u = np.array([
+    [0.5, 0.5],
+    [0.7, 0.3],
+    [0.8, 0.2],
+    [0.7, 0.3],
+    [0.6, 0.4]
+])
+
+m = 2  # fuzziness
+
+def hitung_centroid(X, u, m):
+    c1_num = np.zeros(X.shape[1])
+    c1_den = 0
+    print(">>> Menghitung centroid cluster 1 (c1):")
+    for i in range(len(X)):
+        u_ij_m = u[i, 0] ** m
+        print(f"  u_{i+1}1^{m} * x_{i+1} = {u[i,0]}^{m} * {X[i]} = {u_ij_m} * {X[i]} = {u_ij_m * X[i]}")
+        c1_num += u_ij_m * X[i]
+        c1_den += u_ij_m
+    c1 = c1_num / c1_den
+    print(f"  Numerator c1 = {c1_num}")
+    print(f"  Denominator c1 = {c1_den}")
+    print(f"  Centroid c1 = {c1}\n")
+
+    c2_num = np.zeros(X.shape[1])
+    c2_den = 0
+    print(">>> Menghitung centroid cluster 2 (c2):")
+    for i in range(len(X)):
+        u_ij_m = u[i, 1] ** m
+        print(f"  u_{i+1}2^{m} * x_{i+1} = {u[i,1]}^{m} * {X[i]} = {u_ij_m} * {X[i]} = {u_ij_m * X[i]}")
+        c2_num += u_ij_m * X[i]
+        c2_den += u_ij_m
+    c2 = c2_num / c2_den
+    print(f"  Numerator c2 = {c2_num}")
+    print(f"  Denominator c2 = {c2_den}")
+    print(f"  Centroid c2 = {c2}\n")
+
+    return c1, c2
+
+
+# =================== ITERASI 1 ====================
+print("===== ITERASI 1 =====\n")
+centroids_iter1 = hitung_centroid(X, u, m)
+u_iter2 = perbarui_keanggotaan(X, centroids_iter1, m)
+
+# =================== ITERASI 2 ====================
+print("\n===== ITERASI 2 =====\n")
+centroids_iter2 = hitung_centroid(X, u_iter2, m)
+u_iter3 = perbarui_keanggotaan(X, centroids_iter2, m)
+
+------------------
+
+----- stdout -----
+===== ITERASI 1 =====
+
+>>> Menghitung centroid cluster 1 (c1):
+  u_11^2 * x_1 = 0.5^2 * [1. 2.] = 0.25 * [1. 2.] = [0.25 0.5 ]
+  u_21^2 * x_2 = 0.7^2 * [2. 3.] = 0.48999999999999994 * [2. 3.] = [0.98 1.47]
+  u_31^2 * x_3 = 0.8^2 * [3. 4.] = 0.6400000000000001 * [3. 4.] = [1.92 2.56]
+  u_41^2 * x_4 = 0.7^2 * [6. 7.] = 0.48999999999999994 * [6. 7.] = [2.94 3.43]
+  u_51^2 * x_5 = 0.6^2 * [7. 8.] = 0.36 * [7. 8.] = [2.52 2.88]
+  Numerator c1 = [ 8.61 10.84]
+  Denominator c1 = 2.23
+  Centroid c1 = [3.86098655 4.86098655]
+
+>>> Menghitung centroid cluster 2 (c2):
+  u_12^2 * x_1 = 0.5^2 * [1. 2.] = 0.25 * [1. 2.] = [0.25 0.5 ]
+  u_22^2 * x_2 = 0.3^2 * [2. 3.] = 0.09 * [2. 3.] = [0.18 0.27]
+  u_32^2 * x_3 = 0.2^2 * [3. 4.] = 0.04000000000000001 * [3. 4.] = [0.12 0.16]
+  u_42^2 * x_4 = 0.3^2 * [6. 7.] = 0.09 * [6. 7.] = [0.54 0.63]
+  u_52^2 * x_5 = 0.4^2 * [7. 8.] = 0.16000000000000003 * [7. 8.] = [1.12 1.28]
+  Numerator c2 = [2.21 2.84]
+  Denominator c2 = 0.63
+  Centroid c2 = [3.50793651 4.50793651]
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-1-b5a021dec7a1>[0m in [0;36m<cell line: 0>[0;34m()[0m
+[1;32m     54[0m [0mprint[0m[0;34m([0m[0;34m"===== ITERASI 1 =====\n"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     55[0m [0mcentroids_iter1[0m [0;34m=[0m [0mhitung_centroid[0m[0;34m([0m[0mX[0m[0;34m,[0m [0mu[0m[0;34m,[0m [0mm[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 56[0;31m [0mu_iter2[0m [0;34m=[0m [0mperbarui_keanggotaan[0m[0;34m([0m[0mX[0m[0;34m,[0m [0mcentroids_iter1[0m[0;34m,[0m [0mm[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     57[0m [0;34m[0m[0m
+[1;32m     58[0m [0;31m# =================== ITERASI 2 ====================[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'perbarui_keanggotaan' is not defined
+

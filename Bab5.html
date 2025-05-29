@@ -412,7 +412,14 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kekurangannya">Kekurangannya</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja">Cara Kerja</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-impelementasi">Tahapan Impelementasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzzy-c-means">FUZZY C MEANS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-fuzzy-c-means">Pengertian Fuzzy C Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-kunci">Konsep Kunci</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Cara Kerja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-penting-fuzziness">Parameter Penting: Fuzziness</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-nya">Code nya</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means">K-Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Fuzzy C-Means</a></li>
 </ul>
 </li>
 </ul>
@@ -494,6 +501,40 @@ document.write(`
 </ol>
 <p>Dengan membandingkan nilai inertia dan silhouette score untuk berbagai nilai k, dapat ditentukan jumlah cluster optimal. Dalam kasus ini, nilai k dengan silhouette score tertinggi dianggap sebagai yang paling baik, karena menunjukkan pemisahan cluster yang jelas dan konsisten.</p>
 </section>
+<section id="fuzzy-c-means">
+<h2>FUZZY C MEANS<a class="headerlink" href="#fuzzy-c-means" title="Link to this heading">#</a></h2>
+</section>
+<section id="pengertian-fuzzy-c-means">
+<h2>Pengertian Fuzzy C Means<a class="headerlink" href="#pengertian-fuzzy-c-means" title="Link to this heading">#</a></h2>
+<p>Fuzzy C-Means adalah sebuah algoritma clustering yang bertujuan mengelompokan titik-titik data berdasarkan kemiripannya. Bedanya dengan clustering biasa seperti K-means, FCM memungkinkan satu titik data untuk menjadi anggota beberapa kelompok sekaligus tapi dengan derajat keanggotaan yang berbeda-beda antara 0 sampai 1. Ini sangat berguna untuk data yang abu-abu atau punya karakteristika mirip dengan lebih dari satu kelompok</p>
+</section>
+<section id="konsep-kunci">
+<h2>Konsep Kunci<a class="headerlink" href="#konsep-kunci" title="Link to this heading">#</a></h2>
+<p>Ada dua elemen utama yang terus diperbarui dalam FCM:</p>
+<ul class="simple">
+<li><p>Centroid: ini adalah titik pusat atau wakil dari setiap kelomook. Letaknya bukan harus titik data sungguhan, tapi hasil rata-rata tertimbang dari semua data yang cenderung masuk ke kelompok tersebut</p></li>
+<li><p>Matrik Keanggotaan: ini adalah tabel yang menunjukan seberapa mirip setiap titik data dengan setiap centroid. Setiap nilai dalam matriks ini adalah derajat keanggotaan antara 0 dan 1 dan total keanggotaan sebuah titik data ke semua kelompok selalu 1</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>Cara Kerja<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>FCM bekerja secara berulang hingga menemukan solusi yang stabil:</p>
+<ol class="arabic simple">
+<li><p>Insialisasi awal: algoritma memulai dengan matriks keanggotaan acak atau centroid awal</p></li>
+<li><p>Perhitungan centroid: menggunakan matriks keanggotaan saat ini, centroid baru dihitung. Data dengan keanggotaan tinggi ke suatu kelompok akan lebih menarik centroid kelompok tersebut.</p></li>
+<li><p>Pembaruan matriks keanggotaan: dengan centroid yang baru, setiap titik data sekarang menghitung ulang seberapa dekatnya ia dengan setiap centroid. Semakin dekat, semakin tinggi keanggotaanya ke kelompok tersebut</p></li>
+<li><p>Konvergensi: langkah 2 dan 3 diulang terus sampai centroid tidak banyak bergeser lagi/perubhaan keanggotaanya sudah sangat kecil menandakan bahwa algoritma telah menemukan kelompok yang stabil</p></li>
+</ol>
+</section>
+<section id="parameter-penting-fuzziness">
+<h2>Parameter Penting: Fuzziness<a class="headerlink" href="#parameter-penting-fuzziness" title="Link to this heading">#</a></h2>
+<p>Parameter m umumnya 2 adalah kunci dalam FCM, Ini mengontrol seberapa kabur/lunak batas antar kelompok</p>
+<ul class="simple">
+<li><p>m besar: batas kelompok menjadi lebih lunak dan keanggotaan titik data cenderung lebih merata di beberapa kelompok misalnya banyak nilai 0.5</p></li>
+<li><p>m kecil (mendekati 1): batas kelompok menjadi lebih tegas dan keanggotaan akan cenderung mendekati 0/1, mirip dengan hard clustering</p></li>
+</ul>
+<p>FCM memberikan pemahaman yang lebih kaya tentang struktur data, karena tidak memaksa setiap data untuk hanya masuk ke satu kelompok saja</p>
+</section>
 <section id="code-nya">
 <h2>Code nya<a class="headerlink" href="#code-nya" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
@@ -515,7 +556,7 @@ document.write(`
   Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
 Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/45.0 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.0/45.0 kB</span> <span class=" -Color -Color-Red">1.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.0/45.0 kB</span> <span class=" -Color -Color-Red">2.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -527,11 +568,11 @@ Successfully installed pymysql-1.1.1
   Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
 Downloading psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.3/3.0 MB</span> <span class=" -Color -Color-Red">7.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.5/3.0 MB</span> <span class=" -Color -Color-Red">14.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.9/3.0 MB</span> <span class=" -Color -Color-Red">28.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">30.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━ <span class=" -Color -Color-Green">2.6/3.0 MB</span> <span class=" -Color -Color-Red">37.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">29.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -547,7 +588,7 @@ Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.11/di
 Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: SQLAlchemy in /usr/local/lib/python3.11/dist-packages (2.0.40)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: SQLAlchemy in /usr/local/lib/python3.11/dist-packages (2.0.41)
 Requirement already satisfied: pymysql in /usr/local/lib/python3.11/dist-packages (1.1.1)
 Requirement already satisfied: greenlet&gt;=1 in /usr/local/lib/python3.11/dist-packages (from SQLAlchemy) (3.2.2)
 Requirement already satisfied: typing-extensions&gt;=4.6.0 in /usr/local/lib/python3.11/dist-packages (from SQLAlchemy) (4.13.2)
@@ -775,7 +816,7 @@ Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3
 </div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Hilangan species/labelnya</p></li>
+<li><p>Hilangkan species/labelnya</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -995,9 +1036,6 @@ Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="c1"># Misal kamu sudah punya data_remove_class dari MySQL, berupa numpy array</span>
-<span class="c1"># Contoh: data_remove_class = df.to_numpy()</span>
 
 <span class="c1"># Inisialisasi scaler</span>
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
@@ -1219,6 +1257,9 @@ Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3
 <img alt="_images/de7c7164a6b9acab9221c1b43b08bbacce750bd97cc5af7000ac6a94e3c1a5b9.png" src="_images/de7c7164a6b9acab9221c1b43b08bbacce750bd97cc5af7000ac6a94e3c1a5b9.png" />
 </div>
 </div>
+</section>
+<section id="k-means">
+<h2>K-Means<a class="headerlink" href="#k-means" title="Link to this heading">#</a></h2>
 <ol class="arabic simple" start="6">
 <li><p>Clustering dengan K = 2</p></li>
 </ol>
@@ -1773,6 +1814,700 @@ Converged at iteration 11: strict convergence.
 </div>
 </div>
 </section>
+<section id="id2">
+<h2>Fuzzy C-Means<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Menghitung centroid dan update keanggotaan</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span> <span class="c1"># Untuk memuat data Iris dan labelnya</span>
+
+<span class="c1"># --- 1. Persiapan Data Iris ---</span>
+<span class="c1"># Memuat dataset Iris dan menormalisasinya.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Persiapan Data ---&quot;</span><span class="p">)</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X_original</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span> <span class="c1"># Data Iris asli (fitur)</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>   <span class="c1"># Label sebenarnya (ground truth)</span>
+                       <span class="c1"># 0: Setosa, 1: Versicolor, 2: Virginica</span>
+
+<span class="c1"># Normalisasi Data: Penting untuk FCM agar fitur memiliki skala yang seragam.</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_original</span><span class="p">)</span> <span class="c1"># X adalah data yang sudah dinormalisasi, akan jadi input FCM</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data Iris asli (5 baris pertama):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">tabulate</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_original</span><span class="p">[:</span><span class="mi">5</span><span class="p">]),</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;psql&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Label Asli (5 data pertama):&quot;</span><span class="p">,</span> <span class="n">y_true</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data Iris setelah normalisasi (5 baris pertama):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">tabulate</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">5</span><span class="p">]),</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;psql&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bentuk data input (X): </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bentuk label asli (y_true): </span><span class="si">{</span><span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># --- 2. Parameter FCM ---</span>
+<span class="n">NUM_CLUSTERS</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># Jumlah cluster yang diinginkan (C)</span>
+<span class="n">FUZZINESS_PARAM</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># Parameter fuzziness (m). m &gt; 1, umumnya 2.0.</span>
+
+<span class="n">CONVERGENCE_TOLERANCE</span> <span class="o">=</span> <span class="mf">1e-4</span> <span class="c1"># Toleransi konvergensi (epsilon)</span>
+<span class="n">MAX_ITERATIONS</span> <span class="o">=</span> <span class="mi">100</span>       <span class="c1"># Batas iterasi maksimum</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===== PARAMETER FCM =====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah Cluster: </span><span class="si">{</span><span class="n">NUM_CLUSTERS</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parameter Fuzziness (m): </span><span class="si">{</span><span class="n">FUZZINESS_PARAM</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Toleransi Konvergensi: </span><span class="si">{</span><span class="n">CONVERGENCE_TOLERANCE</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maksimum Iterasi: </span><span class="si">{</span><span class="n">MAX_ITERATIONS</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 3. Fungsi-fungsi Inti Fuzzy C-Means (FCM) ---</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">initialize_membership_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_clusters_val</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Menginisialisasi matriks keanggotaan (U) secara acak.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># Untuk hasil yang konsisten</span>
+    <span class="n">num_data_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">U_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_data_points</span><span class="p">,</span> <span class="n">num_clusters_val</span><span class="p">)</span>
+    <span class="n">U_normalized</span> <span class="o">=</span> <span class="n">U_initial</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">U_initial</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  -&gt; Matriks Keanggotaan Awal (U) diinisialisasi.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">U_normalized</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_centroids</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">U_matrix</span><span class="p">,</span> <span class="n">fuzziness_param_val</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Menghitung pusat setiap cluster (centroid) berdasarkan matriks keanggotaan saat ini.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_data_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">num_dimensions</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">num_clusters_val</span> <span class="o">=</span> <span class="n">U_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">centroids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_clusters_val</span><span class="p">,</span> <span class="n">num_dimensions</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_clusters_val</span><span class="p">):</span>
+        <span class="n">u_ij_pow_m</span> <span class="o">=</span> <span class="n">U_matrix</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">**</span> <span class="n">fuzziness_param_val</span>
+        <span class="n">numerator_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u_ij_pow_m</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">denominator_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u_ij_pow_m</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">denominator_sum</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">centroids</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_dimensions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">centroids</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">numerator_sum</span> <span class="o">/</span> <span class="n">denominator_sum</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  -&gt; Centroid dihitung.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">centroids</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">update_membership_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">centroids_matrix</span><span class="p">,</span> <span class="n">fuzziness_param_val</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Memperbarui matriks keanggotaan (U) berdasarkan centroid yang baru.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_data_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">num_clusters_val</span> <span class="o">=</span> <span class="n">centroids_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">U_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_data_points</span><span class="p">,</span> <span class="n">num_clusters_val</span><span class="p">))</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">fuzziness_param_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_data_points</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_clusters_val</span><span class="p">):</span>
+            <span class="n">distance_to_cj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">centroids_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">distance_to_cj</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">U_new</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+                <span class="k">break</span>
+
+            <span class="n">denominator_sum_k</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_clusters_val</span><span class="p">):</span>
+                <span class="n">distance_to_ck</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">centroids_matrix</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">distance_to_ck</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">distance_to_ck</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+
+                <span class="n">ratio_power</span> <span class="o">=</span> <span class="p">(</span><span class="n">distance_to_cj</span> <span class="o">/</span> <span class="n">distance_to_ck</span><span class="p">)</span> <span class="o">**</span> <span class="n">exponent</span>
+                <span class="n">denominator_sum_k</span> <span class="o">+=</span> <span class="n">ratio_power</span>
+
+            <span class="k">if</span> <span class="n">denominator_sum_k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">U_new</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_clusters_val</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">U_new</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">denominator_sum_k</span>
+
+    <span class="n">U_normalized</span> <span class="o">=</span> <span class="n">U_new</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">U_new</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  -&gt; Matriks Keanggotaan (U) diperbarui.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">U_normalized</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_convergence</span><span class="p">(</span><span class="n">old_centroids</span><span class="p">,</span> <span class="n">new_centroids</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Memeriksa konvergensi algoritma dengan menghitung total perubahan</span>
+<span class="sd">    antara centroid lama dan centroid baru.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">total_delta</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">old_centroids</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">total_delta</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">old_centroids</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">new_centroids</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  -&gt; Perubahan centroid: </span><span class="si">{</span><span class="n">total_delta</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total_delta</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">total_delta</span>
+
+<span class="c1"># --- 4. Alur Utama Algoritma Fuzzy C-Means ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;==================== MEMULAI ALGORITMA FUZZY C-MEANS ====================</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">U_current</span> <span class="o">=</span> <span class="n">initialize_membership_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">NUM_CLUSTERS</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matriks Keanggotaan Awal (5 baris pertama):</span><span class="se">\n</span><span class="si">{</span><span class="n">U_current</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="p">:]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">centroids_old</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">has_converged</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">last_delta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="n">MAX_ITERATIONS</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_converged</span><span class="p">:</span>
+    <span class="n">iteration</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===== ITERASI </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2"> =====&quot;</span><span class="p">)</span>
+
+    <span class="n">centroids_new</span> <span class="o">=</span> <span class="n">calculate_centroids</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">U_current</span><span class="p">,</span> <span class="n">FUZZINESS_PARAM</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Centroid setelah Iterasi </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">centroids_new</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">has_converged</span><span class="p">,</span> <span class="n">last_delta</span> <span class="o">=</span> <span class="n">check_convergence</span><span class="p">(</span><span class="n">centroids_old</span><span class="p">,</span> <span class="n">centroids_new</span><span class="p">,</span> <span class="n">CONVERGENCE_TOLERANCE</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_converged</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt; **KONVERGENSI TERCAPAI!** Perubahan centroid di bawah toleransi.&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+
+    <span class="n">centroids_old</span> <span class="o">=</span> <span class="n">centroids_new</span>
+    <span class="n">U_current</span> <span class="o">=</span> <span class="n">update_membership_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">centroids_new</span><span class="p">,</span> <span class="n">FUZZINESS_PARAM</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">U_current</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matriks Keanggotaan (U) setelah Iterasi </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2"> (5 baris pertama):</span><span class="se">\n</span><span class="si">{</span><span class="n">U_current</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="p">:]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matriks Keanggotaan (U) setelah Iterasi </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">U_current</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 5. Hasil Akhir Clustering Fuzzy C-Means ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==================== HASIL AKHIR CLUSTERING FUZZY C-MEANS ====================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah Iterasi yang Berjalan: </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Toleransi Konvergensi Epsilon: </span><span class="si">{</span><span class="n">CONVERGENCE_TOLERANCE</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Perubahan Centroid Terakhir: </span><span class="si">{</span><span class="n">last_delta</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Centroid Akhir:</span><span class="se">\n</span><span class="si">{</span><span class="n">centroids_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Matriks Keanggotaan Akhir (U) (5 baris pertama):</span><span class="se">\n</span><span class="si">{</span><span class="n">U_current</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Interpretasi Hasil (Hard Assignment - Opsional) ---</span>
+<span class="c1"># Untuk visualisasi atau pemahaman yang lebih mudah, kita bisa &quot;mengubah&quot; hasil fuzzy</span>
+<span class="c1"># menjadi penugasan cluster yang &quot;keras&quot; (hard assignment).</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Penugasan Cluster (Hard Assignment - Untuk Interpretasi) ---&quot;</span><span class="p">)</span>
+<span class="n">cluster_assignment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">U_current</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Mengambil indeks kolom dengan nilai tertinggi di setiap baris</span>
+
+<span class="c1"># Tampilkan penugasan untuk beberapa data poin</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))):</span> <span class="c1"># Tampilkan 10 data poin pertama</span>
+    <span class="c1"># Menampilkan data asli dan normalisasi untuk perbandingan</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data Asli ke-</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">X_original</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">) -&gt; Normalisasi (</span><span class="si">{</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">) -&gt; Paling condong ke Cluster </span><span class="si">{</span><span class="n">cluster_assignment</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># --- 6. Menghitung Akurasi Clustering (OUTPUT SESUAI PERMINTAAN) ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==================== MENGHITUNG AKURASI CLUSTERING ====================&quot;</span><span class="p">)</span>
+
+<span class="c1"># Langkah 1: Dapatkan hasil hard assignment (cluster yang diprediksi)</span>
+<span class="n">predicted_clusters</span> <span class="o">=</span> <span class="n">cluster_assignment</span>
+
+<span class="c1"># Langkah 2: Lakukan pemetaan cluster ke label asli (ground truth)</span>
+<span class="n">cluster_to_label_map</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">cluster_labels_collections</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_CLUSTERS</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">predicted_clusters</span><span class="p">)):</span>
+    <span class="n">cluster_id</span> <span class="o">=</span> <span class="n">predicted_clusters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">true_label</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">cluster_labels_collections</span><span class="p">[</span><span class="n">cluster_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">true_label</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">cluster_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_CLUSTERS</span><span class="p">):</span>
+    <span class="n">labels_in_cluster</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cluster_labels_collections</span><span class="p">[</span><span class="n">cluster_id</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels_in_cluster</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">cluster_to_label_map</span><span class="p">[</span><span class="n">cluster_id</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">continue</span>
+
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">labels_in_cluster</span><span class="p">)</span>
+    <span class="n">most_common_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="n">cluster_to_label_map</span><span class="p">[</span><span class="n">cluster_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">most_common_label</span>
+
+<span class="c1"># Langkah 3: Terapkan pemetaan dan hitung akurasi</span>
+<span class="n">correct_predictions</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">predicted_clusters</span><span class="p">)):</span>
+    <span class="n">predicted_cluster_id</span> <span class="o">=</span> <span class="n">predicted_clusters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">true_label</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">mapped_predicted_label</span> <span class="o">=</span> <span class="n">cluster_to_label_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">predicted_cluster_id</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mapped_predicted_label</span> <span class="o">==</span> <span class="n">true_label</span><span class="p">:</span>
+        <span class="n">correct_predictions</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">total_data_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct_predictions</span> <span class="o">/</span> <span class="n">total_data_points</span>
+
+<span class="c1"># --- Output Akurasi Sesuai Format yang Diminta ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Data Poin: </span><span class="si">{</span><span class="n">total_data_points</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi Benar: </span><span class="si">{</span><span class="n">correct_predictions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi Clustering: </span><span class="si">{</span><span class="n">accuracy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">FCM dan Evaluasi Akurasi Selesai!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Persiapan Data ---
+Data Iris asli (5 baris pertama):
+ +----+-----+-----+-----+-----+
+|    |   0 |   1 |   2 |   3 |
+|----+-----+-----+-----+-----|
+|  0 | 5.1 | 3.5 | 1.4 | 0.2 |
+|  1 | 4.9 | 3   | 1.4 | 0.2 |
+|  2 | 4.7 | 3.2 | 1.3 | 0.2 |
+|  3 | 4.6 | 3.1 | 1.5 | 0.2 |
+|  4 | 5   | 3.6 | 1.4 | 0.2 |
++----+-----+-----+-----+-----+
+
+Label Asli (5 data pertama): [0 0 0 0 0]
+
+Data Iris setelah normalisasi (5 baris pertama):
+ +----+-----------+------------+----------+----------+
+|    |         0 |          1 |        2 |        3 |
+|----+-----------+------------+----------+----------|
+|  0 | -0.900681 |  1.019     | -1.34023 | -1.31544 |
+|  1 | -1.14302  | -0.131979  | -1.34023 | -1.31544 |
+|  2 | -1.38535  |  0.328414  | -1.39706 | -1.31544 |
+|  3 | -1.50652  |  0.0982173 | -1.28339 | -1.31544 |
+|  4 | -1.02185  |  1.2492    | -1.34023 | -1.31544 |
++----+-----------+------------+----------+----------+
+
+Bentuk data input (X): (150, 4)
+
+Bentuk label asli (y_true): (150,)
+
+===== PARAMETER FCM =====
+Jumlah Cluster: 3
+Parameter Fuzziness (m): 2.0
+Toleransi Konvergensi: 0.0001
+Maksimum Iterasi: 100
+
+==================== MEMULAI ALGORITMA FUZZY C-MEANS ====================
+
+  -&gt; Matriks Keanggotaan Awal (U) diinisialisasi.
+Matriks Keanggotaan Awal (5 baris pertama):
+[[0.18205878 0.46212909 0.35581214]
+ [0.65738127 0.17132261 0.17129612]
+ [0.03807826 0.56784481 0.39407693]
+ [0.41686469 0.01211874 0.57101657]
+ [0.67865488 0.173111   0.14823412]]
+
+
+===== ITERASI 1 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 1:
+[[ 0.18015492 -0.07895799  0.14860201  0.15783118]
+ [ 0.04673142 -0.00414338  0.05866575  0.04549694]
+ [-0.21994478  0.10763652 -0.23597937 -0.23185324]]
+
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 1 (5 baris pertama):
+[[0.2494674  0.29314748 0.45738512]
+ [0.2480877  0.29068336 0.46122895]
+ [0.25021306 0.29279211 0.45699483]
+ [0.25153709 0.29380514 0.45465777]
+ [0.25542594 0.29749592 0.44707814]]
+
+
+===== ITERASI 2 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 2:
+[[ 0.32184306 -0.1805122   0.37013276  0.35227467]
+ [ 0.09168238 -0.07223049  0.13191807  0.12638803]
+ [-0.53229799  0.3315663  -0.64475067 -0.61969803]]
+
+  -&gt; Perubahan centroid: 1.16078266
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 2 (5 baris pertama):
+[[0.12775305 0.17188507 0.70036187]
+ [0.13495836 0.18358899 0.68145265]
+ [0.13423824 0.18029596 0.6854658 ]
+ [0.14174222 0.19003133 0.66822644]
+ [0.14318196 0.1891916  0.66762645]]
+
+
+===== ITERASI 3 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 3:
+[[ 0.54842153 -0.29010549  0.62566069  0.60271587]
+ [ 0.19164575 -0.28365576  0.33878461  0.31553709]
+ [-0.91807092  0.66119838 -1.14719383 -1.10547294]]
+
+  -&gt; Perubahan centroid: 1.66616314
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 3 (5 baris pertama):
+[[0.01769137 0.02400847 0.95830016]
+ [0.06197241 0.08874478 0.84928282]
+ [0.03367654 0.04692638 0.91939709]
+ [0.05399274 0.07589992 0.87010734]
+ [0.03267689 0.04348979 0.92383332]]
+
+
+===== ITERASI 4 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 4:
+[[ 0.75729236 -0.27163118  0.79720003  0.80449727]
+ [ 0.18693994 -0.48490762  0.42456647  0.36461684]
+ [-1.00775384  0.78085939 -1.26824864 -1.22369912]]
+
+  -&gt; Perubahan centroid: 0.78787712
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 4 (5 baris pertama):
+[[0.00597923 0.00858945 0.98543133]
+ [0.05782805 0.09374129 0.84843067]
+ [0.02448582 0.0376478  0.93786639]
+ [0.04536425 0.07140931 0.88322644]
+ [0.01543982 0.02157635 0.96298383]]
+
+
+===== ITERASI 5 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 5:
+[[ 0.91520067 -0.1385193   0.89030625  0.92401051]
+ [ 0.09740256 -0.618484    0.38934005  0.30687318]
+ [-1.01118785  0.81254576 -1.27890281 -1.2338868 ]]
+
+  -&gt; Perubahan centroid: 0.46570825
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 5 (5 baris pertama):
+[[0.00441004 0.00693579 0.98865417]
+ [0.05438303 0.10457231 0.84104467]
+ [0.02344094 0.04141778 0.93514128]
+ [0.04276529 0.07864364 0.87859107]
+ [0.01243955 0.01880568 0.96875477]]
+
+
+===== ITERASI 6 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 6:
+[[ 1.01131803 -0.03539321  0.94138468  0.99238841]
+ [ 0.02395985 -0.71827716  0.35425733  0.26436111]
+ [-1.00968312  0.82685112 -1.28231656 -1.23684492]]
+
+  -&gt; Perubahan centroid: 0.31548582
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 6 (5 baris pertama):
+[[0.00377473 0.00624999 0.98997528]
+ [0.0521259  0.11189493 0.83597917]
+ [0.02288477 0.04413232 0.93298291]
+ [0.04123853 0.08378506 0.87497641]
+ [0.01119343 0.01767655 0.97113001]]
+
+
+===== ITERASI 7 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 7:
+[[ 1.05271844  0.01260556  0.96254383  1.02035291]
+ [-0.01134712 -0.77287087  0.33699174  0.24620761]
+ [-1.008006    0.83600557 -1.28397448 -1.23824254]]
+
+  -&gt; Perubahan centroid: 0.15167211
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 7 (5 baris pertama):
+[[0.00344072 0.00579579 0.99076349]
+ [0.05148125 0.11567397 0.83284478]
+ [0.02285623 0.04564498 0.93149879]
+ [0.04086653 0.08649856 0.87263492]
+ [0.0105537  0.01689913 0.97254717]]
+
+
+===== ITERASI 8 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 8:
+[[ 1.06666802  0.03023271  0.96951309  1.02913695]
+ [-0.02570045 -0.7978924   0.32986435  0.23919126]
+ [-1.00658186  0.84120516 -1.28446324 -1.23859456]]
+
+  -&gt; Perubahan centroid: 0.06107579
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 8 (5 baris pertama):
+[[0.00327713 0.00554156 0.99118131]
+ [0.05146351 0.11743897 0.83109752]
+ [0.02299524 0.04643945 0.93056531]
+ [0.04092608 0.08781551 0.8712584 ]
+ [0.01025287 0.01646119 0.97328594]]
+
+
+===== ITERASI 9 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 9:
+[[ 1.07040342  0.03598237  0.97122495  1.03119672]
+ [-0.03174789 -0.80881614  0.32677023  0.23613266]
+ [-1.00572028  0.84383716 -1.28458578 -1.23864684]]
+
+  -&gt; Perubahan centroid: 0.02335594
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 9 (5 baris pertama):
+[[0.00320192 0.00541609 0.99138199]
+ [0.05156944 0.11826932 0.83016124]
+ [0.02311806 0.04684149 0.93004045]
+ [0.04104647 0.08845229 0.87050123]
+ [0.01012023 0.0162466  0.97363317]]
+
+
+===== ITERASI 10 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 10:
+[[ 1.07092767  0.037628    0.97133109  1.03128832]
+ [-0.03460262 -0.8136931   0.32523109  0.23456073]
+ [-1.00527289  0.84511521 -1.28462194 -1.23864862]]
+
+  -&gt; Perubahan centroid: 0.00915154
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 10 (5 baris pertama):
+[[0.00316791 0.0053568  0.99147529]
+ [0.05166315 0.11868036 0.82965649]
+ [0.02319667 0.04704525 0.92975808]
+ [0.04113793 0.08877091 0.87009116]
+ [0.01006267 0.01614645 0.97379088]]
+
+
+===== ITERASI 11 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 11:
+[[ 1.07062836  0.03795517  0.97106733  1.03094055]
+ [-0.03611224 -0.81599922  0.32436799  0.23365369]
+ [-1.00504871  0.84574215 -1.28463625 -1.23864642]]
+
+  -&gt; Perubahan centroid: 0.00431553
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 11 (5 baris pertama):
+[[0.0031522  0.00532857 0.99151922]
+ [0.05172661 0.11889729 0.8293761 ]
+ [0.02324298 0.04715219 0.92960483]
+ [0.04119638 0.0889391  0.86986452]
+ [0.0100372  0.01609953 0.97386327]]
+
+
+===== ITERASI 12 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 12:
+[[ 1.07022689  0.03790588  0.97079145  1.03058539]
+ [-0.03697796 -0.81716827  0.32384861  0.23309874]
+ [-1.00493374  0.84606261 -1.28464336 -1.23864543]]
+
+  -&gt; Perubahan centroid: 0.00258670
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 12 (5 baris pertama):
+[[0.0031446  0.00531458 0.99154082]
+ [0.05176664 0.11901885 0.8292145 ]
+ [0.02327    0.04721114 0.92951886]
+ [0.04123215 0.08903297 0.86973488]
+ [0.01002537 0.01607672 0.97389791]]
+
+
+===== ITERASI 13 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 13:
+[[ 1.06990223  0.0377821   0.97058144  1.03031556]
+ [-0.03749886 -0.81780109  0.32352557  0.23275087]
+ [-1.00487194  0.8462354  -1.28464735 -1.23864524]]
+
+  -&gt; Perubahan centroid: 0.00161822
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 13 (5 baris pertama):
+[[0.00314067 0.00530726 0.99155207]
+ [0.05179148 0.11909021 0.8291183 ]
+ [0.02328601 0.04724516 0.92946883]
+ [0.04125396 0.08908783 0.86965821]
+ [0.0100195  0.016065   0.9739155 ]]
+
+
+===== ITERASI 14 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 14:
+[[ 1.06967341  0.03767015  0.97043711  1.03012972]
+ [-0.03782038 -0.8181622   0.32332197  0.23253094]
+ [-1.00483702  0.84633341 -1.28464972 -1.23864534]]
+
+  -&gt; Perubahan centroid: 0.00101971
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 14 (5 baris pertama):
+[[0.00313852 0.00530321 0.99155827]
+ [0.0518069  0.11913345 0.82905965]
+ [0.02329567 0.04726551 0.92943881]
+ [0.04126737 0.08912095 0.86961168]
+ [0.01001637 0.01605862 0.97392501]]
+
+
+===== ITERASI 15 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 15:
+[[ 1.06952092  0.03758706  0.97034212  1.03000708]
+ [-0.03802139 -0.8183762   0.32319308  0.23239156]
+ [-1.00481649  0.84639125 -1.28465117 -1.23864549]]
+
+  -&gt; Perubahan centroid: 0.00064389
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 15 (5 baris pertama):
+[[0.00313728 0.00530086 0.99156187]
+ [0.05181652 0.11916015 0.82902333]
+ [0.02330161 0.04727797 0.92942042]
+ [0.04127568 0.08914136 0.86958296]
+ [0.01001461 0.01605496 0.97393042]]
+
+
+===== ITERASI 16 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 16:
+[[ 1.06942191  0.03753002  0.97028086  1.02992778]
+ [-0.03814783 -0.81850624  0.3231114   0.23230324]
+ [-1.00480405  0.84642634 -1.28465207 -1.23864561]]
+
+  -&gt; Perubahan centroid: 0.00040686
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 16 (5 baris pertama):
+[[0.00313653 0.00529945 0.99156402]
+ [0.05182254 0.11917682 0.82900064]
+ [0.02330529 0.04728571 0.929409  ]
+ [0.04128087 0.08915409 0.86956505]
+ [0.01001357 0.0160528  0.97393363]]
+
+
+===== ITERASI 17 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 17:
+[[ 1.06935845  0.0374923   0.97024174  1.02987705]
+ [-0.03822759 -0.81858652  0.32305965  0.23224729]
+ [-1.00479639  0.846448   -1.28465263 -1.2386457 ]]
+
+  -&gt; Perubahan centroid: 0.00025716
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 17 (5 baris pertama):
+[[0.00313608 0.00529858 0.99156534]
+ [0.05182633 0.1191873  0.82898637]
+ [0.0233076  0.04729056 0.92940185]
+ [0.04128412 0.08916207 0.8695538 ]
+ [0.01001294 0.01605147 0.97393559]]
+
+
+===== ITERASI 18 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 18:
+[[ 1.06931805  0.03746785  0.97021689  1.02984478]
+ [-0.03827797 -0.81863657  0.32302689  0.23221187]
+ [-1.00479161  0.84646151 -1.28465298 -1.23864576]]
+
+  -&gt; Perubahan centroid: 0.00016255
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 18 (5 baris pertama):
+[[0.00313579 0.00529805 0.99156616]
+ [0.05182872 0.1191939  0.82897739]
+ [0.02330904 0.04729361 0.92939735]
+ [0.04128617 0.08916711 0.86954672]
+ [0.01001255 0.01605066 0.9739368 ]]
+
+
+===== ITERASI 19 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 19:
+[[ 1.06929241  0.03745216  0.97020113  1.0298243 ]
+ [-0.03830981 -0.81866794  0.32300615  0.23218945]
+ [-1.00478862  0.84646999 -1.2846532  -1.2386458 ]]
+
+  -&gt; Perubahan centroid: 0.00010276
+  -&gt; Matriks Keanggotaan (U) diperbarui.
+Matriks Keanggotaan (U) setelah Iterasi 19 (5 baris pertama):
+[[0.00313562 0.00529771 0.99156667]
+ [0.05183022 0.11919806 0.82897171]
+ [0.02330996 0.04729553 0.92939452]
+ [0.04128747 0.08917028 0.86954225]
+ [0.0100123  0.01605015 0.97393755]]
+
+
+===== ITERASI 20 =====
+  -&gt; Centroid dihitung.
+
+Centroid setelah Iterasi 20:
+[[ 1.06927618  0.03744217  0.97019116  1.02981133]
+ [-0.03832994 -0.81868768  0.32299303  0.23217528]
+ [-1.00478673  0.84647532 -1.28465334 -1.23864583]]
+
+  -&gt; Perubahan centroid: 0.00006496
+
+&gt;&gt;&gt; **KONVERGENSI TERCAPAI!** Perubahan centroid di bawah toleransi.
+
+==================== HASIL AKHIR CLUSTERING FUZZY C-MEANS ====================
+Jumlah Iterasi yang Berjalan: 20
+Toleransi Konvergensi Epsilon: 0.0001
+Perubahan Centroid Terakhir: 0.00006496
+
+Centroid Akhir:
+[[ 1.06927618  0.03744217  0.97019116  1.02981133]
+ [-0.03832994 -0.81868768  0.32299303  0.23217528]
+ [-1.00478673  0.84647532 -1.28465334 -1.23864583]]
+
+Matriks Keanggotaan Akhir (U) (5 baris pertama):
+[[0.00313562 0.00529771 0.99156667]
+ [0.05183022 0.11919806 0.82897171]
+ [0.02330996 0.04729553 0.92939452]
+ [0.04128747 0.08917028 0.86954225]
+ [0.0100123  0.01605015 0.97393755]]
+
+--- Penugasan Cluster (Hard Assignment - Untuk Interpretasi) ---
+Data Asli ke-1 ([5.1 3.5 1.4 0.2]) -&gt; Normalisasi ([-0.9   1.02 -1.34 -1.32]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-2 ([4.9 3.  1.4 0.2]) -&gt; Normalisasi ([-1.14 -0.13 -1.34 -1.32]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-3 ([4.7 3.2 1.3 0.2]) -&gt; Normalisasi ([-1.39  0.33 -1.4  -1.32]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-4 ([4.6 3.1 1.5 0.2]) -&gt; Normalisasi ([-1.51  0.1  -1.28 -1.32]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-5 ([5.  3.6 1.4 0.2]) -&gt; Normalisasi ([-1.02  1.25 -1.34 -1.32]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-6 ([5.4 3.9 1.7 0.4]) -&gt; Normalisasi ([-0.54  1.94 -1.17 -1.05]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-7 ([4.6 3.4 1.4 0.3]) -&gt; Normalisasi ([-1.51  0.79 -1.34 -1.18]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-8 ([5.  3.4 1.5 0.2]) -&gt; Normalisasi ([-1.02  0.79 -1.28 -1.32]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-9 ([4.4 2.9 1.4 0.2]) -&gt; Normalisasi ([-1.75 -0.36 -1.34 -1.32]) -&gt; Paling condong ke Cluster 3
+Data Asli ke-10 ([4.9 3.1 1.5 0.1]) -&gt; Normalisasi ([-1.14  0.1  -1.28 -1.45]) -&gt; Paling condong ke Cluster 3
+
+==================== MENGHITUNG AKURASI CLUSTERING ====================
+Total Data Poin: 150
+Prediksi Benar: 126
+Akurasi Clustering: 84.00%
+
+FCM dan Evaluasi Akurasi Selesai!
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Menghitung silhouete score</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">silhouette_score</span><span class="p">,</span> <span class="n">silhouette_samples</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cm</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==================== SILHOUETTE SCORE DAN VISUALISASI ====================&quot;</span><span class="p">)</span>
+
+<span class="c1"># 1. Hitung Silhouette Score dari hasil hard assignment</span>
+<span class="n">sil_score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">predicted_clusters</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Silhouette Score (rata-rata): </span><span class="si">{</span><span class="n">sil_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2. Hitung semua nilai silhouette untuk masing-masing sample</span>
+<span class="n">sample_silhouette_values</span> <span class="o">=</span> <span class="n">silhouette_samples</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">predicted_clusters</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================== SILHOUETTE SCORE DAN VISUALISASI ====================
+Silhouette Score (rata-rata): 0.4584
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1836,7 +2571,14 @@ Converged at iteration 11: strict convergence.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kekurangannya">Kekurangannya</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja">Cara Kerja</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-impelementasi">Tahapan Impelementasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzzy-c-means">FUZZY C MEANS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-fuzzy-c-means">Pengertian Fuzzy C Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-kunci">Konsep Kunci</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Cara Kerja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-penting-fuzziness">Parameter Penting: Fuzziness</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-nya">Code nya</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means">K-Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Fuzzy C-Means</a></li>
 </ul>
 </li>
 </ul>
