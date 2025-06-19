@@ -1,10 +1,17 @@
 Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/usr/local/lib/python3.11/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
   File "/usr/local/lib/python3.11/dist-packages/nbclient/client.py", line 1319, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+  File "/usr/local/lib/python3.11/dist-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
     return loop.run_until_complete(inner)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/usr/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
@@ -18,60 +25,62 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from scipy.stats import norm
-import numpy as np
+import pymysql
+import pandas as pd
+from tabulate import tabulate
 
-features = ["sepal length", "sepal width", "petal length", "petal width"]
+MYSQL_HOST = "mysql-3d9be5d4-irismysqll.g.aivencloud.com"
+MYSQL_PORT = 28758  # Aiven MySQL biasanya menggunakan port 25060
+MYSQL_DB = "defaultdb"  # Ganti dengan nama database Anda
+MYSQL_USER = "avnadmin"  # Username dari Aiven.io
+MYSQL_PASS = "AVNS_9SRQX7luHCPCP1wxyhh"  # Ganti dengan password dari Aiven.io
 
-# Hitung prior probability tiap kelas
-priors = {}
-total_data = len(combined_df)
+try:
+    # Membuat koneksi ke MySQL
+    conn = pymysql.connect(
+        host=MYSQL_HOST,
+        port=MYSQL_PORT,
+        user=MYSQL_USER,
+        password=MYSQL_PASS,
+        database=MYSQL_DB,
+        ssl={'ssl': {}},  # Aiven.io membutuhkan koneksi SSL
+    )
+    cur = conn.cursor()
 
-for c in classes:
-    priors[c] = len(combined_df[combined_df["Class"] == c]) / total_data
+    # Menjalankan query (Ganti 'your_table' dengan nama tabel yang benar)
+    cur.execute("SELECT * FROM defaultdb.irissql;")
+    rows = cur.fetchall()
 
-for idx, row in combined_df.iterrows():
-    class_label = row["Class"]
-    data_values = row[features].values
+    # Mengambil nama kolom
+    col_names = [desc[0] for desc in cur.description]
 
-    likelihoods = {}
+    # Menampilkan hasil dalam bentuk tabel
+    df = pd.DataFrame(rows, columns=col_names)
+    print(tabulate(df, headers="keys", tablefmt="psql"))
 
-    for c in classes:
-        likelihoods[c] = []
-        subset = combined_df[combined_df["Class"] == c]
+except Exception as e:
+    print("Error:", e)
 
-        for feature in features:
-            mean = subset[feature].mean()
-            std_dev = subset[feature].std()  # Pakai std() langsung biar gak perlu akar
-
-            if std_dev == 0:
-                likelihood = 1  # Hindari NaN kalau std_dev nol
-            else:
-                likelihood = norm.pdf(row[feature], mean, std_dev)
-
-            likelihoods[c].append(likelihood)
-
-        # Kalikan semua likelihood dalam satu kelas + dikali prior
-        likelihoods[c] = np.prod(likelihoods[c]) * priors[c]
-
-    # Debugging: Cek likelihood tiap kelas sebelum menentukan prediksi
-    print(f"Data {idx+1}: class = {class_label}")
-    print(f"data column = {data_values}")
-    print(f"Likelihoods: {likelihoods}\n")
-
-
-
+finally:
+    # Menutup koneksi
+    if cur:
+        cur.close()
+    if conn:
+        conn.close()
 ------------------
 
+----- stdout -----
+Error: (2003, "Can't connect to MySQL server on 'mysql-3d9be5d4-irismysqll.g.aivencloud.com' ([Errno -2] Name or service not known)")
+------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-9-922626870e31>[0m in [0;36m<cell line: 0>[0;34m()[0m
-[1;32m      8[0m [0mtotal_data[0m [0;34m=[0m [0mlen[0m[0;34m([0m[0mcombined_df[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      9[0m [0;34m[0m[0m
-[0;32m---> 10[0;31m [0;32mfor[0m [0mc[0m [0;32min[0m [0mclasses[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     11[0m     [0mpriors[0m[0;34m[[0m[0mc[0m[0;34m][0m [0;34m=[0m [0mlen[0m[0;34m([0m[0mcombined_df[0m[0;34m[[0m[0mcombined_df[0m[0;34m[[0m[0;34m"Class"[0m[0;34m][0m [0;34m==[0m [0mc[0m[0;34m][0m[0;34m)[0m [0;34m/[0m [0mtotal_data[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     12[0m [0;34m[0m[0m
+[0;32m/tmp/ipython-input-4-2656296933.py[0m in [0;36m<cell line: 0>[0;34m()[0m
+[1;32m     37[0m [0;32mfinally[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     38[0m     [0;31m# Menutup koneksi[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 39[0;31m     [0;32mif[0m [0mcur[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     40[0m         [0mcur[0m[0;34m.[0m[0mclose[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     41[0m     [0;32mif[0m [0mconn[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNameError[0m: name 'classes' is not defined
+[0;31mNameError[0m: name 'cur' is not defined
 
