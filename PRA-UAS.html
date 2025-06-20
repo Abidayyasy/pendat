@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'PRA-UAS';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="PRA_UAS.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="UAS.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -210,6 +210,10 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="Bab5.html">K-MEANS CLUSTERING</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Bab6-Bining.html">BINING(DISCRETIZER)</a></li>
+
+
 
 </ul>
 
@@ -418,14 +422,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <p>PRA UAS</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">ucimlrepo</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ucimlrepo in /usr/local/lib/python3.11/dist-packages (0.0.7)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ucimlrepo
+  Downloading ucimlrepo-0.0.7-py3-none-any.whl.metadata (5.5 kB)
 Requirement already satisfied: pandas&gt;=1.0.0 in /usr/local/lib/python3.11/dist-packages (from ucimlrepo) (2.2.2)
 Requirement already satisfied: certifi&gt;=2020.12.5 in /usr/local/lib/python3.11/dist-packages (from ucimlrepo) (2025.6.15)
 Requirement already satisfied: numpy&gt;=1.23.2 in /usr/local/lib/python3.11/dist-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2.0.2)
@@ -433,6 +439,13 @@ Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/pytho
 Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.11/dist-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2025.2)
 Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.11/dist-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2025.2)
 Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.0.0-&gt;ucimlrepo) (1.17.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading ucimlrepo-0.0.7-py3-none-any.whl (8.0 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: ucimlrepo
+Successfully installed ucimlrepo-0.0.7
 </pre></div>
 </div>
 </div>
@@ -694,7 +707,7 @@ Name: count, dtype: int64
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="PRA_UAS.html"
+       href="UAS.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
