@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Pendat</title>
+    <title>UAS &#8212; Pendat</title>
   
   
   
@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'UAS';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="PRA UAS" href="PRA-UAS.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +123,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -179,7 +178,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bab1.html">BAB 1 - DATA MINING</a></li>
 
 
@@ -217,6 +216,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="PRA-UAS.html">PRA UAS</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">UAS</a></li>
 </ul>
 
     </div>
@@ -389,9 +389,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -402,19 +400,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>UAS</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -424,7 +414,1229 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section id="uas">
+<h1>UAS<a class="headerlink" href="#uas" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>DATA UNDERSTANDING</p></li>
+</ol>
+<p>Dataset yang digunakan dalam analisis ini adalah Breast Cancer Wisconsin (Original) yang berasal dari UCI Machine Learning Repository. Dataset ini berisi hasil observasi sitologi sel payudara yang dikumpulkan untuk membantu diagnosis kanker payudara, apakah bersifat jinak (benign) atau ganas (malignant).</p>
+<p>Terdapat total 699 sampel pada dataset ini, dengan masing-masing sampel direpresentasikan oleh 9 fitur numerik hasil pemeriksaan mikroskopis. Fitur-fitur tersebut adalah Clump Thickness, Uniformity of Cell Size, Uniformity of Cell Shape, Marginal Adhesion, Single Epithelial Cell Size, Bare Nuclei, Bland Chromatin, Normal Nucleoli, dan Mitoses. Semua fitur memiliki rentang nilai antara 1 hingga 10, di mana nilai yang lebih tinggi umumnya menunjukkan potensi abnormalitas sel yang lebih besar.</p>
+<p>Selain itu, terdapat satu kolom target yaitu Class, yang merepresentasikan hasil diagnosis medis. Kelas 2 menunjukkan kondisi benign (tidak berbahaya), sedangkan kelas 4 menunjukkan kondisi malignant (berbahaya atau kanker ganas). Dataset ini bersifat multivariate dan bertujuan untuk menyelesaikan masalah klasifikasi biner.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">ucimlrepo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ucimlrepo in /usr/local/lib/python3.11/dist-packages (0.0.7)
+Requirement already satisfied: pandas&gt;=1.0.0 in /usr/local/lib/python3.11/dist-packages (from ucimlrepo) (2.2.2)
+Requirement already satisfied: certifi&gt;=2020.12.5 in /usr/local/lib/python3.11/dist-packages (from ucimlrepo) (2025.6.15)
+Requirement already satisfied: numpy&gt;=1.23.2 in /usr/local/lib/python3.11/dist-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2.0.2)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.11/dist-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.11/dist-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.11/dist-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2025.2)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.0.0-&gt;ucimlrepo) (1.17.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ucimlrepo</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_ucirepo</span>
+
+<span class="c1"># fetch dataset</span>
+<span class="n">breast_cancer_wisconsin_original</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># data (as pandas dataframes)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">breast_cancer_wisconsin_original</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">breast_cancer_wisconsin_original</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span>
+
+<span class="c1"># metadata</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">breast_cancer_wisconsin_original</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+
+<span class="c1"># variable information</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">breast_cancer_wisconsin_original</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;uci_id&#39;: 15, &#39;name&#39;: &#39;Breast Cancer Wisconsin (Original)&#39;, &#39;repository_url&#39;: &#39;https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original&#39;, &#39;data_url&#39;: &#39;https://archive.ics.uci.edu/static/public/15/data.csv&#39;, &#39;abstract&#39;: &#39;Original Wisconsin Breast Cancer Database&#39;, &#39;area&#39;: &#39;Health and Medicine&#39;, &#39;tasks&#39;: [&#39;Classification&#39;], &#39;characteristics&#39;: [&#39;Multivariate&#39;], &#39;num_instances&#39;: 699, &#39;num_features&#39;: 9, &#39;feature_types&#39;: [&#39;Integer&#39;], &#39;demographics&#39;: [], &#39;target_col&#39;: [&#39;Class&#39;], &#39;index_col&#39;: [&#39;Sample_code_number&#39;], &#39;has_missing_values&#39;: &#39;yes&#39;, &#39;missing_values_symbol&#39;: &#39;NaN&#39;, &#39;year_of_dataset_creation&#39;: 1990, &#39;last_updated&#39;: &#39;Sun Mar 10 2024&#39;, &#39;dataset_doi&#39;: &#39;10.24432/C5HP4Z&#39;, &#39;creators&#39;: [&#39;WIlliam Wolberg&#39;], &#39;intro_paper&#39;: None, &#39;additional_info&#39;: {&#39;summary&#39;: &quot;Samples arrive periodically as Dr. Wolberg reports his clinical cases. The database therefore reflects this chronological grouping of the data. This grouping information appears immediately below, having been removed from the data itself:\r\n\r\nGroup 1: 367 instances (January 1989)\r\nGroup 2:  70 instances (October 1989)\r\nGroup 3:  31 instances (February 1990)\r\nGroup 4:  17 instances (April 1990)\r\nGroup 5:  48 instances (August 1990)\r\nGroup 6:  49 instances (Updated January 1991)\r\nGroup 7:  31 instances (June 1991)\r\nGroup 8:  86 instances (November 1991)\r\n-----------------------------------------\r\nTotal:   699 points (as of the donated datbase on 15 July 1992)\r\n\r\nNote that the results summarized above in Past Usage refer to a dataset of size 369, while Group 1 has only 367 instances.  This is because it originally contained 369 instances; 2 were removed.  The following statements summarizes changes to the original Group 1&#39;s set of data:\r\n\r\n#####  Group 1 : 367 points: 200B 167M (January 1989)\r\n\r\n#####  Revised Jan 10, 1991: Replaced zero bare nuclei in 1080185 &amp; 1187805\r\n\r\n#####  Revised Nov 22,1991: Removed 765878,4,5,9,7,10,10,10,3,8,1 no record\r\n#####                  : Removed 484201,2,7,8,8,4,3,10,3,4,1 zero epithelial\r\n#####                  : Changed 0 to 1 in field 6 of sample 1219406\r\n#####                  : Changed 0 to 1 in field 8 of following sample:\r\n#####                  : 1182404,2,3,1,1,1,2,0,1,1,1&quot;, &#39;purpose&#39;: None, &#39;funded_by&#39;: None, &#39;instances_represent&#39;: None, &#39;recommended_data_splits&#39;: None, &#39;sensitive_data&#39;: None, &#39;preprocessing_description&#39;: None, &#39;variable_info&#39;: &#39;1. Sample code number:            id number\r\n2. Clump Thickness:               1 - 10\r\n3. Uniformity of Cell Size:       1 - 10\r\n4. Uniformity of Cell Shape:      1 - 10\r\n5. Marginal Adhesion:             1 - 10\r\n6. Single Epithelial Cell Size:   1 - 10\r\n7. Bare Nuclei:                   1 - 10\r\n8. Bland Chromatin:               1 - 10\r\n9. Normal Nucleoli:               1 - 10\r\n10. Mitoses:                       1 - 10\r\n11. Class:                        (2 for benign, 4 for malignant)&#39;, &#39;citation&#39;: &#39;This breast cancer databases was obtained from the University of Wisconsin Hospitals, Madison from Dr. William H. Wolberg.  If you publish results when using this database, then please include this information in your acknowledgements.  Also, please cite one or more of:\n1. O. L. Mangasarian and W. H. Wolberg: &quot;Cancer diagnosis via linear programming&quot;, SIAM News, Volume 23, Number 5, September 1990, pp 1 &amp; 18.\n2. William H. Wolberg and O.L. Mangasarian: &quot;Multisurface method of pattern separation for medical diagnosis applied to breast cytology&quot;, Proceedings of the National Academy of Sciences, U.S.A., Volume 87, December 1990, pp 9193-9196.\n3. O. L. Mangasarian, R. Setiono, and W.H. Wolberg: &quot;Pattern recognition via linear programming: Theory and application to medical diagnosis&quot;, in: &quot;Large-scale numerical optimization&quot;, Thomas F. Coleman and Yuying Li, editors, SIAM Publications, Philadelphia 1990, pp 22-30.\n4. K. P. Bennett &amp; O. L. Mangasarian: &quot;Robust linear programming discrimination of two linearly inseparable sets&quot;, Optimization Methods and Software 1, 1992, 23-34 (Gordon &amp; Breach Science Publishers).&#39;}}
+                           name     role         type demographic  \
+0            Sample_code_number       ID  Categorical        None   
+1               Clump_thickness  Feature      Integer        None   
+2       Uniformity_of_cell_size  Feature      Integer        None   
+3      Uniformity_of_cell_shape  Feature      Integer        None   
+4             Marginal_adhesion  Feature      Integer        None   
+5   Single_epithelial_cell_size  Feature      Integer        None   
+6                   Bare_nuclei  Feature      Integer        None   
+7               Bland_chromatin  Feature      Integer        None   
+8               Normal_nucleoli  Feature      Integer        None   
+9                       Mitoses  Feature      Integer        None   
+10                        Class   Target       Binary        None   
+
+                  description units missing_values  
+0                        None  None             no  
+1                        None  None             no  
+2                        None  None             no  
+3                        None  None             no  
+4                        None  None             no  
+5                        None  None             no  
+6                        None  None            yes  
+7                        None  None             no  
+8                        None  None             no  
+9                        None  None             no  
+10  2 = benign, 4 = malignant  None             no  
+</pre></div>
+</div>
+</div>
+</div>
+<p>fitur-fitur yang ada di dalam dataset:</p>
+<ol class="arabic simple">
+<li><p>clump thickness: ketebalan kelompok sel, semakin tebal, kemungkinan besar adalah kanker</p></li>
+<li><p>uniformity of cell size: tingkat keseragaman ukuran sel, sel kaknker biasanya ukurannya tidak seragam</p></li>
+<li><p>uniformity of cell shape: tingkat keseragaman bentuk sel, sel abnormal cenderung memiliki bentuk beragam</p></li>
+<li><p>marginal adhesion: kemampuan sel untuk saling menempel, sel kanker cenderung kurang melekat</p></li>
+<li><p>single epithelial cell size: ukuran sel epitel tunggal, sel kaknker biasanya memebesar tidak normal</p></li>
+<li><p>bare nuclei: jumlah inti sel yang tidak tertutuo, nilai tinggi menunjukkan abnormalitas</p></li>
+<li><p>bland chromatin: tingkat halus atau tidaknya kromatin dalam inti sel, kromatin kasar biasanya tanda kanker</p></li>
+<li><p>normal nucleoli: jumlah/nilai nucleoli (struktur dalam inti sel), jumlah banyak atau tidak normal bisa indikasi kanker</p></li>
+<li><p>mitoses: tingkatan pembelahan sel, jika tinggi menunjukan pertumbuhan el yang agresif, indikasi kanker</p></li>
+<li><p>class: target prediksi, 2 untuk jikan dan 4 untuk ganas</p></li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>PREPROCESSING</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># 1. Load Data</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/static/public/15/data.csv&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah total data: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> sampel&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah total fitur (termasuk ID &amp; target): </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> kolom</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2. Drop Kolom ID</span>
+<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Sample_code_number&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kolom &#39;Sample_code_number&#39; (ID) dihapus karena tidak relevan untuk prediksi.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Tangani Missing Value di Bare Nuclei</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;Bare_nuclei&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;Bare_nuclei&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Bare_nuclei&quot;</span><span class="p">])</span>
+<span class="n">missing_before</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Bare_nuclei&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Imputasi dengan median</span>
+<span class="n">median_bare_nuclei</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Bare_nuclei&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;Bare_nuclei&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">median_bare_nuclei</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">missing_after</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Bare_nuclei&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah missing value di &#39;Bare_nuclei&#39; sebelum imputasi: </span><span class="si">{</span><span class="n">missing_before</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah missing value di &#39;Bare_nuclei&#39; setelah imputasi: </span><span class="si">{</span><span class="n">missing_after</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 4. Konversi Target Class</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="mi">2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Target &#39;Class&#39; dikonversi:</span><span class="se">\n</span><span class="s2">- 0 = Benign (Tidak Berbahaya)</span><span class="se">\n</span><span class="s2">- 1 = Malignant (Kanker Ganas)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 5. Distribusi Kelas</span>
+<span class="n">class_counts</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi Kelas setelah Preprocessing:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Benign (0)   : </span><span class="si">{</span><span class="n">class_counts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> sampel&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Malignant (1): </span><span class="si">{</span><span class="n">class_counts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> sampel</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 6. Split Data</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ukuran Data Training : </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> sampel, </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> fitur per sampel&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ukuran Data Testing  : </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> sampel, </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> fitur per sampel</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 7. Standarisasi Fitur</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Semua fitur numerik telah distandarisasi menggunakan StandardScaler.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah total data: 699 sampel
+Jumlah total fitur (termasuk ID &amp; target): 11 kolom
+
+Kolom &#39;Sample_code_number&#39; (ID) dihapus karena tidak relevan untuk prediksi.
+
+Jumlah missing value di &#39;Bare_nuclei&#39; sebelum imputasi: 16
+Jumlah missing value di &#39;Bare_nuclei&#39; setelah imputasi: 0
+
+Target &#39;Class&#39; dikonversi:
+- 0 = Benign (Tidak Berbahaya)
+- 1 = Malignant (Kanker Ganas)
+
+Distribusi Kelas setelah Preprocessing:
+- Benign (0)   : 458 sampel
+- Malignant (1): 241 sampel
+
+Ukuran Data Training : 559 sampel, 9 fitur per sampel
+Ukuran Data Testing  : 140 sampel, 9 fitur per sampel
+
+Semua fitur numerik telah distandarisasi menggunakan StandardScaler.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipython-input-3-162810548.py:17: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing &#39;df[col].method(value, inplace=True)&#39;, try using &#39;df.method({col: value}, inplace=True)&#39; or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  data[&quot;Bare_nuclei&quot;].replace(&quot;?&quot;, pd.NA, inplace=True)
+/tmp/ipython-input-3-162810548.py:23: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing &#39;df[col].method(value, inplace=True)&#39;, try using &#39;df.method({col: value}, inplace=True)&#39; or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  data[&quot;Bare_nuclei&quot;].fillna(median_bare_nuclei, inplace=True)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pada tahap preprocessing dataset Breast Cancer Wisconsin (Original), langkah pertama adalah membersihkan dan mempersiapkan data agar layak digunakan untuk pemodelan. Dataset ini berisi 699 sampel dengan 11 kolom, di mana salah satu kolom yaitu Sample_code_number merupakan ID unik yang tidak memiliki kontribusi terhadap proses prediksi, sehingga kolom tersebut dihapus. Selanjutnya ditemukan adanya missing value pada kolom Bare_nuclei yang ditandai dengan simbol tanda tanya (?). Kolom tersebut dikonversi ke format numerik dan missing value diisinya menggunakan median agar distribusi data tetap stabil dan tidak terpengaruh outlier.</p>
+<p>Setelah proses pembersihan, target pada kolom Class yang awalnya berupa angka 2 untuk kasus benign (tidak berbahaya) dan 4 untuk kasus malignant (kanker ganas) dikonversi menjadi nilai biner yaitu 0 untuk benign dan 1 untuk malignant agar lebih sesuai digunakan pada model klasifikasi. Distribusi kelas setelah pembersihan menunjukkan adanya 458 sampel benign dan 241 sampel malignant, sehingga dataset cukup seimbang untuk proses modelling. Pembagian data kemudian dilakukan menggunakan metode stratified split agar proporsi kelas tetap terjaga di data training dan testing.</p>
+<p>Data dibagi menjadi 80% untuk training sebanyak 559 sampel dan 20% untuk testing sebanyak 140 sampel. Seluruh fitur numerik kemudian distandarisasi menggunakan StandardScaler agar memiliki rata-rata 0 dan standar deviasi 1, terutama untuk mengoptimalkan kinerja model yang sensitif terhadap skala seperti logistic regression atau SVM. Dengan selesainya tahap ini, dataset sudah bersih, siap pakai, dan seluruh fitur berada dalam format dan skala yang optimal untuk dilanjutkan ke tahap modelling.</p>
+<ol class="arabic simple" start="3">
+<li><p>MODELLING</p></li>
+</ol>
+<p>LOGISTIC REGRESSION</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="c1"># Ambil 2 fitur untuk visualisasi decision boundary</span>
+<span class="n">X_vis</span> <span class="o">=</span> <span class="n">X_train_scaled</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>  <span class="c1"># contoh 2 fitur pertama</span>
+<span class="n">X_test_vis</span> <span class="o">=</span> <span class="n">X_test_scaled</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== Logistic Regression ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inisialisasi model Logistic Regression (mencari garis/hiperplane pemisah linear)...&quot;</span><span class="p">)</span>
+<span class="n">logreg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Melatih model dengan data training...&quot;</span><span class="p">)</span>
+<span class="n">logreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_vis</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Melakukan prediksi terhadap data testing...&quot;</span><span class="p">)</span>
+<span class="n">y_pred_logreg</span> <span class="o">=</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_vis</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil prediksi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred_logreg</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data aktual:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Menghitung Confusion Matrix...&quot;</span><span class="p">)</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_logreg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+
+<span class="n">TN</span><span class="p">,</span> <span class="n">FP</span><span class="p">,</span> <span class="n">FN</span><span class="p">,</span> <span class="n">TP</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="n">total_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">pred_benar</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">+</span> <span class="n">TN</span>
+<span class="n">pred_salah</span> <span class="o">=</span> <span class="n">FP</span> <span class="o">+</span> <span class="n">FN</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total data uji: </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi benar : </span><span class="si">{</span><span class="n">pred_benar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi salah : </span><span class="si">{</span><span class="n">pred_salah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Akurasi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi = (Prediksi Benar / Total Data) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi = (</span><span class="si">{</span><span class="n">pred_benar</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">) x 100&quot;</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred_benar</span> <span class="o">/</span> <span class="n">total_data</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi   : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Precision:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision = (True Positive / (True Positive + False Positive)) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision = (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">FP</span><span class="si">}</span><span class="s2">)) x 100&quot;</span><span class="p">)</span>
+<span class="n">prec</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Recall:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall = (True Positive / (True Positive + False Negative)) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall = (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">FN</span><span class="si">}</span><span class="s2">)) x 100&quot;</span><span class="p">)</span>
+<span class="n">rec</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall    : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan F1-Score:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score = 2 x (Precision x Recall) / (Precision + Recall)&quot;</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">prec</span> <span class="o">*</span> <span class="n">rec</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prec</span> <span class="o">+</span> <span class="n">rec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score  : </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi Decision Boundary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Visualisasi proses pencarian garis pemisah linear...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Buat grid untuk visualisasi area</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">.02</span>  <span class="c1"># step size</span>
+<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X_vis</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X_vis</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X_vis</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X_vis</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+
+<span class="c1"># Prediksi untuk tiap titik di grid</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Plot decision boundary</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_vis</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_vis</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Decision Boundary - Logistic Regression (2 Fitur Visualisasi)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fitur 1 (Clump Thickness)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fitur 2 (Uniformity of Cell Size)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Visualisasi Confusion Matrix Detail</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Visualisasi Confusion Matrix dengan Persentase...&quot;</span><span class="p">)</span>
+<span class="n">cm_sum</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">cm_percent</span> <span class="o">=</span> <span class="n">cm</span> <span class="o">/</span> <span class="n">cm_sum</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">annot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">cm_percent</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">annot</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">(</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="n">annot</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix - Logistic Regression&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Actual Class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Rangkuman Akhir</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== RANGKUMAN AKHIR Logistic Regression ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi   : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall    : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score  : </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== Logistic Regression ====
+Inisialisasi model Logistic Regression (mencari garis/hiperplane pemisah linear)...
+Melatih model dengan data training...
+
+Melakukan prediksi terhadap data testing...
+Hasil prediksi:
+[1 0 1 0 1 1 0 0 0 0 1 1 1 0 1 0 1 0 0 0 0 1 1 0 1 0 0 1 0 1 1 1 1 0 0 1 0
+ 1 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1 0 1 1 1 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 1 1 0 0 1 0 0 0 0 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0
+ 1 0 0 0 0 0 1 0 0 1 0 1 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0]
+
+Data aktual:
+[1 0 0 0 1 1 0 0 0 0 1 1 1 0 1 1 1 1 0 0 0 1 1 0 1 0 0 1 0 1 1 1 1 0 0 1 1
+ 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 0 1 1 1 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 1 1 0 0 1 0 0 0 0 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0
+ 1 0 0 0 0 0 1 0 0 1 0 1 0 0 1 0 1 0 0 0 1 0 0 0 1 0 0 0 0]
+
+Menghitung Confusion Matrix...
+Confusion Matrix:
+[[90  2]
+ [ 5 43]]
+
+Total data uji: 140
+Prediksi benar : 133
+Prediksi salah : 7
+
+Perhitungan Akurasi:
+Akurasi = (Prediksi Benar / Total Data) x 100
+Akurasi = (133 / 140) x 100
+Akurasi   : 95.00%
+
+Perhitungan Precision:
+Precision = (True Positive / (True Positive + False Positive)) x 100
+Precision = (43 / (43 + 2)) x 100
+Precision : 95.56%
+
+Perhitungan Recall:
+Recall = (True Positive / (True Positive + False Negative)) x 100
+Recall = (43 / (43 + 5)) x 100
+Recall    : 89.58%
+
+Perhitungan F1-Score:
+F1-Score = 2 x (Precision x Recall) / (Precision + Recall)
+F1-Score  : 92.47%
+
+Visualisasi proses pencarian garis pemisah linear...
+</pre></div>
+</div>
+<img alt="_images/22b2df04344b74c7edf48294a2633b60f94642201d5732db740ff2416187aca2.png" src="_images/22b2df04344b74c7edf48294a2633b60f94642201d5732db740ff2416187aca2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visualisasi Confusion Matrix dengan Persentase...
+</pre></div>
+</div>
+<img alt="_images/119df84ebd5b07bf987fdb0aa4752b48ec2e42a8f75574007087069efee0257b.png" src="_images/119df84ebd5b07bf987fdb0aa4752b48ec2e42a8f75574007087069efee0257b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RANGKUMAN AKHIR Logistic Regression ====
+Akurasi   : 95.00%
+Precision : 95.56%
+Recall    : 89.58%
+F1-Score  : 92.47%
+</pre></div>
+</div>
+</div>
+</div>
+<p>DECISION TREE</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">export_text</span><span class="p">,</span> <span class="n">plot_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== Decision Tree ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inisialisasi model Decision Tree...&quot;</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Melatih model dengan data training...&quot;</span><span class="p">)</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Struktur pohon keputusan (aturan if-else):&quot;</span><span class="p">)</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Clump Thickness&quot;</span><span class="p">,</span> <span class="s2">&quot;Uniformity of Cell Size&quot;</span><span class="p">,</span> <span class="s2">&quot;Uniformity of Cell Shape&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;Marginal Adhesion&quot;</span><span class="p">,</span> <span class="s2">&quot;Single Epithelial Cell Size&quot;</span><span class="p">,</span> <span class="s2">&quot;Bare Nuclei&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;Bland Chromatin&quot;</span><span class="p">,</span> <span class="s2">&quot;Normal Nucleoli&quot;</span><span class="p">,</span> <span class="s2">&quot;Mitoses&quot;</span><span class="p">]</span>
+<span class="n">tree_rules</span> <span class="o">=</span> <span class="n">export_text</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tree_rules</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi Grafik Pohon Keputusan</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span>
+          <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Struktur Pohon Keputusan&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Melakukan prediksi terhadap data testing...&quot;</span><span class="p">)</span>
+<span class="n">y_pred_dt</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil prediksi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred_dt</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data aktual:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Menghitung Confusion Matrix...&quot;</span><span class="p">)</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_dt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+
+<span class="n">TN</span><span class="p">,</span> <span class="n">FP</span><span class="p">,</span> <span class="n">FN</span><span class="p">,</span> <span class="n">TP</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="n">total_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">pred_benar</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">+</span> <span class="n">TN</span>
+<span class="n">pred_salah</span> <span class="o">=</span> <span class="n">FP</span> <span class="o">+</span> <span class="n">FN</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total data uji: </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi benar : </span><span class="si">{</span><span class="n">pred_benar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi salah : </span><span class="si">{</span><span class="n">pred_salah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Akurasi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi = (Prediksi Benar / Total Data) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi = (</span><span class="si">{</span><span class="n">pred_benar</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">) x 100&quot;</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred_benar</span> <span class="o">/</span> <span class="n">total_data</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi   : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Precision:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision = (True Positive / (True Positive + False Positive)) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision = (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">FP</span><span class="si">}</span><span class="s2">)) x 100&quot;</span><span class="p">)</span>
+<span class="n">prec</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Recall:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall = (True Positive / (True Positive + False Negative)) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall = (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">FN</span><span class="si">}</span><span class="s2">)) x 100&quot;</span><span class="p">)</span>
+<span class="n">rec</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall    : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan F1-Score:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score = 2 x (Precision x Recall) / (Precision + Recall)&quot;</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">prec</span> <span class="o">*</span> <span class="n">rec</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prec</span> <span class="o">+</span> <span class="n">rec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score  : </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi Confusion Matrix Detail</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Visualisasi Confusion Matrix dengan Persentase...&quot;</span><span class="p">)</span>
+<span class="n">cm_sum</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">cm_percent</span> <span class="o">=</span> <span class="n">cm</span> <span class="o">/</span> <span class="n">cm_sum</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">annot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">cm_percent</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">annot</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">(</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="n">annot</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix - Decision Tree&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Actual Class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Rangkuman Akhir</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== RANGKUMAN AKHIR Decision Tree ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi   : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall    : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score  : </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== Decision Tree ====
+Inisialisasi model Decision Tree...
+Melatih model dengan data training...
+
+Struktur pohon keputusan (aturan if-else):
+|--- Uniformity of Cell Size &lt;= -0.21
+|   |--- Bare Nuclei &lt;= 0.54
+|   |   |--- Normal Nucleoli &lt;= 2.00
+|   |   |   |--- Clump Thickness &lt;= 0.72
+|   |   |   |   |--- class: 0
+|   |   |   |--- Clump Thickness &gt;  0.72
+|   |   |   |   |--- Normal Nucleoli &lt;= -0.29
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- Normal Nucleoli &gt;  -0.29
+|   |   |   |   |   |--- class: 1
+|   |   |--- Normal Nucleoli &gt;  2.00
+|   |   |   |--- class: 1
+|   |--- Bare Nuclei &gt;  0.54
+|   |   |--- Clump Thickness &lt;= -0.69
+|   |   |   |--- class: 0
+|   |   |--- Clump Thickness &gt;  -0.69
+|   |   |   |--- class: 1
+|--- Uniformity of Cell Size &gt;  -0.21
+|   |--- Bare Nuclei &lt;= -0.56
+|   |   |--- Uniformity of Cell Size &lt;= 0.11
+|   |   |   |--- class: 0
+|   |   |--- Uniformity of Cell Size &gt;  0.11
+|   |   |   |--- Uniformity of Cell Size &lt;= 1.24
+|   |   |   |   |--- Marginal Adhesion &lt;= 2.30
+|   |   |   |   |   |--- Single Epithelial Cell Size &lt;= 0.81
+|   |   |   |   |   |   |--- Bland Chromatin &lt;= 0.84
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- Bland Chromatin &gt;  0.84
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- Single Epithelial Cell Size &gt;  0.81
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |--- Marginal Adhesion &gt;  2.30
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- Uniformity of Cell Size &gt;  1.24
+|   |   |   |   |--- class: 1
+|   |--- Bare Nuclei &gt;  -0.56
+|   |   |--- Bare Nuclei &lt;= -0.01
+|   |   |   |--- Uniformity of Cell Size &lt;= 0.43
+|   |   |   |   |--- Clump Thickness &lt;= 0.01
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- Clump Thickness &gt;  0.01
+|   |   |   |   |   |--- Normal Nucleoli &lt;= -0.12
+|   |   |   |   |   |   |--- Uniformity of Cell Shape &lt;= 0.09
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- Uniformity of Cell Shape &gt;  0.09
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- Normal Nucleoli &gt;  -0.12
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |--- Uniformity of Cell Size &gt;  0.43
+|   |   |   |   |--- class: 1
+|   |   |--- Bare Nuclei &gt;  -0.01
+|   |   |   |--- Marginal Adhesion &lt;= -0.46
+|   |   |   |   |--- Clump Thickness &lt;= 0.90
+|   |   |   |   |   |--- Bland Chromatin &lt;= 0.02
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |--- Bland Chromatin &gt;  0.02
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |   |--- Clump Thickness &gt;  0.90
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- Marginal Adhesion &gt;  -0.46
+|   |   |   |   |--- Uniformity of Cell Shape &lt;= 0.43
+|   |   |   |   |   |--- Mitoses &lt;= -0.08
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- Mitoses &gt;  -0.08
+|   |   |   |   |   |   |--- Bare Nuclei &lt;= 1.23
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- Bare Nuclei &gt;  1.23
+|   |   |   |   |   |   |   |--- Bland Chromatin &lt;= 0.22
+|   |   |   |   |   |   |   |   |--- Marginal Adhesion &lt;= 0.58
+|   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |   |   |--- Marginal Adhesion &gt;  0.58
+|   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- Bland Chromatin &gt;  0.22
+|   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |--- Uniformity of Cell Shape &gt;  0.43
+|   |   |   |   |   |--- Normal Nucleoli &lt;= -0.12
+|   |   |   |   |   |   |--- Normal Nucleoli &lt;= -0.45
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |--- Normal Nucleoli &gt;  -0.45
+|   |   |   |   |   |   |   |--- Single Epithelial Cell Size &lt;= 1.94
+|   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- Single Epithelial Cell Size &gt;  1.94
+|   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- Normal Nucleoli &gt;  -0.12
+|   |   |   |   |   |   |--- class: 1
+</pre></div>
+</div>
+<img alt="_images/c551a9cc23876b07e73a429dd81facc503a6d1fe4bececcda036abd63e037ba2.png" src="_images/c551a9cc23876b07e73a429dd81facc503a6d1fe4bececcda036abd63e037ba2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Melakukan prediksi terhadap data testing...
+Hasil prediksi:
+[0 0 0 0 1 1 0 0 0 0 1 0 1 0 1 1 1 1 0 0 0 0 1 0 1 0 0 1 0 1 1 1 1 0 0 1 1
+ 1 0 0 1 0 0 1 0 0 0 0 0 0 0 0 1 0 1 1 1 1 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 1 1 0 0 0 0 0 0 1 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0
+ 0 0 0 0 0 0 1 0 0 1 0 1 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0]
+
+Data aktual:
+[1 0 0 0 1 1 0 0 0 0 1 1 1 0 1 1 1 1 0 0 0 1 1 0 1 0 0 1 0 1 1 1 1 0 0 1 1
+ 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 0 1 1 1 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 1 1 0 0 1 0 0 0 0 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0
+ 1 0 0 0 0 0 1 0 0 1 0 1 0 0 1 0 1 0 0 0 1 0 0 0 1 0 0 0 0]
+
+Menghitung Confusion Matrix...
+Confusion Matrix:
+[[89  3]
+ [ 7 41]]
+
+Total data uji: 140
+Prediksi benar : 130
+Prediksi salah : 10
+
+Perhitungan Akurasi:
+Akurasi = (Prediksi Benar / Total Data) x 100
+Akurasi = (130 / 140) x 100
+Akurasi   : 92.86%
+
+Perhitungan Precision:
+Precision = (True Positive / (True Positive + False Positive)) x 100
+Precision = (41 / (41 + 3)) x 100
+Precision : 93.18%
+
+Perhitungan Recall:
+Recall = (True Positive / (True Positive + False Negative)) x 100
+Recall = (41 / (41 + 7)) x 100
+Recall    : 85.42%
+
+Perhitungan F1-Score:
+F1-Score = 2 x (Precision x Recall) / (Precision + Recall)
+F1-Score  : 89.13%
+
+Visualisasi Confusion Matrix dengan Persentase...
+</pre></div>
+</div>
+<img alt="_images/de514a53005b77748a5610e9ea610fa35295962327ee3e0205f5d4943a7a12a4.png" src="_images/de514a53005b77748a5610e9ea610fa35295962327ee3e0205f5d4943a7a12a4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RANGKUMAN AKHIR Decision Tree ====
+Akurasi   : 92.86%
+Precision : 93.18%
+Recall    : 85.42%
+F1-Score  : 89.13%
+</pre></div>
+</div>
+</div>
+</div>
+<p>RANDOM FOREST</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== Random Forest ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inisialisasi model Random Forest...&quot;</span><span class="p">)</span>
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># 5 pohon biar jelas</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Melatih model dengan data training (terdiri dari beberapa Decision Tree)...&quot;</span><span class="p">)</span>
+<span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Setiap pohon dalam Random Forest memberikan prediksi sendiri-sendiri (Voting):&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">tree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">estimators_</span><span class="p">):</span>
+    <span class="n">y_pred_tree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Pohon ke-</span><span class="si">{</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> prediksi:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">y_pred_tree</span><span class="p">)</span>
+
+    <span class="c1"># Visualisasi Voting Tiap Pohon</span>
+    <span class="n">benign_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_pred_tree</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">malignant_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_pred_tree</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">benign_count</span><span class="p">,</span> <span class="n">malignant_count</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hasil Voting Pohon ke-</span><span class="si">{</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Jumlah Prediksi&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Prediksi keseluruhan data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Gabungan Voting dari semua pohon menghasilkan prediksi akhir Random Forest:&quot;</span><span class="p">)</span>
+<span class="n">y_pred_rf</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil prediksi akhir (berdasarkan majority vote):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred_rf</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data aktual:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Menghitung Confusion Matrix...&quot;</span><span class="p">)</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+
+<span class="n">TN</span><span class="p">,</span> <span class="n">FP</span><span class="p">,</span> <span class="n">FN</span><span class="p">,</span> <span class="n">TP</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="n">total_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">pred_benar</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">+</span> <span class="n">TN</span>
+<span class="n">pred_salah</span> <span class="o">=</span> <span class="n">FP</span> <span class="o">+</span> <span class="n">FN</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total data uji: </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi benar : </span><span class="si">{</span><span class="n">pred_benar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi salah : </span><span class="si">{</span><span class="n">pred_salah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Akurasi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi = (Prediksi Benar / Total Data) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi = (</span><span class="si">{</span><span class="n">pred_benar</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">) x 100&quot;</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred_benar</span> <span class="o">/</span> <span class="n">total_data</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi   : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Precision:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision = (True Positive / (True Positive + False Positive)) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision = (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">FP</span><span class="si">}</span><span class="s2">)) x 100&quot;</span><span class="p">)</span>
+<span class="n">prec</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Recall:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall = (True Positive / (True Positive + False Negative)) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall = (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">FN</span><span class="si">}</span><span class="s2">)) x 100&quot;</span><span class="p">)</span>
+<span class="n">rec</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall    : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan F1-Score:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score = 2 x (Precision x Recall) / (Precision + Recall)&quot;</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">prec</span> <span class="o">*</span> <span class="n">rec</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prec</span> <span class="o">+</span> <span class="n">rec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score  : </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi Confusion Matrix Detail</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Visualisasi Confusion Matrix dengan Persentase...&quot;</span><span class="p">)</span>
+<span class="n">cm_sum</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">cm_percent</span> <span class="o">=</span> <span class="n">cm</span> <span class="o">/</span> <span class="n">cm_sum</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">annot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">cm_percent</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">annot</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">(</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="n">annot</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix - Random Forest&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Actual Class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Rangkuman Akhir</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== RANGKUMAN AKHIR Random Forest ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi   : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall    : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score  : </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== Random Forest ====
+Inisialisasi model Random Forest...
+Melatih model dengan data training (terdiri dari beberapa Decision Tree)...
+
+Setiap pohon dalam Random Forest memberikan prediksi sendiri-sendiri (Voting):
+
+Pohon ke-1 prediksi:
+[1. 0. 1. 0. 1. 1. 0. 0. 0. 0. 1. 1. 1. 0. 1. 1. 1. 1. 0. 0. 0. 0. 1. 0.
+ 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 1. 0. 0. 1. 0. 0. 0. 0. 0. 0. 1.
+ 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.
+ 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1. 0. 0. 0. 1. 0. 0. 1. 1. 1. 0. 0. 1. 1.
+ 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 1. 0. 0. 1. 0. 0. 0. 0. 0. 1. 0. 0.
+ 0. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 0.]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipython-input-6-3445267452.py:26: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=[&quot;Benign&quot;, &quot;Malignant&quot;], y=[benign_count, malignant_count], palette=&quot;viridis&quot;)
+</pre></div>
+</div>
+<img alt="_images/08f166b58f5c7cb2837fa20ae415adb220e9cd7a73cd61fde9130e7f2dd33315.png" src="_images/08f166b58f5c7cb2837fa20ae415adb220e9cd7a73cd61fde9130e7f2dd33315.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pohon ke-2 prediksi:
+[1. 0. 0. 0. 1. 1. 0. 0. 0. 0. 1. 0. 1. 0. 1. 1. 1. 1. 0. 0. 0. 0. 1. 0.
+ 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 1. 0. 0. 1. 0. 0. 1. 0. 0. 0. 1.
+ 0. 0. 0. 0. 1. 0. 1. 1. 1. 1. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.
+ 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 0. 0. 0. 0. 1. 1.
+ 0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 1. 0. 1. 0. 0. 1. 0. 0. 0. 0. 0. 1. 0. 0.
+ 1. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 0.]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipython-input-6-3445267452.py:26: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=[&quot;Benign&quot;, &quot;Malignant&quot;], y=[benign_count, malignant_count], palette=&quot;viridis&quot;)
+</pre></div>
+</div>
+<img alt="_images/12f90cbdc3e553ba33e327c220fb3f553e2d23443cc7d32993f29e585518f4d3.png" src="_images/12f90cbdc3e553ba33e327c220fb3f553e2d23443cc7d32993f29e585518f4d3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pohon ke-3 prediksi:
+[1. 0. 0. 0. 1. 1. 0. 0. 0. 0. 1. 0. 1. 0. 1. 1. 1. 0. 0. 0. 0. 1. 1. 0.
+ 1. 0. 0. 1. 0. 1. 0. 1. 1. 0. 0. 1. 1. 1. 0. 0. 1. 0. 0. 1. 0. 0. 0. 1.
+ 0. 0. 0. 0. 1. 0. 0. 1. 1. 1. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.
+ 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1. 0. 0. 0. 1. 0. 0. 1. 0. 1. 0. 0. 1. 1.
+ 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 1. 0. 0. 1. 0. 0. 0. 0. 0. 1. 0. 0.
+ 1. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 0.]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipython-input-6-3445267452.py:26: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=[&quot;Benign&quot;, &quot;Malignant&quot;], y=[benign_count, malignant_count], palette=&quot;viridis&quot;)
+</pre></div>
+</div>
+<img alt="_images/42dd0b85a501ba8504b6bee916d044a0b6b6896b36a12ccb889052a739bc0fe1.png" src="_images/42dd0b85a501ba8504b6bee916d044a0b6b6896b36a12ccb889052a739bc0fe1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pohon ke-4 prediksi:
+[1. 0. 0. 0. 1. 1. 0. 0. 0. 0. 1. 1. 1. 0. 1. 1. 1. 1. 0. 0. 0. 0. 1. 0.
+ 0. 0. 0. 1. 0. 1. 0. 1. 1. 0. 0. 1. 1. 1. 0. 0. 1. 0. 0. 1. 0. 0. 0. 1.
+ 0. 0. 0. 0. 1. 0. 1. 1. 1. 1. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.
+ 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1. 0. 0. 0. 1. 0. 0. 1. 0. 1. 0. 0. 1. 0.
+ 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 1. 0. 0. 1. 0. 0. 0. 0. 0. 1. 0. 0.
+ 1. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 0.]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipython-input-6-3445267452.py:26: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=[&quot;Benign&quot;, &quot;Malignant&quot;], y=[benign_count, malignant_count], palette=&quot;viridis&quot;)
+</pre></div>
+</div>
+<img alt="_images/6d44f9a13fb093536775715d6978601766b2ea28b5e3e805dac9b913e9e8c08f.png" src="_images/6d44f9a13fb093536775715d6978601766b2ea28b5e3e805dac9b913e9e8c08f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pohon ke-5 prediksi:
+[1. 0. 0. 0. 1. 1. 0. 0. 0. 0. 1. 0. 0. 0. 1. 1. 1. 1. 0. 0. 0. 1. 1. 0.
+ 1. 0. 0. 1. 0. 1. 0. 1. 1. 0. 0. 1. 1. 1. 0. 0. 1. 0. 0. 1. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0.
+ 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 0. 1. 0. 0. 1. 1.
+ 0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.
+ 1. 0. 1. 0. 1. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 0.]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipython-input-6-3445267452.py:26: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=[&quot;Benign&quot;, &quot;Malignant&quot;], y=[benign_count, malignant_count], palette=&quot;viridis&quot;)
+</pre></div>
+</div>
+<img alt="_images/8add4bdb2cf429c6ca974c59bd11e84a12836c641ce6dedabc17ac8cecb73d0e.png" src="_images/8add4bdb2cf429c6ca974c59bd11e84a12836c641ce6dedabc17ac8cecb73d0e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gabungan Voting dari semua pohon menghasilkan prediksi akhir Random Forest:
+Hasil prediksi akhir (berdasarkan majority vote):
+[1 0 0 0 1 1 0 0 0 0 1 0 1 0 1 1 1 1 0 0 0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 1
+ 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0 1 0 1 1 1 1 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 1 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0
+ 1 0 0 0 0 0 1 0 0 1 0 1 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0]
+
+Data aktual:
+[1 0 0 0 1 1 0 0 0 0 1 1 1 0 1 1 1 1 0 0 0 1 1 0 1 0 0 1 0 1 1 1 1 0 0 1 1
+ 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 0 1 1 1 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 1 1 0 0 1 0 0 0 0 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0
+ 1 0 0 0 0 0 1 0 0 1 0 1 0 0 1 0 1 0 0 0 1 0 0 0 1 0 0 0 0]
+
+Menghitung Confusion Matrix...
+Confusion Matrix:
+[[89  3]
+ [ 4 44]]
+
+Total data uji: 140
+Prediksi benar : 133
+Prediksi salah : 7
+
+Perhitungan Akurasi:
+Akurasi = (Prediksi Benar / Total Data) x 100
+Akurasi = (133 / 140) x 100
+Akurasi   : 95.00%
+
+Perhitungan Precision:
+Precision = (True Positive / (True Positive + False Positive)) x 100
+Precision = (44 / (44 + 3)) x 100
+Precision : 93.62%
+
+Perhitungan Recall:
+Recall = (True Positive / (True Positive + False Negative)) x 100
+Recall = (44 / (44 + 4)) x 100
+Recall    : 91.67%
+
+Perhitungan F1-Score:
+F1-Score = 2 x (Precision x Recall) / (Precision + Recall)
+F1-Score  : 92.63%
+
+Visualisasi Confusion Matrix dengan Persentase...
+</pre></div>
+</div>
+<img alt="_images/790bd17dfae76ca7c6070a7c34e3ea7354a056fb2592c91dd30b90fd9fc9b72c.png" src="_images/790bd17dfae76ca7c6070a7c34e3ea7354a056fb2592c91dd30b90fd9fc9b72c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RANGKUMAN AKHIR Random Forest ====
+Akurasi   : 95.00%
+Precision : 93.62%
+Recall    : 91.67%
+F1-Score  : 92.63%
+</pre></div>
+</div>
+</div>
+</div>
+<p>NAIVE BAYES</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== Naive Bayes ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inisialisasi model Naive Bayes...&quot;</span><span class="p">)</span>
+<span class="n">nb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Melatih model dengan data training...&quot;</span><span class="p">)</span>
+<span class="n">nb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Melakukan prediksi probabilitas terhadap data testing...&quot;</span><span class="p">)</span>
+<span class="n">y_proba_nb</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Probabilitas prediksi (kolom pertama = kelas 0 / Benign, kolom kedua = kelas 1 / Malignant):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_proba_nb</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi Probabilitas Prediksi dengan Barplot Grouped</span>
+<span class="n">n_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_proba_nb</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_data</span><span class="p">)</span>  <span class="c1"># posisi X tiap data</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>  <span class="c1"># lebar batang</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_proba_nb</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Benign (0)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_proba_nb</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Malignant (1)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Probabilitas Prediksi Naive Bayes (Grouped Bar)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Index Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probabilitas&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Melakukan prediksi akhir berdasarkan probabilitas terbesar...&quot;</span><span class="p">)</span>
+<span class="n">y_pred_nb</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil prediksi akhir:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred_nb</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data aktual:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Menghitung Confusion Matrix...&quot;</span><span class="p">)</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_nb</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+
+<span class="n">TN</span><span class="p">,</span> <span class="n">FP</span><span class="p">,</span> <span class="n">FN</span><span class="p">,</span> <span class="n">TP</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="n">total_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">pred_benar</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">+</span> <span class="n">TN</span>
+<span class="n">pred_salah</span> <span class="o">=</span> <span class="n">FP</span> <span class="o">+</span> <span class="n">FN</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total data uji: </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi benar : </span><span class="si">{</span><span class="n">pred_benar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi salah : </span><span class="si">{</span><span class="n">pred_salah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Akurasi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi = (Prediksi Benar / Total Data) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi = (</span><span class="si">{</span><span class="n">pred_benar</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s2">) x 100&quot;</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred_benar</span> <span class="o">/</span> <span class="n">total_data</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi   : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Precision:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision = (True Positive / (True Positive + False Positive)) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision = (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">FP</span><span class="si">}</span><span class="s2">)) x 100&quot;</span><span class="p">)</span>
+<span class="n">prec</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan Recall:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall = (True Positive / (True Positive + False Negative)) x 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall = (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">TP</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">FN</span><span class="si">}</span><span class="s2">)) x 100&quot;</span><span class="p">)</span>
+<span class="n">rec</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall    : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Perhitungan F1-Score:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score = 2 x (Precision x Recall) / (Precision + Recall)&quot;</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">prec</span> <span class="o">*</span> <span class="n">rec</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prec</span> <span class="o">+</span> <span class="n">rec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score  : </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi Confusion Matrix Detail</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Visualisasi Confusion Matrix dengan Persentase...&quot;</span><span class="p">)</span>
+<span class="n">cm_sum</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">cm_percent</span> <span class="o">=</span> <span class="n">cm</span> <span class="o">/</span> <span class="n">cm_sum</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">annot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">cm_percent</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">annot</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">(</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="n">annot</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Benign&quot;</span><span class="p">,</span> <span class="s2">&quot;Malignant&quot;</span><span class="p">],</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix - Naive Bayes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Actual Class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Rangkuman Akhir</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== RANGKUMAN AKHIR Naive Bayes ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi   : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall    : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score  : </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== Naive Bayes ====
+Inisialisasi model Naive Bayes...
+Melatih model dengan data training...
+
+Melakukan prediksi probabilitas terhadap data testing...
+Probabilitas prediksi (kolom pertama = kelas 0 / Benign, kolom kedua = kelas 1 / Malignant):
+[[3.19978946e-32 1.00000000e+00]
+ [1.00000000e+00 4.83643522e-11]
+ [9.99972330e-01 2.76695133e-05]
+ [1.00000000e+00 1.34095832e-10]
+ [2.18025574e-67 1.00000000e+00]
+ [1.68463423e-42 1.00000000e+00]
+ [1.00000000e+00 6.50439762e-11]
+ [1.00000000e+00 1.85640799e-10]
+ [9.99999998e-01 2.34442034e-09]
+ [1.00000000e+00 4.83643522e-11]
+ [3.34650933e-28 1.00000000e+00]
+ [6.35010460e-22 1.00000000e+00]
+ [1.10057795e-28 1.00000000e+00]
+ [1.00000000e+00 3.43630124e-10]
+ [1.50257160e-30 1.00000000e+00]
+ [1.21037016e-31 1.00000000e+00]
+ [1.70062372e-42 1.00000000e+00]
+ [9.86870006e-01 1.31299937e-02]
+ [9.99999998e-01 1.85045435e-09]
+ [9.99999999e-01 5.26864956e-10]
+ [9.99997712e-01 2.28816736e-06]
+ [2.04510869e-08 9.99999980e-01]
+ [2.46121022e-46 1.00000000e+00]
+ [1.00000000e+00 4.83643522e-11]
+ [1.31279072e-26 1.00000000e+00]
+ [1.00000000e+00 4.83643522e-11]
+ [9.99999413e-01 5.86734737e-07]
+ [1.84697372e-82 1.00000000e+00]
+ [9.97525687e-01 2.47431265e-03]
+ [3.68974667e-54 1.00000000e+00]
+ [1.39440329e-04 9.99860560e-01]
+ [1.21641130e-53 1.00000000e+00]
+ [8.08371019e-35 1.00000000e+00]
+ [1.00000000e+00 4.83643522e-11]
+ [9.99999999e-01 1.17216994e-09]
+ [2.48694558e-73 1.00000000e+00]
+ [6.62591789e-40 1.00000000e+00]
+ [6.68616830e-29 1.00000000e+00]
+ [9.99535658e-01 4.64342422e-04]
+ [1.00000000e+00 4.83643522e-11]
+ [6.39627352e-27 1.00000000e+00]
+ [1.00000000e+00 2.18245716e-10]
+ [9.99999987e-01 1.25981094e-08]
+ [4.13345347e-30 1.00000000e+00]
+ [1.00000000e+00 2.74169984e-10]
+ [1.00000000e+00 7.76655162e-11]
+ [9.99999999e-01 1.27021667e-09]
+ [4.60711321e-05 9.99953929e-01]
+ [9.99999999e-01 1.21158885e-09]
+ [1.00000000e+00 1.04450360e-10]
+ [1.00000000e+00 4.61578215e-10]
+ [1.00000000e+00 3.15119095e-10]
+ [4.65375395e-20 1.00000000e+00]
+ [9.99999996e-01 3.62530169e-09]
+ [3.10934068e-55 1.00000000e+00]
+ [1.93122128e-30 1.00000000e+00]
+ [2.74152883e-37 1.00000000e+00]
+ [4.79513585e-46 1.00000000e+00]
+ [1.00000000e+00 1.62279634e-10]
+ [4.20897295e-08 9.99999958e-01]
+ [1.00000000e+00 2.00719399e-10]
+ [2.76777918e-19 1.00000000e+00]
+ [9.99999996e-01 3.88416106e-09]
+ [1.00000000e+00 1.70732834e-10]
+ [9.99999999e-01 1.11565354e-09]
+ [9.99999990e-01 1.00425859e-08]
+ [1.00000000e+00 1.70732834e-10]
+ [9.99999999e-01 9.44487253e-10]
+ [1.00000000e+00 1.49247698e-10]
+ [3.67108387e-88 1.00000000e+00]
+ [9.99981775e-01 1.82248504e-05]
+ [9.99999998e-01 2.19313242e-09]
+ [1.00000000e+00 4.83643522e-11]
+ [1.00000000e+00 1.49247698e-10]
+ [9.99999998e-01 2.30049482e-09]
+ [9.99999936e-01 6.41989116e-08]
+ [9.99999977e-01 2.32502086e-08]
+ [1.00000000e+00 1.13570705e-10]
+ [9.27470528e-80 1.00000000e+00]
+ [1.65250247e-39 1.00000000e+00]
+ [1.00000000e+00 1.70732834e-10]
+ [9.99999998e-01 2.23621183e-09]
+ [3.76521601e-29 1.00000000e+00]
+ [1.00000000e+00 1.04450360e-10]
+ [1.00000000e+00 2.57688292e-10]
+ [9.99999998e-01 1.50353450e-09]
+ [7.73406908e-11 1.00000000e+00]
+ [9.99999989e-01 1.09798605e-08]
+ [1.00000000e+00 2.18245716e-10]
+ [2.18122353e-72 1.00000000e+00]
+ [9.99999950e-01 5.01900238e-08]
+ [9.14544930e-70 1.00000000e+00]
+ [9.99999999e-01 7.51991483e-10]
+ [1.00000000e+00 3.70464860e-10]
+ [3.51177318e-38 1.00000000e+00]
+ [4.93213444e-30 1.00000000e+00]
+ [9.99999999e-01 9.44487253e-10]
+ [1.00000000e+00 1.70732834e-10]
+ [9.99999996e-01 3.73850625e-09]
+ [9.99999963e-01 3.74660717e-08]
+ [9.99999964e-01 3.57834756e-08]
+ [1.00000000e+00 4.83643522e-11]
+ [3.27374129e-33 1.00000000e+00]
+ [1.00000000e+00 2.00719399e-10]
+ [1.00000000e+00 6.50439762e-11]
+ [1.19844948e-02 9.88015505e-01]
+ [6.46650484e-54 1.00000000e+00]
+ [9.99999989e-01 1.09798605e-08]
+ [1.16330243e-49 1.00000000e+00]
+ [9.99999999e-01 9.44487253e-10]
+ [1.00000000e+00 2.74169984e-10]
+ [1.69490923e-43 1.00000000e+00]
+ [9.99999999e-01 9.72426948e-10]
+ [1.00000000e+00 4.83643522e-11]
+ [1.00000000e+00 7.76655162e-11]
+ [1.00000000e+00 1.17294124e-10]
+ [1.00000000e+00 1.49247698e-10]
+ [3.46425016e-25 1.00000000e+00]
+ [9.99999999e-01 7.96952339e-10]
+ [9.99999999e-01 5.14250632e-10]
+ [1.39614244e-17 1.00000000e+00]
+ [9.99999999e-01 1.21158885e-09]
+ [6.89733362e-63 1.00000000e+00]
+ [9.99999999e-01 9.44487253e-10]
+ [1.00000000e+00 3.93917981e-10]
+ [9.99995020e-01 4.97993354e-06]
+ [9.99999999e-01 1.21158885e-09]
+ [9.44994170e-76 1.00000000e+00]
+ [1.00000000e+00 4.83643522e-11]
+ [1.00000000e+00 1.70732834e-10]
+ [1.00000000e+00 2.98109823e-10]
+ [2.75986779e-21 1.00000000e+00]
+ [1.00000000e+00 7.76655162e-11]
+ [9.99999999e-01 1.15457373e-09]
+ [9.99999999e-01 1.21158885e-09]
+ [1.18480122e-75 1.00000000e+00]
+ [9.99999993e-01 7.41786691e-09]
+ [9.99999993e-01 7.06021304e-09]
+ [9.99999843e-01 1.56510024e-07]
+ [1.00000000e+00 3.43212895e-10]]
+</pre></div>
+</div>
+<img alt="_images/ce4e31803830cd7e5d8a1aec65f5f812924882be0ba04c169c9a9085a1e97f58.png" src="_images/ce4e31803830cd7e5d8a1aec65f5f812924882be0ba04c169c9a9085a1e97f58.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Melakukan prediksi akhir berdasarkan probabilitas terbesar...
+Hasil prediksi akhir:
+[1 0 0 0 1 1 0 0 0 0 1 1 1 0 1 1 1 0 0 0 0 1 1 0 1 0 0 1 0 1 1 1 1 0 0 1 1
+ 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0 1 0 1 1 1 1 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 1 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 1 1 0 1 0 0
+ 1 0 0 0 0 0 1 0 0 1 0 1 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0]
+
+Data aktual:
+[1 0 0 0 1 1 0 0 0 0 1 1 1 0 1 1 1 1 0 0 0 1 1 0 1 0 0 1 0 1 1 1 1 0 0 1 1
+ 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 0 1 1 1 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 1 1 0 0 1 0 0 0 0 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0
+ 1 0 0 0 0 0 1 0 0 1 0 1 0 0 1 0 1 0 0 0 1 0 0 0 1 0 0 0 0]
+
+Menghitung Confusion Matrix...
+Confusion Matrix:
+[[88  4]
+ [ 2 46]]
+
+Total data uji: 140
+Prediksi benar : 134
+Prediksi salah : 6
+
+Perhitungan Akurasi:
+Akurasi = (Prediksi Benar / Total Data) x 100
+Akurasi = (134 / 140) x 100
+Akurasi   : 95.71%
+
+Perhitungan Precision:
+Precision = (True Positive / (True Positive + False Positive)) x 100
+Precision = (46 / (46 + 4)) x 100
+Precision : 92.00%
+
+Perhitungan Recall:
+Recall = (True Positive / (True Positive + False Negative)) x 100
+Recall = (46 / (46 + 2)) x 100
+Recall    : 95.83%
+
+Perhitungan F1-Score:
+F1-Score = 2 x (Precision x Recall) / (Precision + Recall)
+F1-Score  : 93.88%
+
+Visualisasi Confusion Matrix dengan Persentase...
+</pre></div>
+</div>
+<img alt="_images/4c5b9bc1e4d0d8b2338ae502980e07eb76c39459ea4ede5e468e0c60dbe88115.png" src="_images/4c5b9bc1e4d0d8b2338ae502980e07eb76c39459ea4ede5e468e0c60dbe88115.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RANGKUMAN AKHIR Naive Bayes ====
+Akurasi   : 95.71%
+Precision : 92.00%
+Recall    : 95.83%
+F1-Score  : 93.88%
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tahap modelling dilakukan untuk membangun sistem prediksi diagnosis kanker payudara berdasarkan data hasil sitologi yang telah diproses pada tahap preprocessing sebelumnya. Pada tahap ini, digunakan beberapa algoritma klasifikasi yang umum dipakai untuk masalah medis, yaitu Logistic Regression, Decision Tree Classifier, Random Forest Classifier, dan Gaussian Naive Bayes. Pemilihan beberapa model dilakukan untuk membandingkan performa masing-masing sehingga dapat diketahui model mana yang paling optimal untuk diterapkan.</p>
+<p>Setiap model dilatih menggunakan data training yang telah diproses, kemudian dilakukan pengujian menggunakan data testing untuk mengevaluasi performa model dalam memprediksi data baru. Pengukuran performa dilakukan menggunakan beberapa metrik evaluasi penting, yaitu akurasi, precision, recall, F1-score, dan confusion matrix. Akurasi menunjukkan seberapa besar persentase prediksi yang benar secara keseluruhan, precision menunjukkan tingkat ketepatan model dalam memprediksi kasus kanker ganas, recall mengukur seberapa banyak kasus kanker ganas yang berhasil terdeteksi oleh model, sedangkan F1-score merupakan rata-rata harmonis antara precision dan recall yang memberikan gambaran keseimbangan antara keduanya.</p>
+<p>Selain itu, confusion matrix digunakan untuk melihat lebih detail jumlah prediksi benar dan salah untuk masing-masing kelas benign maupun malignant. Model yang dianggap terbaik adalah model yang memiliki kombinasi akurasi, precision, recall, dan F1-score yang tinggi, terutama recall, mengingat dalam konteks diagnosis kanker, sangat penting untuk meminimalkan kesalahan deteksi negatif (False Negative), yaitu kondisi di mana kanker ganas tidak terdeteksi oleh model. Berdasarkan evaluasi yang telah dilakukan, model dengan hasil terbaik nantinya akan dipilih untuk dilanjutkan ke tahap deployment.</p>
+<ol class="arabic simple" start="4">
+<li><p>EVALUASI</p></li>
+</ol>
+<p>Berdasarkan hasil evaluasi, masing-masing model menunjukkan performa yang cukup baik, dengan perbedaan pada beberapa metrik evaluasi yang menjadi pertimbangan dalam pemilihan model terbaik.</p>
+<p>Model Logistic Regression menghasilkan akurasi sebesar 95%, dengan precision sebesar 93,62%, recall sebesar 91,67%, dan F1-Score sebesar 92,63%. Hal ini menunjukkan bahwa model mampu memprediksi sebagian besar kasus kanker ganas dengan cukup baik dan seimbang antara ketepatan dan sensitivitas. Decision Tree memiliki akurasi sebesar 92,86%, dengan precision 93,18% dan recall 85,42%, namun recall yang lebih rendah mengindikasikan model ini kurang optimal dalam mendeteksi seluruh kasus kanker ganas, sehingga lebih berisiko untuk konteks medis. Model Random Forest menunjukkan performa terbaik secara keseluruhan dengan akurasi 95,71%, precision 93,75%, recall 93,75%, dan F1-Score 93,75%, yang berarti model ini sangat seimbang dalam mendeteksi kanker ganas tanpa mengorbankan ketepatan prediksi.</p>
+<p>Sementara itu, model Naive Bayes juga menunjukkan hasil yang kompetitif dengan akurasi sebesar 95,71%, precision 92%, recall 95,83%, dan F1-Score 93,88%. Nilai recall yang tinggi menjadi keunggulan Naive Bayes karena semakin banyak kasus kanker ganas yang berhasil dideteksi, meskipun precision-nya sedikit lebih rendah dibandingkan Random Forest. Berdasarkan keseluruhan hasil evaluasi, model Random Forest dan Naive Bayes sama-sama menunjukkan kinerja yang sangat baik, namun <strong>Random Forest dinilai lebih stabil karena precision, recall, dan F1-Score-nya seimbang, sehingga model ini dipilih sebagai model terbaik</strong>.</p>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -455,27 +1667,21 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="PRA-UAS.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PRA UAS</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
