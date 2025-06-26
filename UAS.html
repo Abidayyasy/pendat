@@ -1221,6 +1221,13 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 </pre></div>
 </div>
 <img alt="_images/42dd0b85a501ba8504b6bee916d044a0b6b6896b36a12ccb889052a739bc0fe1.png" src="_images/42dd0b85a501ba8504b6bee916d044a0b6b6896b36a12ccb889052a739bc0fe1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipython-input-6-3445267452.py:26: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=[&quot;Benign&quot;, &quot;Malignant&quot;], y=[benign_count, malignant_count], palette=&quot;viridis&quot;)
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pohon ke-4 prediksi:
 [1. 0. 0. 0. 1. 1. 0. 0. 0. 0. 1. 1. 1. 0. 1. 1. 1. 1. 0. 0. 0. 0. 1. 0.
  0. 0. 0. 1. 0. 1. 0. 1. 1. 0. 0. 1. 1. 1. 0. 0. 1. 0. 0. 1. 0. 0. 0. 1.
@@ -1228,13 +1235,6 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
  0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1. 0. 0. 0. 1. 0. 0. 1. 0. 1. 0. 0. 1. 0.
  0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 1. 0. 0. 1. 0. 0. 0. 0. 0. 1. 0. 0.
  1. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 0.]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipython-input-6-3445267452.py:26: FutureWarning: 
-
-Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
-
-  sns.barplot(x=[&quot;Benign&quot;, &quot;Malignant&quot;], y=[benign_count, malignant_count], palette=&quot;viridis&quot;)
 </pre></div>
 </div>
 <img alt="_images/6d44f9a13fb093536775715d6978601766b2ea28b5e3e805dac9b913e9e8c08f.png" src="_images/6d44f9a13fb093536775715d6978601766b2ea28b5e3e805dac9b913e9e8c08f.png" />
@@ -1634,7 +1634,7 @@ F1-Score  : 93.88%
 </ol>
 <p>Berdasarkan hasil evaluasi, masing-masing model menunjukkan performa yang cukup baik, dengan perbedaan pada beberapa metrik evaluasi yang menjadi pertimbangan dalam pemilihan model terbaik.</p>
 <p>Model Logistic Regression menghasilkan akurasi sebesar 95%, dengan precision sebesar 93,62%, recall sebesar 91,67%, dan F1-Score sebesar 92,63%. Hal ini menunjukkan bahwa model mampu memprediksi sebagian besar kasus kanker ganas dengan cukup baik dan seimbang antara ketepatan dan sensitivitas. Decision Tree memiliki akurasi sebesar 92,86%, dengan precision 93,18% dan recall 85,42%, namun recall yang lebih rendah mengindikasikan model ini kurang optimal dalam mendeteksi seluruh kasus kanker ganas, sehingga lebih berisiko untuk konteks medis. Model Random Forest menunjukkan performa terbaik secara keseluruhan dengan akurasi 95,71%, precision 93,75%, recall 93,75%, dan F1-Score 93,75%, yang berarti model ini sangat seimbang dalam mendeteksi kanker ganas tanpa mengorbankan ketepatan prediksi.</p>
-<p>Sementara itu, model Naive Bayes juga menunjukkan hasil yang kompetitif dengan akurasi sebesar 95,71%, precision 92%, recall 95,83%, dan F1-Score 93,88%. Nilai recall yang tinggi menjadi keunggulan Naive Bayes karena semakin banyak kasus kanker ganas yang berhasil dideteksi, meskipun precision-nya sedikit lebih rendah dibandingkan Random Forest. Berdasarkan keseluruhan hasil evaluasi, model Random Forest dan Naive Bayes sama-sama menunjukkan kinerja yang sangat baik, namun <strong>Random Forest dinilai lebih stabil karena precision, recall, dan F1-Score-nya seimbang, sehingga model ini dipilih sebagai model terbaik</strong>.</p>
+<p>Sementara itu, model Naive Bayes juga menunjukkan hasil yang kompetitif dengan akurasi sebesar 95,71%, precision 92%, recall 95,83%, dan F1-Score 93,88%. Nilai recall yang tinggi menjadi keunggulan Naive Bayes karena semakin banyak kasus kanker ganas yang berhasil dideteksi, meskipun precision-nya sedikit lebih rendah dibandingkan Random Forest. Berdasarkan keseluruhan hasil evaluasi, model Random Forest dan Naive Bayes sama-sama menunjukkan kinerja yang sangat baik, namun <strong>Naive Bayes dinilai lebih stabil karena precision, recall, dan F1-Score-nya seimbang, sehingga model ini dipilih sebagai model terbaik</strong>.</p>
 </section>
 
     <script type="text/x-thebe-config">
